@@ -21,7 +21,7 @@ function Homepage() {
         <nav>
           <ul>
             <li key={navIDS.myMusic}>
-              <Link>My Library</Link>
+              <Link>My Music</Link>
             </li>
           </ul>
         </nav>
