@@ -2,6 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Music2, Share, File } from "lucide-react";
 
+const navIDS = { myMusic: crypto.randomUUID() };
+const appInforIDS = {
+  music: crypto.randomUUID(),
+  songHistory: crypto.randomUUID(),
+  share: crypto.randomUUID(),
+};
+const footerIDS = { terms: crypto.randomUUID(), contact: crypto.randomUUID() };
+
 function Homepage() {
   return (
     <>
@@ -12,7 +20,7 @@ function Homepage() {
         </div>
         <nav>
           <ul>
-            <li>
+            <li key={navIDS.myMusic}>
               <Link>My Library</Link>
             </li>
           </ul>
@@ -27,15 +35,15 @@ function Homepage() {
         </section>
         <section>
           <ul>
-            <li>
+            <li key={appInforIDS.music}>
               <Music2 />
               <p>Real-time music recognition</p>
             </li>
-            <li>
+            <li key={appInforIDS.songHistory}>
               <File />
               <p>Song history</p>
             </li>
-            <li>
+            <li key={appInforIDS.share}>
               <Share />
               <p>Share across platforms</p>
             </li>
@@ -44,8 +52,8 @@ function Homepage() {
       </main>
       <footer>
         <ul>
-          <li>Terms</li>
-          <li>Contact</li>
+          <li key={footerIDS.terms}>Terms</li>
+          <li key={footerIDS.contact}>Contact</li>
         </ul>
       </footer>
     </>
