@@ -42,6 +42,12 @@ function Homepage() {
           </ul>
         </section>
       </main>
+      <footer>
+        <ul>
+          <li>Terms</li>
+          <li>Contact</li>
+        </ul>
+      </footer>
     </>
   );
 }
