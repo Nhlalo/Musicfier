@@ -14,7 +14,7 @@ const footerIDS = { terms: crypto.randomUUID(), contact: crypto.randomUUID() };
 
 export default function Homepage() {
   return (
-    <div>
+    <>
       <header>
         <div>
           <img src={Logo} alt="Musicfier" />
@@ -24,7 +24,7 @@ export default function Homepage() {
       <nav>
         <ul>
           <li key={navIDS.myMusic}>
-            <Link>My Music</Link>
+            <a>My Music</a>
           </li>
         </ul>
       </nav>
@@ -58,6 +58,6 @@ export default function Homepage() {
           <li key={footerIDS.contact}>Contact</li>
         </ul>
       </footer>
-    </div>
+    </>
   );
 }
