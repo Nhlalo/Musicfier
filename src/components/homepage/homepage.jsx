@@ -20,14 +20,14 @@ export default function Homepage() {
           <img src={Logo} alt="Musicfier" />
           <h1>Musicfier</h1>
         </div>
+        <nav>
+          <ul>
+            <li key={navIDS.myMusic}>
+              <a>My Music</a>
+            </li>
+          </ul>
+        </nav>
       </header>
-      <nav>
-        <ul>
-          <li key={navIDS.myMusic}>
-            <a>My Music</a>
-          </li>
-        </ul>
-      </nav>
       <main>
         <section>
           <h2>Tap To Musicfy</h2>
