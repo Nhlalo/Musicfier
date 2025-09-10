@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Music2, Share, File } from "lucide-react";
-import Logo from "../../assets/Logo.PNG";
-import SearchImage from "../../assets/SearchImage.PNG";
+import Logo from "../../assets/logo.png";
+import SearchImage from "../../assets/searchimage.png";
 
 const navIDS = { myMusic: crypto.randomUUID() };
 const appInforIDS = {
@@ -12,22 +12,22 @@ const appInforIDS = {
 };
 const footerIDS = { terms: crypto.randomUUID(), contact: crypto.randomUUID() };
 
-function Homepage() {
+export default function Homepage() {
   return (
-    <>
+    <div>
       <header>
         <div>
           <img src={Logo} alt="Musicfier" />
           <h1>Musicfier</h1>
         </div>
-        <nav>
-          <ul>
-            <li key={navIDS.myMusic}>
-              <Link>My Music</Link>
-            </li>
-          </ul>
-        </nav>
       </header>
+      <nav>
+        <ul>
+          <li key={navIDS.myMusic}>
+            <Link>My Music</Link>
+          </li>
+        </ul>
+      </nav>
       <main>
         <section>
           <h2>Tap To Musicfy</h2>
@@ -58,6 +58,6 @@ function Homepage() {
           <li key={footerIDS.contact}>Contact</li>
         </ul>
       </footer>
-    </>
+    </div>
   );
 }
