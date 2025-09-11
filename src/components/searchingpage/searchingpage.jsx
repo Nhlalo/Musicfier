@@ -18,7 +18,7 @@ export default function Searchingpage() {
         </button>
         <div>
           <AudioLines />
-          <p>Listenign for music</p>
+          <p>Listening for music</p>
           <p>Make sure your device can hear the song clearly</p>
         </div>
         <div>
