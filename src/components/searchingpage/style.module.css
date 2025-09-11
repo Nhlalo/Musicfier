@@ -31,3 +31,11 @@
   width: 100%;
   height: auto;
 }
+.icon {
+  width: 16px;
+}
+@media (min-width: 550px) {
+  .icon {
+    width: 24px;
+  }
+}
