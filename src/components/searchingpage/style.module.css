@@ -1,8 +1,19 @@
+:root {
+  --icon-size: 16px;
+}
 .main {
   min-height: 100vh;
   padding: 1rem;
   display: flex;
   flex-direction: column;
+}
+.cancelIconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cancelIcon {
+  width: var(--icon-size);
 }
 .main > section {
   display: flex;
@@ -32,7 +43,7 @@
   height: auto;
 }
 .icon {
-  width: 16px;
+  width: var(--icon-size);
   animation: icon 1s infinite alternate;
 }
 @keyframes icon {
@@ -45,7 +56,7 @@
 }
 
 @media (min-width: 550px) {
-  .icon {
-    width: 24px;
+  :root {
+    --icon-size: 24px;
   }
 }
