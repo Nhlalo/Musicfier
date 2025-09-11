@@ -4,6 +4,12 @@
 *::after {
   box-sizing: border-box;
 }
+:root {
+  --primary-text-clr: hsl(0deg 0% 99.8%);
+  --primary-bg-clr: hsl(214.19deg 100% 36.47%);
+  --searchBTN-clr: hsl(207.53deg 100% 50%);
+  color-scheme: light dark;
+}
 html {
   font-size: 16px;
 }
@@ -11,4 +17,9 @@ body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  background-color: var(--primary-bg-clr);
+  color: var(--primary-text-clr);
+}
+li {
+  list-style: none;
 }
