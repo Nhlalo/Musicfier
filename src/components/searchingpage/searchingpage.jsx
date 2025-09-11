@@ -8,13 +8,13 @@ import Styles from "./style.module.css";
 
 export default function Searchingpage() {
   return (
-    <main>
+    <main className={Styles.main}>
       <div>
         <X />
       </div>
       <section>
-        <button>
-          <img src={SearchImage} alt="searching" />
+        <button className={Styles.searchBTN}>
+          <img src={SearchImage} alt="searching" className={Styles.searchImg} />
         </button>
         <div>
           <AudioLines />
