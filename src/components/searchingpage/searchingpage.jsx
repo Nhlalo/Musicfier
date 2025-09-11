@@ -9,20 +9,20 @@ import Styles from "./style.module.css";
 export default function Searchingpage() {
   return (
     <main className={Styles.main}>
-      <div>
-        <X />
+      <div className={Styles.cancelIconContainer}>
+        <X className={Styles.cancelIcon} />
       </div>
       <section>
         <button className={Styles.searchBTN}>
           <img src={SearchImage} alt="searching" className={Styles.searchImg} />
         </button>
         <div>
-          <AudioLines />
+          <AudioLines className={Styles.icon} />
           <p>Listening for music</p>
           <p>Make sure your device can hear the song clearly</p>
         </div>
         <div>
-          <Ellipsis />
+          <Ellipsis className={Styles.icon} />
           <p>Searching</p>
           <p>Please wait</p>
         </div>
