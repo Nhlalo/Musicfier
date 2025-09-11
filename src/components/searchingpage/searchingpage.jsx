@@ -13,7 +13,9 @@ export default function Searchingpage() {
         <X />
       </div>
       <section>
-        <img src={SearchImage} alt="searching" />
+        <button>
+          <img src={SearchImage} alt="searching" />
+        </button>
         <div>
           <AudioLines />
           <p>Listenign for music</p>
