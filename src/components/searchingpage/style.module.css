@@ -33,7 +33,17 @@
 }
 .icon {
   width: 16px;
+  animation: icon 1s infinite alternate;
 }
+@keyframes icon {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
 @media (min-width: 550px) {
   .icon {
     width: 24px;
