@@ -1,5 +1,6 @@
 :root {
   --icon-size: 16px;
+  --searchBTN-margin-bottom: 0.5rem;
 }
 .main {
   min-height: 100vh;
@@ -32,11 +33,21 @@
   font-size: 0.8rem;
 }
 .searchBTN {
-  width: 12%;
+  width: 10%;
   background-color: hsl(208, 57%, 74%);
   padding: 1rem;
   border-radius: 50%;
   border: none;
+  margin-bottom: var(--searchBTN-margin-bottom);
+  animation: searchBTN 1s infinite alternate;
+}
+@keyframes searchBTN {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
 }
 .searchImg {
   width: 100%;
@@ -58,5 +69,6 @@
 @media (min-width: 550px) {
   :root {
     --icon-size: 24px;
+    --searchBTN-margin-bottom: 1rem;
   }
 }
