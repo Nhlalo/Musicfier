@@ -1,0 +1,19 @@
+.container {
+  background-color: transparent;
+}
+.songInforContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.playBTN {
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: red;
+}
+.openDSPBTN {
+  margin-inline: auto;
+  text-align: center;
+  padding-inline: 2rem;
+  padding-block: 0.5rem;
+  color: red;
+}
