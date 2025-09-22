@@ -1,0 +1,44 @@
+:root {
+  ---size: clamp(100px, 11vw, 15vw);
+  ---albumCover-width: var(---size);
+  ---ablumCover-height: var(--size);
+  ---album-font-size: 1.543rem;
+  ---date-font-size: 0.8rem;
+  ---spotifyLogo-width: clamp(20px, 2vw, 5vw);
+}
+.featuredAlbumContainer {
+  padding: 1rem;
+}
+.albumInforContainer {
+  display: flex;
+  gap: 1rem;
+}
+.playAlbumBTN {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.albumCover {
+  width: var(---albumCover-width);
+  height: var(---ablumCover-height);
+}
+.playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+p {
+  margin-bottom: 0.5rem;
+}
+.albumName {
+  font-size: var(---album-font-size);
+  font-weight: bold;
+}
+.releaseDate {
+  font-size: var(---date-font-size);
+}
+.spotifyLogo {
+  width: var(---spotifyLogo-width);
+}
