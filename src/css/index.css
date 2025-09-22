@@ -26,3 +26,6 @@ li {
 button {
   border: none;
 }
+p {
+  margin: 0;
+}
