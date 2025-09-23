@@ -1,0 +1,28 @@
+:root {
+  --p-font-size: 0.875rem;
+  --main-bg-color: gray;
+  --text-position: end;
+}
+section {
+  padding: 1rem;
+  background-color: var(--main-bg-color);
+}
+.trackInformationContainer > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+}
+.trackInformationContainer > div > p:nth-child(2) {
+  text-align: var(--text-position);
+}
+p {
+  font-size: var(--p-font-size);
+  flex-grow: 1;
+}
+@media (min-width: 768px) {
+  :root {
+    --p-font-size: 1rem;
+    --text-position: start;
+  }
+}
