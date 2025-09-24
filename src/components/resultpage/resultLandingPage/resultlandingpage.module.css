@@ -1,0 +1,22 @@
+:root {
+  --container-height: 90vh;
+}
+.container {
+  height: var(--container-height);
+  background-image: url(../topsongs/SpotifyLogo.png);
+  background-size: cover;
+  background-attachment: fixed;
+}
+.actionBTN > button {
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.shareBTN {
+  margin-right: 0.5rem;
+}
