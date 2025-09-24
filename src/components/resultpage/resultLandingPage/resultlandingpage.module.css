@@ -2,10 +2,14 @@
   --container-height: 90vh;
 }
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: var(--container-height);
   background-image: url(../topsongs/SpotifyLogo.png);
   background-size: cover;
   background-attachment: fixed;
+
 }
 .actionBTN > button {
   border-radius: 50%;
