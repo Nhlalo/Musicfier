@@ -1,6 +1,6 @@
 import Styles from "./resultlandingpage.module.css";
 import { Share, Ellipsis, X } from "lucide-react";
-
+import Identificationpage from "../identification/identification.jsx";
 
 export default function ResultLandinPage() {
   return (
@@ -16,7 +16,7 @@ export default function ResultLandinPage() {
           </button>
         </div>
       </div>
-      
+      <Identificationpage />
     </section>
   );
 }
