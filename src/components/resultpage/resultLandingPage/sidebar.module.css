@@ -1,0 +1,57 @@
+:root {
+  --size: 24px;
+  --icon-width: var(--size);
+  --icon-height: var(--size);
+  --container-width: 60vw;
+}
+aside {
+  width: var(--container-width);
+  background-color: rgba(107, 107, 107, 0.85);
+  border-radius: 10px;
+  padding: 1rem 1rem 1rem 2rem;
+}
+ul,
+.actionGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+li,
+button {
+  padding-left: 0;
+  padding-right: 0;
+}
+li {
+  list-style: none;
+}
+a,
+button {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  gap: 0.5rem;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+.spotifyLogo {
+  width: var(--icon-width);
+  height: var(--icon-height);
+}
+hr {
+  width: 100%;
+  margin: 0;
+  margin-top: 0.2rem;
+  margin-bottom: 1rem;
+  background-color: red;
+}
+.removeBTN {
+  color: red;
+}
+@media (min-width: 768px) {
+  :root {
+    --container-width: 30vw;
+  }
+}
