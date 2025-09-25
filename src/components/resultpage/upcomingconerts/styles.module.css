@@ -1,0 +1,84 @@
+:root {
+  --dateContainer-width: 30px;
+  --seeAll-font-size: 0.7rem;
+  --icon-width: 15px;
+}
+section {
+  background: gray;
+  border-radius: 7px;
+  padding: 1rem;
+}
+a,
+button {
+  background: darkgray;
+  padding: 0.7rem;
+  border-radius: 7px;
+}
+a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.7rem;
+  color: white;
+}
+.date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.chevronRight,
+.calendar {
+  width: var(--icon-width);
+}
+button {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  width: 100%;
+}
+.monthContainer,
+.month {
+  width: var(--dateContainer-width);
+  height: var(--dateContainer-width);
+}
+.monthContainer {
+  position: relative;
+  background-color: lightgray;
+  margin-left: 0.7rem;
+}
+.month {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: var(--seeAll-font-size);
+}
+.location {
+  font-weight: bold;
+}
+
+.moreConcert > p {
+  font-weight: bold;
+}
+.seeAll,
+.date,
+.city {
+  font-size: var(--seeAll-font-size);
+}
+.seeAll {
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  :root {
+    --dateContainer-width: 40px;
+    --seeAll-font-size: 0.8rem;
+    --icon-width: 18px;
+  }
+}
