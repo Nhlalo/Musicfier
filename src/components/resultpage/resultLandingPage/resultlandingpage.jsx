@@ -11,7 +11,7 @@ export default function ResultLandinPage() {
           <button type="button" className={Styles.shareBTN}>
             <Share />
           </button>
-          <button type="buttonn">
+          <button type="button">
             <Ellipsis />
           </button>
         </div>
