@@ -1,0 +1,58 @@
+:root {
+  --playBTN-value: 70px;
+  --x-value: 18px;
+  --container-height: 70vh;
+  --playBTN-width: var(--playBTN-value);
+  --playBTN-height: var(--playBTN-value);
+  --artistName-font-size: 1.5rem;
+  --x-width: var(--x-value);
+  --x-height: var(--x-value);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--container-height);
+  background-image: url(../topsongs/SpotifyLogo.png);
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 0.7rem;
+}
+.closeBTN,
+.playBTN {
+  border-radius: 50%;
+}
+.closeBTN {
+  padding: 0.2rem;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.x {
+  width: var(--x-width);
+  height: var(--x-height);
+}
+.artistInforContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 90px;
+  gap: 0.5rem;
+}
+.playBTN {
+  width: var(--playBTN-width);
+  height: var(--playBTN-height);
+}
+.artistName {
+  font-weight: bold;
+  font-size: var(--artistName-font-size);
+}
+@media (min-width: 1024px) {
+  :root {
+    --playBTN-value: 70px;
+    --x-value: 24px;
+
+    --artistName-font-size: 1.9rem;
+  }
+}
