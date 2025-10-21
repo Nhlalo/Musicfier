@@ -9,6 +9,15 @@
   --img-height: 100px;
   --calendarIcon-width: 5px;
 }
+h1 {
+  margin-bottom: 0;
+}
+p {
+  text-align: center;
+}
+header {
+  padding-inline: 1rem;
+}
 main {
   color: white;
 }
