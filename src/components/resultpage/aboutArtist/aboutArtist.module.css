@@ -7,6 +7,13 @@
   --artistName-font-size: 1.5rem;
   --x-width: var(--x-value);
   --x-height: var(--x-value);
+  --artistDescriptionContainer-bg: black;
+  --artistDescriptionContainer-clr: gray;
+  --artistDescriptionContainer-font-size: 0.8rem;
+  --moreBTN-clr: rgb(70, 36, 173);
+  --moreBTN-font-size: 0.8rem;
+  --aboutWord-font-size: 1.2rem;
+  --aboutWord-clr: white;
 }
 .container {
   display: flex;
@@ -48,11 +55,32 @@
   font-weight: bold;
   font-size: var(--artistName-font-size);
 }
+.artistDescriptionContainer {
+  background-color: var(--artistDescriptionContainer-bg);
+  color: var(--artistDescriptionContainer-clr);
+  padding-top: 2rem;
+  padding-inline: 0.7rem;
+  padding-bottom: 1.5rem;
+  font-size: var(--artistDescriptionContainer-font-size);
+}
+.aboutWord {
+  color: var(--aboutWord-clr);
+  font-size: var(--aboutWord-font-size);
+}
+
+.moreBTN {
+  color: var(--moreBTN-clr);
+  background-color: transparent;
+  font-weight: bold;
+  font-size: var(--moreBTN-font-size);
+}
 @media (min-width: 1024px) {
   :root {
     --playBTN-value: 70px;
     --x-value: 24px;
 
     --artistName-font-size: 1.9rem;
+    --artistDescriptionContainer-font-size: 1rem;
+    --moreBTN-font-size: 1rem;
   }
 }
