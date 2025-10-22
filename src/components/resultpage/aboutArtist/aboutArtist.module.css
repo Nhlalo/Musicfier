@@ -56,13 +56,15 @@
   font-size: var(--artistName-font-size);
 }
 .artistDescriptionContainer {
-  background-color: var(--artistDescriptionContainer-bg);
+  background-color: black;
   color: var(--artistDescriptionContainer-clr);
   padding-top: 2rem;
   padding-inline: 0.7rem;
   padding-bottom: 1.5rem;
   font-size: var(--artistDescriptionContainer-font-size);
+  box-shadow: 5px -15px 25px rgba(0, 0, 0, 1);
 }
+
 .aboutWord {
   color: var(--aboutWord-clr);
   font-size: var(--aboutWord-font-size);
