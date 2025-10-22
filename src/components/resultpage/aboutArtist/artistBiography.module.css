@@ -1,0 +1,62 @@
+:root {
+  --main-color: black;
+  --main-bg: white;
+  --closeBTN-color: blue;
+  --hometownWord-color: darkgray;
+  --hometownWord-font-size: 0.7rem;
+  --wordArtist-font-size: 1rem;
+}
+section {
+  color: var(--main-color);
+  background-color: var(--main-bg);
+  height: 90vh;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding-inline: 0.5rem;
+  padding-top: 1rem;
+}
+.artistContainer {
+  display: flex;
+}
+.wordArtist,
+.closeBTN {
+  font-weight: bold;
+  font-size: var(--wordArtist-font-size);
+}
+.wordArtist {
+  flex-grow: 1;
+  text-align: center;
+  font-size: var(--wordArtist-font-size);
+}
+.closeBTN {
+  color: var(--closeBTN-color);
+  background-color: transparent;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
+.hometownContainer,
+.dateofbirthContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.hometownWord,
+.bornWord {
+  color: darkgray;
+  font-size: var(--hometownWord-font-size);
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 0.7rem;
+  color: lightgray;
+}
+.artistDescription {
+  margin-top: 1.5rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --wordArtist-font-size: 1.1rem;
+  }
+}
