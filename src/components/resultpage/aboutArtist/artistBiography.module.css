@@ -7,6 +7,8 @@
   --wordArtist-font-size: 1rem;
 }
 section {
+  position: fixed;
+  top: 10vh; /* Leave 10vh at the top */
   color: var(--main-color);
   background-color: var(--main-bg);
   height: 90vh;
@@ -14,6 +16,21 @@ section {
   border-top-right-radius: 0.5rem;
   padding-inline: 0.5rem;
   padding-top: 1rem;
+  /* Initial state - off screen at bottom */
+  transform: translateY(100vh);
+  opacity: 0;
+
+  transition:
+    transform 0.4s ease-out,
+    opacity 0.3s ease-out;
+
+  /* Ensure it's above other content */
+  z-index: 1000;
+}
+section.enter {
+  /* Final state - visible at 90vh height from top */
+  transform: translateY(0);
+  opacity: 1;
 }
 .artistContainer {
   display: flex;
