@@ -1,6 +1,6 @@
 // Get the charts using Globalfm as Spotify does not provide certain charts. This will be used in conjuction with the Spotify API to provide the needed data
 
-async function getlobalTopTracks(limit = 20, signal) {
+async function getGlobalTopTracks(limit = 20, signal) {
   try {
     const response = await fetch(
       `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${LASTFM_API_KEY}&format=json&limit=${limit}`,
@@ -55,4 +55,4 @@ async function getCountryTopTracks(
   }
 }
 
-export { getlobalTopTracks, getCountryTopTracks };
+export { getGlobalTopTracks, getCountryTopTracks };
