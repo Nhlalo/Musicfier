@@ -1,24 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useMatches } from "react-router-dom";
-import Logo from "../../../assets/logo.png";
-import Styles from "./header.jsx";
 import { Menu } from "lucide-react";
-
-//Establish keys for the list items
-const listItemKeys = {
-  concerts: crypto.randomUUID(),
-  charts: crypto.randomUUID(),
-  mymusic: crypto.randomUUID(),
-  contacts: crypto.randomUUID(),
-};
-
-//Array containing the content within the links and keys assigned to the list items
-const navLinksContent = [
-  { content: "Concerts", key: listItemKeys.concerts },
-  { content: "Charts", key: listItemKeys.charts },
-  { content: "My Music", key: listItemKeys.mymusic },
-  { content: "Contacts", key: listItemKeys.contacts },
-];
+import { navLinksContent } from "../../../data/constants/navigation.jsx";
+import Styles from "./header.jsx";
+import Logo from "../../../assets/logo.png";
 
 export default function Header({}) {
   const [isScrolled, setIsScrolled] = useState(false);
