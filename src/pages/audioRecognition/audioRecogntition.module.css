@@ -1,0 +1,185 @@
+:root {
+  --icon-size: 16px;
+  --searchBTN-margin-bottom: 0.5rem;
+}
+.main {
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background: linear-gradient(135deg, #00c1ff, #0088ff);
+}
+.cancelIconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cancelIcon {
+  width: var(--icon-size);
+}
+.searchSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: 2rem;
+  position: relative;
+}
+.listening {
+  animation: listening 5s 1 normal;
+  animation-fill-mode: forwards;
+  opacity: 1;
+}
+.wait {
+  animation: waiting 3s 1 normal;
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+.lastTry {
+  animation: lastTry 7s infinite normal;
+  animation-delay: 8s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes listening {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes waiting {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes lastTry {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.loadingMessage {
+  text-align: center;
+  position: absolute;
+  transform: translateY(50px);
+}
+.loadingMessageHeader {
+  font-weight: bold;
+  font-size: 1rem;
+}
+.loadingMessageDescr {
+  font-size: 0.75rem;
+}
+.outerCircle,
+.middleCircle,
+.innerCircle {
+  position: absolute;
+
+  width: max(34px, 9vw);
+  height: max(34px, 9vw);
+
+  border-radius: 50%;
+}
+.outerCircle {
+  background-color: rgb(98, 173, 198);
+  animation: outerCircle 2s infinite normal;
+  opacity: 0.1;
+}
+
+.middleCircle {
+  background-color: rgb(220, 229, 232);
+  opacity: 0.1;
+  animation: middleCircle 1s infinite normal;
+}
+.innerCircle {
+  background-color: rgb(237, 242, 243);
+  opacity: 0.1;
+  animation: innerCircle 1.5s infinite normal;
+}
+.searchBTN {
+  width: max(94px, 10vw);
+  height: max(94px, 10vw);
+  background-color: hsl(215, 47%, 46%);
+  opacity: 0.8;
+  padding: 1rem;
+  border-radius: 50%;
+  border: none;
+  margin-bottom: var(--searchBTN-margin-bottom);
+  transform: translateY(-45px);
+}
+.hideItem {
+  display: none;
+}
+
+@keyframes outerCircle {
+  0% {
+    transform: translateY(-45px) scale(3);
+  }
+  50% {
+    transform: translateY(-45px) scale(4.5);
+  }
+  100% {
+    transform: translateY(-45px) scale(5.5);
+  }
+}
+@keyframes middleCircle {
+  0% {
+    transform: translateY(-45px) scale(2);
+  }
+  50% {
+    transform: translateY(-45px) scale(3.5);
+  }
+  100% {
+    transform: translateY(-45px) scale(4);
+  }
+}
+@keyframes innerCircle {
+  0% {
+    transform: translateY(-45px) scale(2);
+  }
+  50% {
+    transform: translateY(-45px) scale(2.5);
+  }
+  100% {
+    transform: translateY(-45px) scale(3.5);
+  }
+}
+.searchImg {
+  width: 100%;
+  height: auto;
+}
+.icon {
+  width: var(--icon-size);
+  animation: icon 1s infinite alternate;
+}
+@keyframes icon {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
