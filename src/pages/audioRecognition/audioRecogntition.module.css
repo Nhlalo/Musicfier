@@ -227,6 +227,8 @@
   :root {
     --icon-size: 24px;
     --searchBTN-margin-bottom: 1rem;
+    --errorHeader-font-size: 1.125rem;
+    --errorDescr-font-size: 16px;
   }
   .loadingMessage {
     transform: translateY(75px);
@@ -237,6 +239,13 @@
 
   .loadingMessageDescr {
     font-size: 1.125rem;
+  }
+  .errorfeedback {
+    left: -250px;
+    top: -75px;
+    width: max-content;
+    max-width: 245px;
+    min-width: 100px;
   }
 
   @keyframes outerCircle {
