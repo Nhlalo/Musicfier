@@ -1,0 +1,71 @@
+:root {
+  --about-bg: linear-gradient(135deg, #00c1ff, #0088ff);
+  --main-clr: #ffffff;
+  --heading-fontsize: 1.5rem;
+  --websiteDescr-fontsize: 1.125rem;
+  --instructions-fontsize: 1.125rem;
+  --aboutContainer-top-padding: 3.75rem;
+}
+.aboutContainer {
+  width: 100%;
+  justify-content: center;
+  background: var(--about-bg);
+  padding-top: var(--aboutContainer-top-padding);
+  padding-bottom: 3.75rem;
+}
+.aboutContainer,
+.aboutWrapper {
+  display: flex;
+}
+.aboutWrapper {
+  color: var(--main-clr);
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  min-width: 45ch;
+}
+.heading {
+  font-size: var(--heading-fontsize);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.websiteDescr {
+  font-size: var(--websiteDescr-fontsize);
+}
+.buttonWrapper {
+  /*This is to prevent main page animations froms slipping through */
+  position: relative;
+  z-index: 1;
+}
+
+.audioDetectionLink {
+  background: linear-gradient(135deg, #009eeb 0%, #0066cc 100%);
+  width: clamp(150px, 15vw, 400px);
+  height: clamp(150px, 15vw, 400px);
+  padding: 12px;
+  border-radius: 50%;
+  animation: detectionLink 1s infinite alternate;
+  z-index: 1;
+  cursor: pointer;
+}
+.instructions {
+  text-align: center;
+  margin-top: 16px;
+  font-size: var(--websiteDescr-fontsize);
+  font-weight: bold;
+}
+@keyframes detectionLink {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
