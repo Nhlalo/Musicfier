@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import Styles from "./error.module.css";
+import Styles from "./about.module.css";
 export default function Error() {
   return (
     <div className={Styles.errorfeedback} role="status" aria-live="polite">
