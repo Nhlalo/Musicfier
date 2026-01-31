@@ -1,7 +1,15 @@
+import { useState } from "react";
+import Error from "../../../audiorecognition/error/error";
 import Styles from "./about.module.css";
 import Logo from "../../../assets/logo.png";
 
-export default function About() {
+export default function About({ errorStatus = true }) {
+  // The errorStatus prop will be useful for audio searching errors/ no audio found return
+  const [error, setError] = useState(true);
+  //This will allow the error element to change the state of its parent element
+  function passToError(status) {
+    setError(status);
+  }
   return (
     <section className={Styles.aboutContainer}>
       <div className={Styles.aboutWrapper}>
@@ -12,6 +20,7 @@ export default function About() {
           </p>
         </div>
         <div className={Styles.buttonWrapper}>
+          {error && errorStatus && <Error error={passToError} />}
           <button
             href="google.com"
             aria-label="Audio recognize"
