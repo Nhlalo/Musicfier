@@ -30,6 +30,20 @@
   transform: translateX(0);
   opacity: 1;
 }
+/* Custom backdrop */
+.sidebar::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .contentWrapper,
 .logoContainer,
 .headerContainer,
