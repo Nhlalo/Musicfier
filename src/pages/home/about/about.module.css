@@ -69,3 +69,25 @@
   height: auto;
   object-fit: cover;
 }
+
+@media (min-width: 768px) {
+  :root {
+    --heading-fontsize: 1.875rem;
+    --aboutContainer-top-padding: 7.5rem;
+  }
+  .aboutWrapper {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --heading-fontsize: 3.125rem;
+    --websiteDescr-fontsize: 1.25rem;
+    --instructions-fontsize: 1.25rem;
+  }
+  .aboutWrapper {
+    gap: 0px;
+  }
+}
