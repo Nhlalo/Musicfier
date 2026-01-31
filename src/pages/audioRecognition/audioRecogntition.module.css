@@ -183,3 +183,53 @@
     transform: scale(1.1);
   }
 }
+@media (min-width: 768px) {
+  :root {
+    --icon-size: 24px;
+    --searchBTN-margin-bottom: 1rem;
+  }
+  .loadingMessage {
+    transform: translateY(75px);
+  }
+  .loadingMessageHeader {
+    font-size: 1.5rem;
+  }
+
+  .loadingMessageDescr {
+    font-size: 1.125rem;
+  }
+
+  @keyframes outerCircle {
+    0% {
+      transform: translateY(-55px) scale(1);
+    }
+    50% {
+      transform: translateY(-55px) scale(2.5);
+    }
+    100% {
+      transform: translateY(-55px) scale(3.5);
+    }
+  }
+  @keyframes middleCircle {
+    0% {
+      transform: translateY(-55px) scale(1);
+    }
+    50% {
+      transform: translateY(-55px) scale(2);
+    }
+    100% {
+      transform: translateY(-55px) scale(2.8);
+    }
+  }
+  @keyframes innerCircle {
+    0% {
+      transform: translateY(-55px) scale(1);
+    }
+    50% {
+      transform: translateY(-55px) scale(1.5);
+    }
+    100% {
+      transform: translateY(-55px) scale(2);
+    }
+  }
+}
