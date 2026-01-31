@@ -1,0 +1,134 @@
+.footerContainer {
+  width: 100%;
+  color: #fff;
+  background-color: #141414;
+  padding-top: 25px;
+  padding-bottom: 70px;
+}
+.footerWrapper {
+  width: min(90vw, 1128px);
+  margin: auto;
+}
+.subContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.logoContainer,
+.websiteInfor {
+  flex-grow: 1;
+}
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 13%;
+  margin-right: 7%;
+}
+.homeLink {
+  margin: 12px 0 30px;
+  display: flex;
+  align-items: center;
+}
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: #5b5b5b;
+}
+.logo {
+  width: 43px;
+  height: 43px;
+  fill: #fff;
+}
+.websiteName {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 900;
+}
+.motivation {
+  max-width: 55ch;
+  line-height: 1.6;
+}
+.websiteInfor {
+  display: flex;
+}
+.companyInfor,
+.legalInfor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 13%;
+  margin-right: 7%;
+  margin-top: 30px;
+}
+.ul {
+  padding-left: 0;
+}
+.company,
+.legal,
+.li {
+  font-size: 1.125rem;
+}
+.company,
+.legal {
+  color: #949494;
+  font-weight: 400;
+  margin-block: 0;
+}
+.li {
+  padding: 8px 0;
+}
+.socialMediaContainer {
+  margin-top: 70px;
+}
+.socialMediaApps {
+  display: flex;
+  gap: 30px;
+  padding-left: 0;
+}
+.socialMediaIcon {
+  height: 27px;
+  width: 27px;
+  color: #fff;
+  fill: #fff;
+}
+.socialMediaApps,
+.copyRightsWarning,
+.followUs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.44rem;
+}
+.followUs {
+  color: #949494;
+  font-size: 1.125rem;
+}
+@media (min-width: 768px) {
+  .subContainer {
+    flex-direction: row;
+  }
+  .logoContainer {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .logoContainer,
+  .companyInfor,
+  .legalInfor {
+    display: block;
+  }
+
+  .companyInfor,
+  .legalInfor {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+  }
+  .company,
+  .legal {
+    margin-block: 18px;
+  }
+}
