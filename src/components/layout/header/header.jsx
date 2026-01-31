@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useMatches } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
+import Sidebar from "../sidebar/sidebar.jsx";
 import Styles from "./header.jsx";
 import Logo from "../../../assets/logo.png";
 
@@ -83,6 +84,11 @@ export default function Header({}) {
           </button>
         </div>
       </header>
+      <Sidebar
+        UpdateSidebarVisibility={handleSidebarDisplay}
+        sideBarStatus={showSidebar}
+        lastFocusedElement={lastFocusedElement}
+      />
     </>
   );
 }
