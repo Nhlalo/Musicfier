@@ -1,6 +1,8 @@
 :root {
   --icon-size: 16px;
   --searchBTN-margin-bottom: 0.5rem;
+  --errorHeader-font-size: 0.875rem;
+  --errorDescr-font-size: 0.75rem;
 }
 .main {
   min-height: 100vh;
@@ -182,6 +184,44 @@
   100% {
     transform: scale(1.1);
   }
+}
+.errorfeedback {
+  color: #000;
+  background-color: #fff;
+  width: 180px;
+  border-radius: 0.9375rem;
+  position: absolute;
+  left: -115px;
+  top: -135px;
+}
+.errorfeedbackWrapper {
+  position: relative;
+  padding: 1.25rem;
+}
+.errorfeedback,
+.errorDescr {
+  font-weight: 700;
+  text-align: left;
+}
+.errorHeader {
+  font-size: var(--errorHeader-font-size);
+  font-weight: 700;
+  margin-bottom: 0.3125rem;
+}
+.errorDescr {
+  font-size: var(--errorDescr-font-size);
+  color: #3a3a3c;
+  letter-spacing: 0.5px;
+}
+.closeBTN {
+  position: absolute;
+  right: 0.125rem;
+  top: 0.0625rem;
+}
+.xIcon {
+  width: 20px;
+  height: 20px;
+  color: #3a3a3c;
 }
 @media (min-width: 768px) {
   :root {
