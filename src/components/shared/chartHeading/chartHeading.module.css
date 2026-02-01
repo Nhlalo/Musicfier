@@ -144,3 +144,19 @@
 .mainHr {
   width: min(90vw, 1128px);
 }
+@media (min-width: 768px) {
+  :root {
+    --chartDescription-fontsize: 1.875rem;
+    --mainImg-width: 166px;
+    --maingImg-height: 166px;
+    --supportingImg-width: 125px;
+    --supportingImg-height: 125px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --chartDescription-fontsize: 3.125rem;
+    --chartHeading-fontsize: 1.25rem;
+    --artistChartDescr-fontsize: 1.25rem;
+  }
+}
