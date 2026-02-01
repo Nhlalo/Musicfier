@@ -4,7 +4,7 @@ import useFocusTrap from "../../../hooks/useFocusTrap";
 import { navLinksContent } from "../../../data/constants/navigation";
 import Styles from "./sidebar.module.css";
 import Container from "../../ui/container/container";
-import Logo from "../../../../assets/logo.png";
+import Logo from "../../../assets/images/logo.png";
 
 export default function Sidebar() {
   const sidebarRef = useRef(null);
