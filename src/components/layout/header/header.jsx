@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
 import Styles from "./header.jsx";
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/images/logo.png";
 
 export default function Header({}) {
   const [isScrolled, setIsScrolled] = useState(false);

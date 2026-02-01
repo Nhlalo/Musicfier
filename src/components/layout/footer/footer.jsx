@@ -6,7 +6,7 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import Styles from "./footer.module.css";
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/images/logo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
