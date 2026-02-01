@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebook,
+  faFacebookF,
+  faTwitter,
   faInstagram,
   faSnapchat,
-  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import Styles from "./footer.module.css";
 import logo from "../../../assets/images/logo.png";
@@ -74,7 +74,7 @@ export default function Footer() {
               <a href="">
                 {" "}
                 <FontAwesomeIcon
-                  icon={faFacebook}
+                  icon={faFacebookF}
                   className={Styles.socialMediaIcon}
                 />
               </a>
@@ -83,7 +83,7 @@ export default function Footer() {
               <a href="">
                 {" "}
                 <FontAwesomeIcon
-                  icon={faXTwitter}
+                  icon={faTwitter}
                   className={Styles.socialMediaIcon}
                 />
               </a>
