@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import { ChevronRight } from "lucide-react";
+import { mockCharts } from "../../../data/mock/spotify-mock";
 import Styles from "./chartHeading.module.css";
+
+const keys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
 export default function ChartHeading({
   mainBG = "#fff",
   displayFeaturedArtistsImg,
-  mockCharts,
   heading,
   headingDescr,
   miniHeading,
@@ -15,6 +17,7 @@ export default function ChartHeading({
   featuredArtists,
 }) {
   const [hoverStatus, setHoverStatus] = useState(false);
+
   const displayChartBTN = useRef(null);
 
   return (
@@ -28,11 +31,12 @@ export default function ChartHeading({
           className={Styles.featuredArtistsImgContainer}
           style={{ display: displayFeaturedArtistsImg ? "flex" : "none" }}
         >
-          {mockCharts.slice(0, 3).map((songData) => (
+          {mockCharts.slice(0, 3).map((songData, index) => (
             <img
               src={songData.artistImage}
               alt="Featured artists on this chart"
               className={Styles.supportingImg}
+              key={keys[index]}
             />
           ))}
         </div>
@@ -53,7 +57,7 @@ export default function ChartHeading({
             style={{ display: displayChart ? "block" : "none" }}
           >
             <img
-              src={songData.artistImage}
+              src={mockCharts[0].artistImage}
               alt=""
               aria-hidden="true"
               className={Styles.artistImg}
