@@ -1,0 +1,108 @@
+import { useState, useRef } from "react";
+import { ChevronRight } from "lucide-react";
+import Styles from "./chartHeading.module.css";
+
+export default function Charts({
+  mainBG = "#fff",
+  displayFeaturedArtistsImg,
+  mockCharts,
+  heading,
+  headingDescr,
+  miniHeading,
+  displayChart,
+  subHeading,
+  chartContainer,
+  featuredArtists,
+}) {
+  const [hoverStatus, setHoverStatus] = useState(false);
+  const displayChartBTN = useRef(null);
+
+  return (
+    <section
+      className={Styles.globalChart}
+      style={{ backgroundColor: `${mainBG}` }}
+    >
+      <div className={Styles.globalChartWrapper}>
+        {/* This will display on the local charts */}
+        <div
+          className={Styles.featuredArtistsImgContainer}
+          style={{ display: displayFeaturedArtistsImg ? "flex" : "none" }}
+        >
+          {mockCharts.slice(0, 3).map((songData) => (
+            <img
+              src={songData.songCover}
+              alt="Featured artists on this chart"
+              className={Styles.supportingImg}
+            />
+          ))}
+        </div>
+        <div className={Styles.chartDesriptionContainer}>
+          <div className={Styles.chartDescriptionWrapper}>
+            <span className={Styles.chartHeading}>{heading}</span>
+            <h2 className={Styles.chartDescription}>{headingDescr}</h2>
+            <p className={Styles.artistChartDescr}>{miniHeading}</p>
+          </div>
+          {/* This will be displayed on the global charts */}
+          <button
+            aria-label="View the chart"
+            type="button"
+            className={Styles.viewChartBTN}
+            ref={displayChartBTN}
+            onMouseEnter={() => setHoverStatus(true)}
+            onMouseLeave={() => setHoverStatus(false)}
+            style={{ display: displayChart ? "block" : "none" }}
+          >
+            <img
+              src={songData.songCover}
+              alt=""
+              aria-hidden="true"
+              className={Styles.artistImg}
+            />
+            <p
+              className={Styles.top50}
+              aria-hidden="true"
+              style={{ display: hoverStatus ? "none" : "block" }}
+            >
+              GLOBAL TOP 50 CHART
+            </p>
+            <p
+              className={Styles.featuredArtists}
+              aria-hidden="true"
+              style={{ display: hoverStatus ? "none" : "block" }}
+            >
+              Featuring songs from Tyla, Drake and more
+            </p>
+            <div
+              className={Styles.viewChart}
+              aria-hidden="true"
+              style={{ display: hoverStatus ? "flex" : "none" }}
+            >
+              View Chart
+            </div>
+          </button>
+        </div>
+        <div className={Styles.top50SongsContainer}>
+          <div className={Styles.top50SongsWrapper}>
+            <h2 className={Styles.heading}>{subHeading}</h2>
+            <button
+              type="button"
+              aria-label="View the whole global top 50 chart"
+              className={Styles.viewTop50BTN}
+            >
+              SEE ALL <ChevronRight aria-hidden="true" />
+            </button>
+          </div>
+          <hr className={Styles.mainHr} aria-hidden="true" />
+          {chartContainer}
+        </div>
+        <div className={Styles.featuredArtistsContainer}>
+          <div className={Styles.featuredArtistsWrapper}>
+            <h2 className={Styles.heading}>Featured Artists</h2>
+          </div>
+          <hr className={Styles.mainHr} aria-hidden="true" />
+          {featuredArtists}
+        </div>
+      </div>
+    </section>
+  );
+}
