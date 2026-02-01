@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { ChevronRight } from "lucide-react";
 import Styles from "./chartHeading.module.css";
 
-export default function Charts({
+export default function ChartHeading({
   mainBG = "#fff",
   displayFeaturedArtistsImg,
   mockCharts,
