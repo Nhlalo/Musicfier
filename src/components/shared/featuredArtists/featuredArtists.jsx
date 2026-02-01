@@ -5,7 +5,7 @@ import useScrollLogic from "../../../hooks/scrollLogic";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 import Styles from "./featuredArtists.module.css";
 
-function FeaturedArtist({ artistSpotifyID, artistName }) {
+function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
   return (
     <Link
       to={`artist/${artistSpotifyID}`}
@@ -50,6 +50,7 @@ export default function FeaturedArtists() {
             <FeaturedArtist
               artistSpotifyID={songData.spotifyArtistId}
               artistName={songData.artistName}
+              artistImg={songData.artistImage}
               key={songData.key}
             />
           ))}
