@@ -1,0 +1,146 @@
+:root {
+  --globalChart-bg: white;
+  --globalChart-clr: black;
+  --chartDescription-fontsize: 1.5rem;
+  --chartHeading-fontsize: 1.125rem;
+  --artistChartDescr-fontsize: 1rem;
+  --mainImg-width: 134px;
+  --maingImg-height: 134px;
+  --supportingImg-width: 101px;
+  --supportingImg-height: 101px;
+}
+.globalChart {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 74px;
+}
+.globalChartWrapper {
+  width: 95%;
+}
+.featuredArtistsImgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+.supportingImg,
+.supportingImg2,
+.mainImg {
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: cover;
+}
+.supportingImg,
+.supportingImg2 {
+  position: relative;
+  width: var(--supportingImg-width);
+  height: var(--supportingImg-height);
+}
+
+.mainImg {
+  z-index: 2;
+  width: var(--mainImg-width);
+  height: var(--maingImg-height);
+}
+.supportingImg {
+  left: 40px;
+}
+.supportingImg2 {
+  right: 40px;
+}
+.chartDesriptionContainer {
+  text-align: center;
+}
+.chartDescriptionWrapper {
+  max-width: 671px;
+  margin: 0 auto 40px;
+}
+.chartDescription {
+  font-size: var(--chartDescription-fontsize);
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+}
+.chartHeading {
+  font-size: var(--chartHeading-fontsize);
+  color: #3a3a3c;
+  font-weight: 700;
+}
+.artistChartDescr {
+  font-size: var(--artistChartDescr-fontsize);
+  color: #3a3a3c;
+}
+.viewChartBTN {
+  position: relative;
+  width: min(90vw, 1128px);
+  margin: 0 auto 40px;
+  overflow: hidden; /* Hides overflow */
+  padding: 0;
+  border-radius: 2.5rem;
+}
+
+.artistImg {
+  width: 100%;
+  object-fit: cover;
+}
+.top50,
+.featuredArtists {
+  position: absolute;
+  left: 15px;
+}
+.featuredArtists {
+  bottom: 15px;
+  color: #fff;
+}
+.viewChart {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.top50 {
+  bottom: 40px;
+  color: #828282;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.top50SongsContainer,
+.featuredArtistsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.featuredArtistsContainer {
+  padding-bottom: 2.5rem;
+}
+.top50SongsWrapper,
+.featuredArtistsWrapper {
+  width: min(90vw, 1128px);
+  display: flex;
+  justify-content: space-between;
+}
+.heading {
+  padding: 25px 0 12px;
+}
+.viewTop50BTN {
+  display: flex;
+  align-items: center;
+  color: #066bff;
+  font-weight: 700;
+}
+.viewTop50BTN:hover {
+  text-decoration: underline;
+}
+.mainHr {
+  width: min(90vw, 1128px);
+}
