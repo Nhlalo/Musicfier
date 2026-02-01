@@ -1,8 +1,9 @@
+import { useState, useRef } from "react";
+import { Link } from "react-router";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
 import { mockCharts } from "../../../data/mock/spotify-mock";
-import { useState, useRef } from "react";
 import Styles from "./featuredArtists.module.css";
-import { ChevronRight, ChevronLeft } from "lucide-react";
 
 function FeaturedArtist({ artistSpotifyID, artistName }) {
   return (
@@ -48,7 +49,8 @@ export default function FeaturedArtists() {
           {mockCharts.map((songData) => (
             <FeaturedArtist
               artistSpotifyID={songData.spotifyArtistId}
-              artistName={artistName}
+              artistName={songData.artistName}
+              key={songData.key}
             />
           ))}
         </div>
