@@ -1,15 +1,22 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useMatches } from "react-router-dom";
 import Header from "./header/header";
 import Footer from "./footer/footer";
 
 export default function RootLayout() {
+  const matches = useMatches();
+  const routeHandles = matches.map((match) => match.handle).filter(Boolean);
+
+  const mergedHandle = Object.assign({}, ...routeHandles);
+  const shouldHideHeader = mergedHandle?.header === "hidden";
+  const shouldHideFooter = mergedHandle?.footer === "hidden";
+
   return (
     <>
-      <Header />
+      {!shouldHideHeader && <Header />}
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {!shouldHideFooter && <Footer />}
     </>
   );
 }
