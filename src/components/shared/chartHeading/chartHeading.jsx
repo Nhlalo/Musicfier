@@ -30,7 +30,7 @@ export default function Charts({
         >
           {mockCharts.slice(0, 3).map((songData) => (
             <img
-              src={songData.songCover}
+              src={songData.artistImage}
               alt="Featured artists on this chart"
               className={Styles.supportingImg}
             />
@@ -53,7 +53,7 @@ export default function Charts({
             style={{ display: displayChart ? "block" : "none" }}
           >
             <img
-              src={songData.songCover}
+              src={songData.artistImage}
               alt=""
               aria-hidden="true"
               className={Styles.artistImg}
