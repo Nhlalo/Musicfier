@@ -5,6 +5,7 @@ import {
   concertsColors,
   artistInforColors,
 } from "./data/constants/colors";
+import RootLayout from "./components/layout/rootLayout";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "artist",
+        path: "artist/id",
         element: <ArtistInfor />,
         handle: {
           colors: { artistInforColors },
