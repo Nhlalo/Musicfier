@@ -7,6 +7,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -15,6 +16,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -23,6 +25,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -31,6 +34,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -39,6 +43,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -47,6 +52,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -55,6 +61,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -63,6 +70,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -71,6 +79,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -79,6 +88,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -87,6 +97,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -95,6 +106,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -103,6 +115,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -111,6 +124,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -119,6 +133,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -127,6 +142,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -135,6 +151,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -143,6 +160,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
   {
     Position: ++chartPosition,
@@ -151,6 +169,7 @@ const mockCharts = [
     songCover: "../assets/artistImg.jpg",
     spotifyLink: "string",
     songPreviewUrl: "string",
+    spotifyArtistId: "3TVXtAsR1Inumwj472S9r4",
   },
 ];
 export { mockCharts };
