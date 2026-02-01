@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
+import { mockCharts } from "../../../data/mock/spotify-mock";
 import Song from "./song";
 import Styles from "./chartContainer.module.css";
 export default function ChartContainer() {
