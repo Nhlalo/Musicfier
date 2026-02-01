@@ -135,3 +135,11 @@
   transition: none !important;
   animation: none !important;
 }
+@media (min-width: 768px) {
+  :root {
+    --songProfile-gap: 20px;
+  }
+  .chartWrapper {
+    grid-template-columns: repeat(7, 45%);
+  }
+}
