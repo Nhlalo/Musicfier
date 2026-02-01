@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import Error from "../../../audiorecognition/error/error";
+import Error from "../../audioRecognition/error";
 import Styles from "./about.module.css";
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/images/logo.png";
 
 export default function About({ errorStatus = true }) {
   // The errorStatus prop will be useful for audio searching errors/ no audio found return

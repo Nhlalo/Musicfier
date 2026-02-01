@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AudioLines, X, Ellipsis } from "lucide-react";
 import Styles from "./audioRecognition.module.css";
-import searchImage from "../../../assets/logo.png";
+import searchImage from "../../assets/images/logo.png";
 
 export default function AudioRecognition() {
   return (
