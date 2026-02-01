@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import Error from "../../../audiorecognition/error/error";
 import Styles from "./about.module.css";
 import Logo from "../../../assets/logo.png";
@@ -21,13 +22,13 @@ export default function About({ errorStatus = true }) {
         </div>
         <div className={Styles.buttonWrapper}>
           {error && errorStatus && <Error error={passToError} />}
-          <button
-            href="google.com"
-            aria-label="Audio recognize"
+          <Link
+            to="audioRecognition"
+            aria-label="Audio recognition"
             className={Styles.audioDetectionLink}
           >
             <img src={Logo} alt="" aria-hidden="true" className={Styles.logo} />
-          </button>
+          </Link>
           <p className={Styles.instructions}>Tap to Musicfy</p>
         </div>
       </div>
