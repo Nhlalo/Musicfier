@@ -7,3 +7,39 @@
 html {
   font-size: 16px;
 }
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+p {
+  margin: 0;
+}
+/*This ensures that the Link element does not come with default margin because it is rendered as a 'a' element by the browser*/
+a {
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+/*This it to make the body not be scrollable when the modal is open */
+.sidebarOpen {
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overscroll-behavior-y: none;
+}
