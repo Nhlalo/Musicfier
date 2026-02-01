@@ -31,11 +31,24 @@ async function searchSpotifyTrack(trackName, artistName, token, signal) {
   const data = await response.json();
   if (data.tracks.items.length > 0) {
     const track = data.tracks.items[0];
+    const artistID = track.artists[0].id;
+    const artistInforResponse = await fetch(
+      `https://api.spotify.com/v1/artists/${artistID} `,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      },
+    );
+    const artistData = await artistInforResponse.json();
+
     return {
       spotifyLink: track.external_urls.spotify,
       previewUrl: track.preview_url,
       songCover: track.album.images[0]?.url || null,
       spotifyId: track.id,
+      artistImage: artistData.images[0]?.url || null,
     };
   }
   return null;
