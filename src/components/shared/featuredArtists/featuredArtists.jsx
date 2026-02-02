@@ -19,14 +19,15 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
   );
 }
 export default function FeaturedArtists() {
+  const [scrollStartStatus, setScrollStartStatus] = useState(true);
+  const [scrollEndStatus, setScrollEndStatus] = useState(false);
+
   const chartContainerRef = useRef(null);
   const resizeTimeoutRef = useRef(null);
   const leftEdgeSongRef = useRef(0);
   const isResizingRef = useRef(false);
   const originalScrollBehaviorRef = useRef("smooth"); // Store original behavior
-
-  const [scrollStartStatus, setScrollStartStatus] = useState(true);
-  const [scrollEndStatus, setScrollEndStatus] = useState(false);
+  const scrollGridCallbackRef = useRef(null);
 
   useScrollLogic(
     chartContainerRef,
@@ -34,12 +35,13 @@ export default function FeaturedArtists() {
     leftEdgeSongRef,
     isResizingRef,
     originalScrollBehaviorRef,
+    scrollGridCallbackRef,
     setScrollStartStatus,
     setScrollEndStatus,
   );
 
-  const handleLeftScroll = () => scrollGridCallback("left");
-  const handleRightScroll = () => scrollGridCallback("right");
+  const handleLeftScroll = () => scrollGridCallbackRef.current("left");
+  const handleRightScroll = () => scrollGridCallbackRef.current("right");
 
   return (
     <>

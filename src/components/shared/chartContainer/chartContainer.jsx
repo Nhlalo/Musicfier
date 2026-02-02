@@ -13,6 +13,7 @@ export default function ChartContainer() {
   const leftEdgeSongRef = useRef(0);
   const isResizingRef = useRef(false);
   const originalScrollBehaviorRef = useRef("smooth"); // Store original behavior
+  const scrollGridCallbackRef = useRef(null);
 
   useScrollLogic(
     chartContainerRef,
@@ -20,12 +21,13 @@ export default function ChartContainer() {
     leftEdgeSongRef,
     isResizingRef,
     originalScrollBehaviorRef,
+    scrollGridCallbackRef,
     setScrollStartStatus,
     setScrollEndStatus,
   );
 
-  const handleLeftScroll = () => scrollGridCallback("left");
-  const handleRightScroll = () => scrollGridCallback("right");
+  const handleLeftScroll = () => scrollGridCallbackRef.current("left");
+  const handleRightScroll = () => scrollGridCallbackRef.current("right");
 
   return (
     <>
@@ -40,6 +42,7 @@ export default function ChartContainer() {
               image={songData.songCover}
               actName={songData.artistName}
               artistID={songData.spotifyArtistId}
+              key={songData.key}
             />
           ))}
         </div>
