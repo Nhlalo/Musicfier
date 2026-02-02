@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useNavigate } from "react-router";
 import { AudioLines, X, Ellipsis } from "lucide-react";
 import Styles from "./audioRecognition.module.css";
 import searchImage from "../../assets/images/logo.png";
 
 export default function AudioRecognition() {
+  const navigate = useNavigate();
+  //Direct to the home page
+  function handleHomePage() {
+    navigate("/");
+  }
   return (
     <>
       <main className={Styles.main}>
         <div className={Styles.cancelIconContainer}>
-          <a
-            href="google.com"
+          <button
             data-testid="homepage-link"
-            aria-label="Home page"
+            aria-label="Direct to home page"
+            onClick={handleHomePage}
           >
             {" "}
             <X className={Styles.cancelIcon} aria-hidden="true" />
-          </a>
+          </button>
         </div>
         <section className={Styles.searchSection}>
           <div className={Styles.outerCircle} aria-hidden="true">
