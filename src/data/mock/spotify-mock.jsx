@@ -1,5 +1,5 @@
 import ArtistImg from "../../assets/images/artistImg.jpg";
-let chartPosition = 1;
+let chartPosition = 0;
 
 function createMockSong(
   position,
@@ -223,6 +223,16 @@ const mockCharts = [
     "46HVymK1B7cL5e1hD6cE1t",
   ),
 
+  createMockSong(
+    ++chartPosition,
+    "Last Night",
+    "Morgan Wallen",
+    ArtistImg,
+    ArtistImg,
+    "string",
+    "string",
+    "4QTxD5qJ3K5C5Q5d5y0q5J",
+  ),
   createMockSong(
     ++chartPosition,
     "Last Night",
