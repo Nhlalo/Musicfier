@@ -1,12 +1,13 @@
+import { Link } from "react-router";
 import Styles from "./charts.module.css";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 
 function MoreChart({ location = "South Africa" }) {
   return (
-    <a
+    <Link
+      to={"/charts"}
       className={Styles.chartLink}
       aria-label={`View the Top 50 ${location} chart`}
-      href="google.com"
     >
       <div className={Styles.featuredSongCoverContainer} aria-hidden="true">
         {mockCharts.slice(0, 3).map((songData) => (
@@ -37,7 +38,7 @@ function MoreChart({ location = "South Africa" }) {
         </div>
         <div className={Styles.viewMoreBTN}>VIEW</div>
       </div>
-    </a>
+    </Link>
   );
 }
 
