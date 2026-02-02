@@ -7,10 +7,10 @@ function selectColors(bg, bg1, color, color1, logoBG, logoBG1, btnBG, btnBG1) {
       btnBG,
     },
     scrolled: {
-      bg1,
-      color1,
-      logoBG1,
-      btnBG1,
+      bg: bg1,
+      color: color1,
+      logoBG: logoBG1,
+      btnBG: btnBG1,
     },
   };
 }
@@ -18,11 +18,11 @@ function selectColors(bg, bg1, color, color1, logoBG, logoBG1, btnBG, btnBG1) {
 const homeColors = selectColors(
   "#00bbff",
   "#fff",
-  "#3b86f7",
-  "#fff",
   "#fff",
   "#000000",
+  "#3b86f7",
   "#242424",
+  "#fff",
   "#000",
 );
 const chartsColors = selectColors(
