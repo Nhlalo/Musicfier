@@ -3,11 +3,12 @@ import { useMatches } from "react-router";
 import { Menu } from "lucide-react";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
-import Styles from "./header.jsx";
+import Styles from "./header.module.css";
 import Logo from "../../../assets/images/logo.png";
 
 export default function Header({}) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const lastFocusedElement = useRef(null);
 
@@ -32,6 +33,27 @@ export default function Header({}) {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); //
+  //This will display the side bar
+  function handleOpeningSidebar() {
+    //Store the last focused element before opening the sidebar
+    lastFocusedElement.current = document.activeElement;
+
+    setShowSidebar(true);
+  }
+
+  //This will be passed down to the sidebar(child component)
+  function handleSidebarDisplay(value) {
+    setShowSidebar(value);
+  }
+
+  function handleScrollToTop(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth", // Optional: adds smooth scrolling
+    });
+  }
 
   return (
     <>
@@ -43,10 +65,14 @@ export default function Header({}) {
         }}
       >
         <div className={Styles.navContentWrapper}>
-          <a className={Styles.logoContainer}>
+          <button
+            className={Styles.logoContainer}
+            onClick={handleScrollToTop}
+            aria-label="Scroll to the top"
+          >
             <div
               className={Styles.logoWrapper}
-              style={{ backgroundColor: logoBG }}
+              style={{ backgroundColor: currentColors.logoBG }}
               aria-hidden="true"
             >
               <img src={Logo} alt="Musicfier" className={Styles.logo} />
@@ -54,7 +80,7 @@ export default function Header({}) {
             <figcaption className={Styles.websiteName} aria-hidden="true">
               MUSICFIER
             </figcaption>
-          </a>
+          </button>
           <nav className={Styles.navContainer}>
             <ul className={Styles.listContainer}>
               {navLinksContent.map((element) => (
@@ -62,7 +88,7 @@ export default function Header({}) {
                   <a
                     href=""
                     className={Styles.navlink}
-                    style={{ color: navLinkColor }}
+                    style={{ color: currentColors.color }}
                   >
                     {element.content}
                   </a>
@@ -79,7 +105,7 @@ export default function Header({}) {
             <Menu
               className={Styles.dropdownMenu}
               aria-hidden="true"
-              style={{ color: dropdownBTNColor }}
+              style={{ color: currentColors.btnBG }}
             />
           </button>
         </div>
