@@ -77,7 +77,13 @@ export default function Header({}) {
             >
               <img src={Logo} alt="Musicfier" className={Styles.logo} />
             </div>
-            <figcaption className={Styles.websiteName} aria-hidden="true">
+            <figcaption
+              className={Styles.websiteName}
+              aria-hidden="true"
+              style={{
+                color: currentColors.color,
+              }}
+            >
               MUSICFIER
             </figcaption>
           </button>
