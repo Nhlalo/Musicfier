@@ -4,7 +4,8 @@ import Error from "../../audioRecognition/error";
 import Styles from "./about.module.css";
 import Logo from "../../../assets/images/logo.png";
 
-export default function About({ errorStatus = false }) {
+export default function About({ errorStatus = true }) {
+  const navigate = useNavigate();
   // The errorStatus prop will be useful for audio searching errors/ no audio found return
   const [error, setError] = useState(true);
   //This will allow the error element to change the state of its parent element
@@ -12,7 +13,7 @@ export default function About({ errorStatus = false }) {
     setError(status);
   }
   function handleAudioRecognition() {
-    Navigate("/audioRecognition");
+    navigate("/audioRecognition");
   }
   return (
     <section className={Styles.aboutContainer}>

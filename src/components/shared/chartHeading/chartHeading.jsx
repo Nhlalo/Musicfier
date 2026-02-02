@@ -17,12 +17,14 @@ export default function ChartHeading({
   chartContainer,
   featuredArtists,
 }) {
+  const navigate = useNavigate();
+
   const [hoverStatus, setHoverStatus] = useState(false);
 
   const displayChartBTN = useRef(null);
 
   function handleViewCharts() {
-    navigate("./charts");
+    navigate("/charts");
   }
 
   return (
