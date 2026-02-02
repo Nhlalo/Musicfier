@@ -1,0 +1,104 @@
+:root {
+  --featuredConverSong-width: 160px;
+  --featuredConverSong-height: 160px;
+  --featuredSongCoverContainer-xTranslation: 150px;
+  --featuredSongCoverContainer-yTranslation: -360px;
+}
+.chartLink {
+  width: min(100%);
+  background-color: #070707;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+.featuredSongCover {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.featuredSongCoverWrapper {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: var(--featuredConverSong-width);
+  height: var(--featuredConverSong-height);
+  border-radius: 8px;
+}
+.featuredSongCoverContainer {
+  display: flex;
+  gap: 8px;
+  transform-origin: left top;
+  transform: rotate(45deg)
+    translateX(var(--featuredSongCoverContainer-xTranslation))
+    translateY(var(--featuredSongCoverContainer-yTranslation));
+}
+.featuredSongCoverContainer,
+.chartDescrContainer {
+  width: 100%;
+}
+.chartDescrContainer {
+  display: flex;
+  padding-top: 15px;
+  width: 90%;
+  margin: auto;
+  gap: 20px;
+}
+.chartDescrHeading {
+  font-size: 32px;
+  font-weight: 900;
+}
+.viewMoreBTN {
+  padding: 10px 30px;
+  margin-left: 15px;
+  font-weight: 900;
+  border-radius: 8px;
+  background-color: #515151;
+  width: fit-content;
+  align-self: flex-end;
+  z-index: 5;
+}
+.featuredArtists {
+  margin-top: 5px;
+}
+
+.moreChartsContainer {
+  background-color: #fff;
+  width: 100%;
+  padding: 30px 0 60px;
+}
+
+.moreChartsWrapper {
+  width: min(90vw, 1128px);
+  margin: auto;
+}
+.moreChartsHeading {
+  font-size: 24px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  padding: 25px 0 12px;
+}
+.miniChartsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  :root {
+    --featuredSongCoverContainer-xTranslation: 300px;
+    --featuredSongCoverContainer-yTranslation: -510px;
+  }
+}
+@media (min-width: 888px) {
+  .chartLink {
+    width: min(95%, 556px);
+  }
+  :root {
+    --featuredSongCoverContainer-xTranslation: 150px;
+    --featuredSongCoverContainer-yTranslation: -340px;
+  }
+  .miniChartsContainer {
+    flex-direction: row;
+  }
+}
