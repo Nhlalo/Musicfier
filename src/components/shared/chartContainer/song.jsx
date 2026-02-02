@@ -3,7 +3,10 @@ import { Play } from "lucide-react";
 import Styles from "./chartContainer.module.css";
 
 //Generate keys for the list of links
-const keys = [].reduce((acc) => acc.push(crypto.randomUUID()), []);
+let keys = [];
+for (let i = 0; i < 20; i++) {
+  keys.push(crypto.randomUUID());
+}
 export default function Song({
   songLink,
   songName,
