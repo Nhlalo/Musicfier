@@ -17,6 +17,11 @@ export default function ChartHeading({
   chartContainer,
   featuredArtists,
 }) {
+  const imgClasses = [
+    Styles.supportingImg,
+    Styles.mainImg,
+    Styles.supportingImg2,
+  ];
   const navigate = useNavigate();
 
   const [hoverStatus, setHoverStatus] = useState(false);
@@ -42,7 +47,7 @@ export default function ChartHeading({
             <img
               src={songData.artistImage}
               alt="Featured artists on this chart"
-              className={Styles.supportingImg}
+              className={imgClasses[index]}
               key={keys[index]}
             />
           ))}
