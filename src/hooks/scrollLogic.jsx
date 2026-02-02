@@ -13,6 +13,7 @@ export default function useScrollLogic(
   leftEdgeSongRef,
   isResizingRef,
   originalScrollBehaviorRef,
+  scrollGridCallbackRef,
   setScrollStartStatus,
   setScrollEndStatus,
 ) {
@@ -41,7 +42,7 @@ export default function useScrollLogic(
     leftEdgeSongRef.current = songIndex;
   }, []);
 
-  const scrollGridCallback = useCallback(
+  scrollGridCallbackRef.current = useCallback(
     (direction) => {
       if (!chartContainerRef.current || isResizingRef.current) return;
 

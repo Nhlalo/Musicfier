@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
-export default function useFocusTrap({
+export default function useFocusTrap(
   firstFocusedElement,
   closeSideBar,
   focusableContent,
   sideBarStatus,
-}) {
+) {
   useEffect(() => {
-    firstFocusedElement.focus();
+    firstFocusedElement?.focus();
 
     // Escape key handler
     const handleEscape = (e) => {
