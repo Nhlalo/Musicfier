@@ -19,6 +19,7 @@
 }
 .cancelIcon {
   width: var(--icon-size);
+  color: #fff;
 }
 .searchSection {
   display: flex;
