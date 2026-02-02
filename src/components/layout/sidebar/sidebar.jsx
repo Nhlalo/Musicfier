@@ -1,12 +1,16 @@
 import { useRef, useEffect } from "react";
 import { X } from "lucide-react";
 import useFocusTrap from "../../../hooks/useFocusTrap";
-import { navLinksContent } from "../../../data/constants/navigation";
+import NavLinksContentRef from "../../../data/constants/navigation";
 import Styles from "./sidebar.module.css";
 import Container from "../../ui/container/container";
 import Logo from "../../../assets/images/logo.png";
 
-export default function Sidebar() {
+export default function Sidebar({
+  UpdateSidebarVisibility,
+  sideBarStatus,
+  lastFocusedElement,
+}) {
   const sidebarRef = useRef(null);
   const logoLinkRef = useRef(null);
   const closeSideBarBTNRef = useRef(null);
@@ -22,8 +26,14 @@ export default function Sidebar() {
     chartsLinkRef,
     myMusicLinkRef,
     contactsLinkRef,
-  ].map((ref) => ref.current);
+  ].map((ref) => ref?.current);
 
+  const navLinksContent = NavLinksContentRef(
+    concertsLinkRef,
+    chartsLinkRef,
+    myMusicLinkRef,
+    contactsLinkRef,
+  );
   //Trap focus within the sidebar
   useFocusTrap(logoLinkRef.current, closeSideBar, refs, sideBarStatus);
 
