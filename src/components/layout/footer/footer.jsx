@@ -5,6 +5,7 @@ import {
   faInstagram,
   faSnapchat,
 } from "@fortawesome/free-brands-svg-icons";
+import handleScrollToTop from "../../../utils/scrollToTop";
 import Styles from "./footer.module.css";
 import logo from "../../../assets/images/logo.png";
 
@@ -20,15 +21,10 @@ export default function Footer() {
               href="google.com"
               aria-label="Return to the header"
             >
-              <div className={Styles.logoWrapper}>
-                <img
-                  src={logo}
-                  alt="Musicfier"
-                  className={Styles.logo}
-                  aria-hidden="false"
-                />
+              <div className={Styles.logoWrapper} aria-hidden="true">
+                <img src={logo} alt="Musicfier" className={Styles.logo} />
               </div>
-              <span className={Styles.websiteName} aria-hidden="false">
+              <span className={Styles.websiteName} aria-hidden="true">
                 Musicfier
               </span>
             </a>
