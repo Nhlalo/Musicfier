@@ -16,10 +16,10 @@ export default function Footer() {
       <div className={Styles.footerWrapper}>
         <div className={Styles.subContainer}>
           <div className={Styles.logoContainer}>
-            <a
+            <button
               className={Styles.homeLink}
-              href="google.com"
-              aria-label="Return to the header"
+              aria-label="Scroll to the top"
+              onClick={handleScrollToTop}
             >
               <div className={Styles.logoWrapper} aria-hidden="true">
                 <img src={logo} alt="Musicfier" className={Styles.logo} />
@@ -27,7 +27,7 @@ export default function Footer() {
               <span className={Styles.websiteName} aria-hidden="true">
                 Musicfier
               </span>
-            </a>
+            </button>
             <p className={Styles.motivation}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
               dolorum facilis minima debitis ut veritatis quasi earum neque iste
