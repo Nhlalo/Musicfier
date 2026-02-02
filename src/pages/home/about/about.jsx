@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import Error from "../../audioRecognition/error";
 import Styles from "./about.module.css";
 import Logo from "../../../assets/images/logo.png";
 
-export default function About({ errorStatus = true }) {
+export default function About({ errorStatus = false }) {
   // The errorStatus prop will be useful for audio searching errors/ no audio found return
   const [error, setError] = useState(true);
   //This will allow the error element to change the state of its parent element
   function passToError(status) {
     setError(status);
+  }
+  function handleAudioRecognition() {
+    Navigate("/audioRecognition");
   }
   return (
     <section className={Styles.aboutContainer}>
@@ -22,13 +25,14 @@ export default function About({ errorStatus = true }) {
         </div>
         <div className={Styles.buttonWrapper}>
           {error && errorStatus && <Error error={passToError} />}
-          <Link
+          <button
             to="audioRecognition"
             aria-label="Audio recognition"
             className={Styles.audioDetectionLink}
+            onClick={handleAudioRecognition}
           >
             <img src={Logo} alt="" aria-hidden="true" className={Styles.logo} />
-          </Link>
+          </button>
           <p className={Styles.instructions}>Tap to Musicfy</p>
         </div>
       </div>
