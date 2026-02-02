@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import Styles from "./audioRecognition";
+import Styles from "./audioRecognition.module.css";
 export default function Error({ error }) {
   //This make the error message disappear by turning the error state in the About component to false
   function handleClose() {

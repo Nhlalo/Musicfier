@@ -192,7 +192,8 @@
   border-radius: 0.9375rem;
   position: absolute;
   left: -115px;
-  top: -135px;
+  top: -110px;
+  z-index: 1;
 }
 .errorfeedbackWrapper {
   position: relative;
@@ -242,7 +243,7 @@
   }
   .errorfeedback {
     left: -250px;
-    top: -75px;
+    top: -5px;
     width: max-content;
     max-width: 245px;
     min-width: 100px;
