@@ -7,9 +7,27 @@ const listItemKeys = {
 };
 //Array containing the content within the links and keys assigned to the list items
 const navLinksContent = [
-  { content: "Concerts", key: listItemKeys.concerts, ref: concertsLinkRef },
-  { content: "Charts", key: listItemKeys.charts, ref: chartsLinkRef },
-  { content: "My Music", key: listItemKeys.mymusic, ref: myMusicLinkRef },
-  { content: "Contacts", key: listItemKeys.contacts, ref: contactsLinkRef },
+  { content: "Concerts", key: listItemKeys.concerts },
+  { content: "Charts", key: listItemKeys.charts },
+  { content: "My Music", key: listItemKeys.mymusic },
+  { content: "Contacts", key: listItemKeys.contacts },
 ];
+
+export default function NavLinksContentRef(
+  concertsLinkRef,
+  chartsLinkRef,
+  myMusicLinkRef,
+  contactsLinkRef,
+) {
+  const refs = [
+    concertsLinkRef,
+    chartsLinkRef,
+    myMusicLinkRef,
+    contactsLinkRef,
+  ];
+  return navLinksContent.map((content, index) => {
+    return { ...content, ref: refs[index] };
+  });
+}
+
 export { navLinksContent };
