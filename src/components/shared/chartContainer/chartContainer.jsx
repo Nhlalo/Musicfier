@@ -32,7 +32,7 @@ export default function ChartContainer() {
       <div className={Styles.chartContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.chartWrapper} ref={chartContainerRef}>
-          {mockCharts.map((songData, index) => {
+          {mockCharts.map((songData, index) => (
             <Song
               songLink={songData.spotifyLink}
               songName={songData.songName}
@@ -40,8 +40,8 @@ export default function ChartContainer() {
               image={songData.songCover}
               actName={songData.artistName}
               artistID={songData.spotifyArtistId}
-            />;
-          })}
+            />
+          ))}
         </div>
       </div>
       <div className={Styles.chartNavigatorBTNContainer}>
