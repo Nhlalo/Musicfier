@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useMatches } from "react-router";
 import { Menu } from "lucide-react";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
+import handleScrollToTop from "../../../utils/scrollToTop.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
 import Styles from "./header.module.css";
 import Logo from "../../../assets/images/logo.png";
@@ -44,15 +45,6 @@ export default function Header({}) {
   //This will be passed down to the sidebar(child component)
   function handleSidebarDisplay(value) {
     setShowSidebar(value);
-  }
-
-  function handleScrollToTop(e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth", // Optional: adds smooth scrolling
-    });
   }
 
   return (
