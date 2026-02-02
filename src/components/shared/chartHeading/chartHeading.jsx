@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router";
 import { ChevronRight } from "lucide-react";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 import Styles from "./chartHeading.module.css";
@@ -19,6 +20,10 @@ export default function ChartHeading({
   const [hoverStatus, setHoverStatus] = useState(false);
 
   const displayChartBTN = useRef(null);
+
+  function handleViewCharts() {
+    navigate("./charts");
+  }
 
   return (
     <section
@@ -54,6 +59,7 @@ export default function ChartHeading({
             ref={displayChartBTN}
             onMouseEnter={() => setHoverStatus(true)}
             onMouseLeave={() => setHoverStatus(false)}
+            onClick={handleViewCharts}
             style={{ display: displayChart ? "block" : "none" }}
           >
             <img
@@ -92,6 +98,7 @@ export default function ChartHeading({
               type="button"
               aria-label="View the whole global top 50 chart"
               className={Styles.viewTop50BTN}
+              onClick={handleViewCharts}
             >
               SEE ALL <ChevronRight aria-hidden="true" />
             </button>
