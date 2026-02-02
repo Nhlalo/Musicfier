@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { X } from "lucide-react";
 import useFocusTrap from "../../../hooks/useFocusTrap";
 import NavLinksContentRef from "../../../data/constants/navigation";
@@ -11,6 +12,8 @@ export default function Sidebar({
   sideBarStatus,
   lastFocusedElement,
 }) {
+  const navigate = useNavigate();
+
   const sidebarRef = useRef(null);
   const logoLinkRef = useRef(null);
   const closeSideBarBTNRef = useRef(null);
@@ -47,6 +50,10 @@ export default function Sidebar({
       elementToRestore.focus();
     });
   }
+  function handleHomePage() {
+    navigate("/");
+    closeSideBar();
+  }
   return (
     <dialog
       className={
@@ -59,10 +66,11 @@ export default function Sidebar({
       <Container>
         <div className={Styles.contentWrapper}>
           <div className={Styles.headerContainer}>
-            <a
+            <button
               className={Styles.logoContainer}
               ref={logoLinkRef}
-              href="google.com"
+              aria-label="Home page"
+              onClick={handleHomePage}
             >
               <div className={Styles.logoWrapper} aria-hidden="true">
                 <img src={Logo} alt="Musicfier" className={Styles.logo} />
@@ -70,7 +78,7 @@ export default function Sidebar({
               <figcaption className={Styles.websiteName} aria-hidden="true">
                 MUSICFIER
               </figcaption>
-            </a>
+            </button>
             <button
               aria-label="Close the side bar"
               onClick={closeSideBar}
