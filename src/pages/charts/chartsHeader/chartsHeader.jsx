@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import { countryContext } from "../../charts";
 import CountrySelect from "./countrySelect";
-import Chart from "../chartlist/chartsong";
+import Chart from "../chartlist/chartList";
 import Styles from "./chartsHeader.module.css";
 
 //Generate keys for the chart buttons
