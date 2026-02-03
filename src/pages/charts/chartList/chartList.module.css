@@ -1,0 +1,174 @@
+:root {
+  --chartSong-width: 100%;
+  --musicVideoContainer-width: 100%;
+}
+.chartSong {
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 0;
+}
+.overlay:hover {
+  background-color: rgba(207, 203, 203, 0.2);
+  opacity: 1;
+}
+.spotifyLogo {
+  width: 4.375rem;
+}
+.songlink,
+.songContainer,
+.songInforContainer,
+.chartNumber,
+.songCoverContainer,
+.videoLink,
+.musicVideoInforContainer,
+.musicVideoInfor,
+.musicVideoLinkContainer,
+.chartWrapper {
+  display: flex;
+}
+
+.chartNumber,
+.songCoverContainer,
+.musicVideoLinkContainer {
+  align-items: center;
+  justify-content: center;
+}
+.chartNumber {
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+.songContainer {
+  align-items: center;
+  color: #000;
+}
+.songCoverContainer {
+  position: relative;
+}
+.songCover {
+  height: 4.6875rem;
+  width: 4.6875rem;
+  border-radius: 8px;
+}
+.playContainer,
+.playIconContainer {
+  position: absolute;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 62.4375rem;
+  justify-content: center;
+  align-items: center;
+}
+.playIconContainer {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.playIcon,
+.play {
+  color: #fff;
+  fill: #fff;
+  width: 35%;
+  height: 35%;
+}
+.songInforContainer {
+  flex-direction: column;
+  padding-left: 20px;
+  gap: 0.3125rem;
+}
+.artistName {
+  font-weight: 600;
+}
+.songName {
+  color: #3a3a3c;
+}
+.chartSongContainer {
+  width: var(--chartSong-width);
+  padding-top: 0.3125rem;
+  order: 2;
+}
+.musicVideoContainer {
+  width: var(--musicVideoContainer-width);
+  order: 1;
+}
+.musicVideoInfor {
+  flex-direction: column;
+  gap: 0.3125rem;
+}
+.musicVideoWrapper {
+  max-width: 1340px;
+  margin: 0 auto;
+}
+.musicVideoHeader {
+  padding: 1.5625rem 0 0.9375rem;
+  font-size: 1.5rem;
+  display: none;
+}
+.musicVideoSubContainer {
+  padding: 1.875rem 1.875rem 5rem;
+  border-radius: 0.5rem;
+}
+.musicVideoLink {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+}
+.songImg {
+  width: 15.625rem;
+  height: 15.625rem;
+  border-radius: 0.5rem;
+}
+.playContainer {
+  width: 60px;
+  height: 60px;
+}
+.musicVideoInforContainer {
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+.musicVideoName {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.125rem;
+}
+.musicArtistName {
+  color: #fff;
+}
+.videoLink {
+  padding: 0.625rem 20px;
+  align-items: flex-end;
+  font-weight: 700;
+  border-radius: 999px;
+  background-color: #fff;
+  padding: 10px 20px;
+  color: #000;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+}
+.youtubeLogo {
+  width: 4.375rem;
+}
+.chartContainer {
+  width: 100%;
+}
+.chartWrapper {
+  width: 95%;
+  margin: 0.9375rem auto;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 90px;
+}
