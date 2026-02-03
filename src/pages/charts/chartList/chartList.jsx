@@ -47,3 +47,24 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
     </li>
   );
 }
+
+function ChartContainer() {
+  const { chart } = useContext(chartContext);
+
+  return (
+    <ul className={Styles.chartSongContainer}>
+      {chart.length &&
+        chart.map((song) => {
+          return (
+            <Song
+              chartNumber={song.position}
+              songName={song.songName}
+              artist={song.artistName}
+              songlink={song.spotifyLink}
+              key={song.key}
+            />
+          );
+        })}
+    </ul>
+  );
+}
