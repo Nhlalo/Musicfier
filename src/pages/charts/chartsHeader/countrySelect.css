@@ -1,0 +1,48 @@
+/* This is styling soley for the select element of the react-select library */
+
+.country__menu,
+.country__control {
+  width: 95% !important ;
+}
+.country__control {
+  color: #fff !important ;
+  width: 95% !important ;
+  display: flex !important ;
+  justify-content: space-between !important ;
+  background-color: rgba(255, 255, 255, 0.3) !important ;
+  padding: 15px !important ;
+  border-radius: 8px !important ;
+  border: none !important ;
+  outline: none !important ;
+  align-items: center !important ;
+}
+
+.country__placeholder,
+.country__single-value,
+.country__input {
+  text-transform: uppercase !important ;
+  fill: #fff !important;
+  color: #fff !important;
+  font-weight: 700 !important ;
+}
+.css-tj5bde-Svg {
+  color: fff !important;
+  font-weight: 700 !important ;
+}
+.country__indicator-separator {
+  display: none !important;
+}
+.country_options {
+  color: #000 !important;
+}
+.country__menu-list {
+  background-color: #fff !important;
+  color: #000 !important;
+  max-height: 15.625rem !important;
+}
+@media (min-width: 768px) {
+  .country__menu,
+  .country__control {
+    width: 16.875rem !important ;
+  }
+}
