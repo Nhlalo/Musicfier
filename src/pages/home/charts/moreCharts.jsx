@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import Styles from "./charts.module.css";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 
+const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+
 function MoreChart({ location = "South Africa" }) {
   return (
     <Link
@@ -10,8 +12,8 @@ function MoreChart({ location = "South Africa" }) {
       aria-label={`View the Top 50 ${location} chart`}
     >
       <div className={Styles.featuredSongCoverContainer} aria-hidden="true">
-        {mockCharts.slice(0, 3).map((songData) => (
-          <div className={Styles.featuredSongCoverWrapper}>
+        {mockCharts.slice(0, 3).map((songData, index) => (
+          <div className={Styles.featuredSongCoverWrapper} key={imgKeys[index]}>
             <img
               src={songData.artistImage}
               alt="featured song cover"
