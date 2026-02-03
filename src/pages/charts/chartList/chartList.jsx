@@ -68,3 +68,64 @@ function ChartContainer() {
     </ul>
   );
 }
+function MusicVideo({ BG }) {
+  const { chart } = useContext(chartContext);
+  const firstSong = chart.split(0, 1);
+  const musicVideoLink = mockYouTubeMusicLink(
+    firstSong.artistName,
+    firstSong.songName,
+  );
+  return (
+    <div className={Styles.musicVideoContainer}>
+      <div className={Styles.musicVideoWrapper}>
+        <h2 className={Styles.musicVideoHeader}>Music Video</h2>
+        <div
+          className={Styles.musicVideoSubContainer}
+          style={{ backgroundColor: BG }}
+        >
+          <div className={Styles.musicVideoLinkContainer}>
+            <a
+              href={musicVideoLink}
+              aria-label={`play ${firstSong.songname} by ${firstSong.artist} on Youtube`}
+              className={Styles.musicVideoLink}
+            >
+              <img
+                src={artistImg}
+                alt={`Song cover of ${firstSong.songname} by ${firstSong.artist} `}
+                aria-hidden="true"
+                className={Styles.songImg}
+                loading="lazy"
+              />
+              <div className={Styles.playContainer}>
+                <Play className={Styles.play} aria-hidden="true" />
+              </div>
+            </a>
+          </div>
+          <div className={Styles.musicVideoInforContainer}>
+            <div className={Styles.musicVideoInfor}>
+              {" "}
+              <span className={Styles.musicVideoName}>
+                {firstSong.songname}
+              </span>
+              <span className={Styles.musicArtistName}>{firstSong.artist}</span>
+            </div>
+            <a
+              href={musicVideoLink}
+              className={Styles.videoLink}
+              aria-label={`play ${firstSong.songname} by ${firstSong.artist} on Youtube`}
+            >
+              {" "}
+              Watch On
+              <img
+                src={youtubeLogo}
+                alt="Youtube logo"
+                className={Styles.youtubeLogo}
+                aria-hidden="true"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
