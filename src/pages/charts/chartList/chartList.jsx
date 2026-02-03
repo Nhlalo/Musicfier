@@ -7,6 +7,17 @@ import spotifyLogo from "../../../assets/images/spotify.png";
 import youtubeLogo from "../../../assets/images/youtube.png";
 import Styles from "./chartList.module.css";
 
+export default function Chart({ BG = "rgb(89, 82, 63)" }) {
+  return (
+    <section className={Styles.chartContainer}>
+      <div className={Styles.chartWrapper}>
+        <ChartContainer />
+        <MusicVideo BG={BG} />
+      </div>
+    </section>
+  );
+}
+
 function Song({ songlink, chartNumber, songName, artist, songCover }) {
   return (
     <li className={Styles.chartSong}>
