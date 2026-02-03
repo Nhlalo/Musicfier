@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router";
 import { ChevronDown } from "lucide-react";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import { countryContext } from "../../charts";
@@ -37,6 +38,8 @@ function GenreBTNs() {
 
 export default function ChartHeader() {
   const chartTypes = ["Top 50", "Viral", "Discovery", "Genres"];
+
+  const navigate = useNavigate();
 
   const { setChart, chart } = useContext(chartContext);
   const { country } = useContext(countryContext);
@@ -84,10 +87,13 @@ export default function ChartHeader() {
     const item = e.currentTarget.dataset.item;
     if (item === "Top 50") {
       changeBTNStatus(true, false, false, false);
+      navigate(`/charts/top-50/${country}`);
     } else if (item === "Viral") {
       changeBTNStatus(false, true, false, false);
+      navigate(`/charts/viral/${country}`);
     } else if (item === "Discovery") {
       changeBTNStatus(false, false, true, false);
+      navigate(`/charts/discovery/${country}`);
     } else {
       changeBTNStatus(false, false, false, true);
     }

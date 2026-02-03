@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from "react-router";
 import Select from "react-select";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import "./countrySelect.css";
@@ -7,6 +8,9 @@ export default function CountrySelect({
   classname,
   classPrefix,
 }) {
+  const navigate = useNavigate();
+  const { chartType } = useParams();
+
   const { setCountry, country } = useContext(countryContext);
   const { setChart } = useContext(chartContext);
   const [selected, setSelected] = useState(null);
@@ -18,8 +22,11 @@ export default function CountrySelect({
 
   //Selecting a new country, will show charts of that country
   function handleChange(selectedOption) {
-    setSelected(selectedOption);
-    setCountry(selectedOption.value);
+    const countryChosenData = selectedOption;
+    const countryName = valueChosen.value;
+    setSelected(countryChosenData);
+    setCountry(countryName);
+    navigate(`./charts/${chartType}/${countryName}`);
   }
 
   return (
