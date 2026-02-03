@@ -1,0 +1,141 @@
+.chartHeaderContainer {
+  background-color: #000;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+.chartHeaderWrapper {
+  width: 95%;
+  margin: 0 auto;
+}
+.countryBTNContainer,
+.chartContainer {
+  padding: 0.9375rem 2.5%;
+}
+.countryBTNContainer {
+  width: 100vw;
+  background-color: transparent;
+  backdrop-filter: blur(3.75rem);
+  z-index: 4;
+  position: relative;
+}
+.countryBTN {
+  background-color: transparent;
+}
+
+.cheveronIcon {
+  width: 1rem;
+  height: 1rem;
+  color: #fff;
+}
+.inforContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.chartContainer {
+  padding-top: 4.625rem;
+  height: 15.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.8125rem;
+}
+.country,
+.chartName {
+  font-weight: 700;
+}
+.country {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+.chartName {
+  font-size: 32px;
+}
+.chartDescr {
+  opacity: 0.7;
+}
+.buttonContainer {
+  display: flex;
+  gap: 0.875rem;
+  margin-top: auto;
+  position: relative;
+  width: max-content;
+}
+.chartTypeBTNs {
+  color: #fff;
+  padding: 0.625rem 0.9375rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.buttonClick {
+  background-color: #fff;
+  color: #000;
+}
+.imageContainer,
+.imageContainerViral,
+.imageContainerDiscovery {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotate(45deg) translateY(-58%) translateX(17%);
+}
+.imageContainer::after,
+.imageContainerViral::after,
+.imageContainerDiscovery::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.imageContainerDiscovery::after {
+  background-color: rgba(89, 82, 63, 0.2);
+}
+.imageContainerViral::after {
+  background-color: rgba(45, 118, 139, 0.2);
+}
+.sideImage {
+  height: 192px;
+  width: 192px;
+  object-fit: cover;
+}
+.genresContainer {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 15px 15px 10px;
+  max-height: 325px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0rem;
+  top: -7.5rem;
+  right: 1.25rem;
+  border-radius: 0.5rem;
+}
+.genreBTN {
+  text-align: left;
+  background-color: transparent;
+  padding: 0;
+  padding-bottom: 0.5rem;
+}
+.genreBTN:hover {
+  color: rgba(72, 71, 71, 0.7);
+}
+.blueBG {
+  background-color: rgb(45, 118, 139);
+}
+.brownBG {
+  background-color: rgb(89, 82, 63);
+}
