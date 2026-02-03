@@ -87,7 +87,12 @@ export default function ChartHeading({
               aria-hidden="true"
               style={{ display: hoverStatus ? "none" : "block" }}
             >
-              Featuring songs from Tyla, Drake and more
+              {"Featuring songs from ".concat(
+                ...mockCharts
+                  .slice(0, 3)
+                  .map((songData) => songData.artistName),
+                " and more",
+              )}
             </p>
             <div
               className={Styles.viewChart}
