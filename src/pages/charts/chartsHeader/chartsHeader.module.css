@@ -139,3 +139,39 @@
 .brownBG {
   background-color: rgb(89, 82, 63);
 }
+@media (max-width: 390px) {
+  .imageContainer {
+    transform: rotate(45deg) translateY(-80%) translateX(40%);
+  }
+}
+
+@media (min-width: 768px) {
+  .countryBTNContainer {
+    backdrop-filter: none;
+  }
+  .chartName {
+    font-size: 50px;
+  }
+  .country,
+  .chartDescr {
+    font-size: 16px;
+  }
+  .country__control {
+    width: 16.875rem;
+  }
+  .chartContainer {
+    padding-top: 2.8125rem;
+    height: 16.875rem;
+  }
+}
+@media (min-width: 1024px) {
+  .genresContainer {
+    padding: 0.9375rem 15px 10px;
+    max-height: 20.3125rem;
+    top: -12.1875rem;
+    right: 1.875rem;
+  }
+  .genreBTN {
+    padding: 0.9375rem 2.5rem 0.9375rem 0.9375rem;
+  }
+}
