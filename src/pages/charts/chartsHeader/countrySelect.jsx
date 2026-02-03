@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { mockCountries } from "../../../data/mock/allcountries-mock";
+import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import "./countrySelect.css";
 
 export default function CountrySelect({
@@ -12,7 +12,8 @@ export default function CountrySelect({
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    setChart(mockCountries);
+    const countryChart = getMockCountryCharts(country);
+    setChart(countryChart);
   }, [selected, country]);
 
   //Selecting a new country, will show charts of that country
