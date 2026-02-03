@@ -16,6 +16,7 @@ export default function ChartHeading({
   subHeading,
   chartContainer,
   featuredArtists,
+  userCountry,
 }) {
   const imgClasses = [
     Styles.supportingImg,
@@ -29,7 +30,7 @@ export default function ChartHeading({
   const displayChartBTN = useRef(null);
 
   function handleViewCharts() {
-    navigate("/charts");
+    navigate(`/charts/top-50/${userCountry}`);
   }
 
   return (
