@@ -4,7 +4,8 @@ import { mockCharts } from "../../../data/mock/spotify-mock";
 
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
-function MoreChart({ location = "South Africa" }) {
+function MoreChart({ location }) {
+  console.log("More Chart", location);
   return (
     <Link
       to={"/charts"}
@@ -44,14 +45,14 @@ function MoreChart({ location = "South Africa" }) {
   );
 }
 
-export default function MoreCharts() {
+export default function MoreCharts({ location }) {
   return (
     <section className={Styles.moreChartsContainer}>
       <div className={Styles.moreChartsWrapper}>
         <h2 className={Styles.moreChartsHeading}>More Charts</h2>
         <div className={Styles.miniChartsContainer}>
-          <MoreChart />
-          <MoreChart />
+          <MoreChart location={location} />
+          <MoreChart location={location} />
         </div>
       </div>
     </section>
