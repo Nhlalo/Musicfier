@@ -82,19 +82,8 @@ function getChartColors(chartType) {
       "#fff",
       "#000",
     ),
-    genres: selectColors(
-      "#000",
-      "#000",
-      "#fff",
-      "#fff",
-      "#3b86f7",
-      "rgba(255, 255, 255, 0.3)",
-      "#fff",
-      "#000",
-    ),
   };
 
-  // Get base colors for chart type
   const baseColors = colorSchemes[chartType];
 
   return baseColors;
