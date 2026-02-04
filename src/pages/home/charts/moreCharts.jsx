@@ -5,7 +5,6 @@ import { mockCharts } from "../../../data/mock/spotify-mock";
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
 function MoreChart({ location }) {
-  console.log("More Chart", location);
   return (
     <Link
       to={"/charts"}

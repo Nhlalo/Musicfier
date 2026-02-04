@@ -51,8 +51,10 @@ export default function ChartHeader() {
   const sectionBG = colors.default.bg;
 
   useEffect(() => {
-    const chartData = getMockCountryCharts(country);
-    setChart(chartData);
+    if (chart.length) {
+      const chartData = getMockCountryCharts(country).songs;
+      setChart(chartData.songs);
+    }
   }, [buttonClicked]);
 
   function changeBTNStatus(top50, viral, discovery, genres) {
