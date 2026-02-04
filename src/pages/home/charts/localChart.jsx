@@ -1,17 +1,16 @@
 import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
 import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
-import { mockUserLocation } from "../../../data/mock/user-location-mock";
 
-export default function LocalCharts({ location = "South Africa" }) {
+export default function LocalCharts({ location }) {
   const content = {
     mainBG: "#f2f2f7",
     displayFeaturedArtistsImg: true,
-    heading: `DISCOVERY ${mockUserLocation.country.toUpperCase()}`,
+    heading: `DISCOVERY ${location?.toUpperCase()}`,
     headingDescr: "Rising tracks from new and upcoming artists",
     miniHeading: "Be the first to listen to these future hit songs",
     displayChart: false,
-    subHeading: `Discovery ${mockUserLocation.country} Tracks`,
+    subHeading: `Discovery ${location} Tracks`,
     chartContainer: <ChartContainer />,
     featuredArtists: <FeaturedArtists />,
   };

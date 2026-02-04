@@ -14,7 +14,7 @@ const content = {
   chartContainer: <ChartContainer />,
   featuredArtists: <FeaturedArtists />,
 };
-export default function GlobalCharts() {
+export default function GlobalCharts({ location }) {
   return (
     <ChartHeading
       mainBG={content.mainBG}
@@ -26,6 +26,7 @@ export default function GlobalCharts() {
       subHeading={content.subHeading}
       chartContainer={content.chartContainer}
       featuredArtists={content.featuredArtists}
+      userCountry={location}
     />
   );
 }
