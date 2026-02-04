@@ -1,6 +1,9 @@
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import Select from "react-select";
+import { chartContext, countryContext } from "../charts";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
+import { mockCountries } from "../../../data/mock/allcountries-mock";
 import "./countrySelect.css";
 
 export default function CountrySelect({
@@ -31,7 +34,7 @@ export default function CountrySelect({
 
   return (
     <Select
-      options={getAllCountries()}
+      options={mockCountries}
       value={selected}
       placeholder={location}
       onChange={handleChange}

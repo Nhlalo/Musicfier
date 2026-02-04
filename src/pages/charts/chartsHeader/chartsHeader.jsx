@@ -1,24 +1,18 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { ChevronDown } from "lucide-react";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
-import { countryContext } from "../../charts";
+import { chartContext, countryContext } from "../charts";
 import CountrySelect from "./countrySelect";
-import Chart from "../chartlist/chartList";
+import Chart from "../chartList/chartList";
 import Styles from "./chartsHeader.module.css";
-
-//Generate keys for the chart buttons
-const chartTypeKeys = [
-  crypto.randomUUID(),
-  crypto.randomUUID(),
-  crypto.randomUUID(),
-  crypto.randomUUID(),
-];
 
 //Generate keys for the images
 const imgKeys = Array.from({ length: 2 }, () => crypto.randomUUID());
 //Generate keys for the  genre buttons
 const genreKeys = Array.from({ length: 2 }, () => crypto.randomUUID());
+//Generate keys for the chart type
+const chartTypeKeys = Array.from({ length: 4 }, () => crypto.randomUUID());
 
 function GenreBTNs() {
   const genres = ["Dance", "Hip-Hip/Rap", "Pop"];
@@ -87,7 +81,7 @@ export default function ChartHeader() {
     const item = e.currentTarget.dataset.item;
     if (item === "Top 50") {
       changeBTNStatus(true, false, false, false);
-      navigate(`/charts/top-50/${country}`);
+      navigate(`/charts/top50/${country}`);
     } else if (item === "Viral") {
       changeBTNStatus(false, true, false, false);
       navigate(`/charts/viral/${country}`);
@@ -113,7 +107,7 @@ export default function ChartHeader() {
               <span className={Styles.country}>{country}</span>
               <span className={Styles.chartName}>Top 50</span>
               <span className={Styles.chartDescr}>
-                {`The top songs in {${country}} this week`}
+                {`The top songs in ${country} this week`}
               </span>
             </div>
             <div className={Styles.buttonContainer}>
@@ -158,17 +152,18 @@ export default function ChartHeader() {
             }
             aria-hidden="true"
           >
-            {chart.slice(0, 2).map((songData, index) => {
-              return (
-                <img
-                  src={songData.artistImage}
-                  alt="Artist"
-                  key={imgKeys[index]}
-                  className={Styles.sideImage}
-                  tabIndex="-1"
-                />
-              );
-            })}
+            {Array.isArray(chart) &&
+              chart.slice(0, 2).map((songData, index) => {
+                return (
+                  <img
+                    src={songData.artistImage}
+                    alt="Artist"
+                    key={imgKeys[index]}
+                    className={Styles.sideImage}
+                    tabIndex="-1"
+                  />
+                );
+              })}
           </div>
         </div>
       </section>
