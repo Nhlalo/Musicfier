@@ -1,14 +1,11 @@
+import { useContext } from "react";
 import About from "./about/about";
 import GlobalCharts from "./charts/globalChart";
 import LocalCharts from "./charts/localChart";
 import MoreCharts from "./charts/moreCharts";
-import {
-  mockUserLocation,
-  mockUserLocation,
-} from "../../data/mock/user-location-mock";
-
+import { LocationContext } from "../../components/layout/rootLayout";
 export default function Home() {
-  const userLocation = mockUserLocation.country;
+  const userLocation = useContext(LocationContext);
   return (
     <>
       <About />
