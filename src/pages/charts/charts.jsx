@@ -8,9 +8,9 @@ const countryContext = createContext({});
 const chartContext = createContext({});
 
 export default function ChartList() {
-  const location = useContext(LocationContext);
+  const countryName = useContext(LocationContext);
 
-  const [country, setCountry] = useState(location);
+  const [country, setCountry] = useState(countryName);
   const [chart, setChart] = useState([]);
 
   const countryAdjustement = useMemo(

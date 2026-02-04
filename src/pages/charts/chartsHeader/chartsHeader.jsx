@@ -38,6 +38,7 @@ export default function ChartHeader() {
 
   const { setChart, chart } = useContext(chartContext);
   const { country } = useContext(countryContext);
+  console.log(country);
 
   //Records the clicked button
   const [buttonClickStatus, setButtonClickStatus] = useState({
@@ -52,8 +53,8 @@ export default function ChartHeader() {
 
   useEffect(() => {
     if (chart.length) {
-      const chartData = getMockCountryCharts(country).songs;
-      setChart(chartData.songs);
+      const chartData = getMockCountryCharts(country);
+      setChart(chartData);
     }
   }, [buttonClicked]);
 

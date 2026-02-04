@@ -81,7 +81,7 @@ function ChartContainer() {
 }
 function MusicVideo({ BG }) {
   const { chart } = useContext(chartContext);
-  const firstSong = chart.length ? chart.songs[0] : {};
+  const firstSong = chart.length ? chart[0] : [];
   const artistName = firstSong?.artistName;
   const songName = firstSong?.songName;
   const artistImagery = firstSong?.artistImage;

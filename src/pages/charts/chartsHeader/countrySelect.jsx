@@ -25,11 +25,10 @@ export default function CountrySelect({
 
   //Selecting a new country, will show charts of that country
   function handleChange(selectedOption) {
-    const countryChosenData = selectedOption;
-    const countryName = valueChosen.value;
-    setSelected(countryChosenData);
+    const countryName = selectedOption.value;
+    setSelected(selectedOption);
     setCountry(countryName);
-    navigate(`./charts/${chartType}/${countryName}`);
+    navigate(`/charts/${chartType}/${countryName}`);
   }
 
   return (
