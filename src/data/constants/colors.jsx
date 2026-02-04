@@ -52,7 +52,7 @@ function getChartColors(chartType) {
 
   const colorSchemes = {
     //top50 is top-50 via the url to accommodate for the space between top and 50
-    "top-50": selectColors(
+    top50: selectColors(
       "#000",
       "#000",
       "#fff",
