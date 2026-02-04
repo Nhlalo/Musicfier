@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, useMemo } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLoaderData } from "react-router";
 import { ChevronDown } from "lucide-react";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import { chartContext, countryContext } from "../charts";
@@ -32,6 +32,7 @@ function GenreBTNs() {
 
 export default function ChartHeader() {
   const chartTypes = ["Top 50", "Viral", "Discovery", "Genres"];
+  const { colors } = useLoaderData();
 
   const navigate = useNavigate();
 
@@ -47,21 +48,7 @@ export default function ChartHeader() {
   });
   const buttonClicked = useMemo(() => buttonClickStatus, [buttonClickStatus]);
 
-  const sectionBG = buttonClickStatus["Top 50"]
-    ? `${Styles.chartHeaderContainer}`
-    : buttonClickStatus.Discovery
-      ? `${Styles.chartHeaderContainer} ${Styles.brownBG}`
-      : buttonClickStatus.Viral
-        ? `${Styles.chartHeaderContainer} ${Styles.blueBG}`
-        : `${Styles.chartHeaderContainer} `;
-
-  const headerBG = buttonClickStatus["Top 50"]
-    ? "#000"
-    : buttonClickStatus.Discovery
-      ? "rgb(91, 81, 58)"
-      : buttonClickStatus.Viral
-        ? "rgb(43, 122, 144)"
-        : "#000";
+  const sectionBG = colors.default.bg;
 
   useEffect(() => {
     const chartData = getMockCountryCharts(country);
@@ -94,7 +81,10 @@ export default function ChartHeader() {
   };
   return (
     <>
-      <section className={sectionBG}>
+      <section
+        className={Styles.chartHeaderContainer}
+        style={{ backgroundColor: sectionBG }}
+      >
         <div className={Styles.chartHeaderWrapper}>
           <div className={Styles.countryBTNContainer}>
             <CountrySelect
@@ -167,7 +157,7 @@ export default function ChartHeader() {
           </div>
         </div>
       </section>
-      <Chart BG={headerBG} />
+      <Chart BG={sectionBG} />
     </>
   );
 }
