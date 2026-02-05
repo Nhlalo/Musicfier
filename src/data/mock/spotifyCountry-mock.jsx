@@ -412,6 +412,11 @@ const mockChartsArray = [
 
 // Function to get charts by country name
 export default function getMockCountryCharts(country) {
-  const foundChart = mockChartsArray.find((chart) => chart.country === country);
-  return foundChart;
+  let foundChart;
+  if (country) {
+    foundChart = mockChartsArray.find((chart) => chart.country === country);
+  }
+  const chartSongs = foundChart ? foundChart.songs : [];
+
+  return chartSongs;
 }
