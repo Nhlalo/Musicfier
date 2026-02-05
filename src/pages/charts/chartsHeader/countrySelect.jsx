@@ -6,13 +6,9 @@ import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import { mockCountries } from "../../../data/mock/allcountries-mock";
 import "./countrySelect.css";
 
-export default function CountrySelect({
-  location = "South Africa",
-  classname,
-  classPrefix,
-}) {
+export default function CountrySelect({ classname, classPrefix }) {
   const navigate = useNavigate();
-  const { chartType } = useParams();
+  const { chartType, countryname } = useParams();
 
   const { setCountry, country } = useContext(countryContext);
   const { setChart } = useContext(chartContext);
@@ -20,8 +16,8 @@ export default function CountrySelect({
 
   useEffect(() => {
     if (country) {
-      localStorage.setItem("location", country);
-      const countryChart = getMockCountryCharts(country);
+      localStorage.setItem("location", countryname);
+      const countryChart = getMockCountryCharts(countryname);
       setChart(countryChart);
     }
   }, [selected, country]);
@@ -29,7 +25,7 @@ export default function CountrySelect({
   //Selecting a new country, will show charts of that country
   function handleChange(selectedOption) {
     const countryName = selectedOption.value;
-    setSelected(selectedOption);
+    setSelected(countryname);
     setCountry(countryName);
     navigate(`/charts/${chartType}/${countryName}`);
   }
