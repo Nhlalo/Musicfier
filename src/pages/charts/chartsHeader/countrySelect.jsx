@@ -19,8 +19,11 @@ export default function CountrySelect({
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    const countryChart = getMockCountryCharts(country);
-    setChart(countryChart);
+    if (country) {
+      localStorage.setItem("location", country);
+      const countryChart = getMockCountryCharts(country);
+      setChart(countryChart);
+    }
   }, [selected, country]);
 
   //Selecting a new country, will show charts of that country
@@ -35,7 +38,7 @@ export default function CountrySelect({
     <Select
       options={mockCountries}
       value={selected}
-      placeholder={location}
+      placeholder={country}
       onChange={handleChange}
       isSearchable={true} // ✅ Control open state
       className={classname}
