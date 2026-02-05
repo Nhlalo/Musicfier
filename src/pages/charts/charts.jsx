@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState, useMemo, useContext } from "react";
-import { LocationContext } from "../../components/layout/rootLayout";
-import { mockUserLocation } from "../../data/mock/user-location-mock";
+import { createContext, useEffect, useState, useMemo } from "react";
+import { useParams } from "react-router";
 import getMockCountryCharts from "../../data/mock/spotifyCountry-mock";
 import ChartHeader from "./chartsHeader/chartsHeader";
 
@@ -8,7 +7,8 @@ const countryContext = createContext({});
 const chartContext = createContext({});
 
 export default function ChartList() {
-  const countryName = useContext(LocationContext);
+  const { countryname } = useParams();
+  const countryName = countryname;
 
   const [country, setCountry] = useState(countryName);
   const [chart, setChart] = useState([]);
@@ -31,8 +31,9 @@ export default function ChartList() {
 
   useEffect(() => {
     const chartSongs = getMockCountryCharts(countryName);
+    setCountry(countryName);
     setChart(chartSongs);
-  }, []);
+  }, [countryName, country, chart]);
 
   return (
     <chartContext.Provider value={chartAjustment}>
