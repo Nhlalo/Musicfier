@@ -18,6 +18,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     const userLocation = mockUserLocation.country;
+    localStorage.setItem("location", userLocation);
     setLocation(userLocation);
   }, []);
 
