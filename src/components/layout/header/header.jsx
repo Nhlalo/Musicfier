@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useMatches } from "react-router";
+import { useMatches, useLoaderData } from "react-router";
 import { Menu } from "lucide-react";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
 import handleScrollToTop from "../../../utils/scrollToTop.jsx";
@@ -15,9 +15,13 @@ export default function Header({}) {
 
   const matches = useMatches();
 
+  // Find the current route that has loader data
+  const currentMatch = matches.find((match) => match.loaderData);
+  const chartColors = currentMatch?.loaderData?.colors;
+
   // Get current route's color scheme from handle
-  const routeHandle = matches[matches.length - 1]?.handle || {};
-  const colorScheme = routeHandle.colors;
+  const routeHandle = matches[matches.length - 1]?.handle;
+  const colorScheme = routeHandle ? routeHandle.colors : chartColors;
 
   const currentColors = isScrolled
     ? colorScheme?.scrolled
