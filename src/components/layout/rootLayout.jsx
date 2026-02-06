@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useLayoutEffect } from "react";
 import { Outlet, useMatches, useLocation } from "react-router";
 import { mockUserLocation } from "../../data/mock/user-location-mock";
 import Header from "./header/header";
@@ -15,18 +15,14 @@ export default function RootLayout() {
   const mergedHandle = Object.assign({}, ...routeHandles);
   const shouldHideHeader = mergedHandle?.header === "hidden";
   const shouldHideFooter = mergedHandle?.footer === "hidden";
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   useEffect(() => {
     const userLocation = mockUserLocation.country;
     localStorage.setItem("location", userLocation);
     setLocation(userLocation);
   }, []);
-
-  //This is curb the react router issue of scroll position preservation through routing.
-  useEffect(() => {
-    // Scroll to top when route changes
-    window.scrollTo(0, 0);
-  }, [pathname]); // Trigger on every route change
 
   return (
     <>
