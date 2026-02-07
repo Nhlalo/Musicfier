@@ -1,3 +1,4 @@
+import Styles from "./artistsSearch.module.css";
 export default function ErrorMessage() {
   return (
     <div className={Styles.errorContainer}>
