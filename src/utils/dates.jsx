@@ -4,3 +4,9 @@ function getTodayDate() {
 
   return today;
 }
+function getTomorrowDate() {
+  const today = new Date();
+  const tomorrow = new Date(today); // Create a copy of today
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toISOString().split("T")[0]; // "2024-01-16"
+}
