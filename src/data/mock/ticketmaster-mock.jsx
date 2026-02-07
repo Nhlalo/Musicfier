@@ -1,15 +1,16 @@
+import artistImg from "../../assets/images/artistImg.jpg";
 const mockArtists = [
   {
     id: "12345",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: "Hip-Hop/Rap",
     upcomingEvents: 27,
   },
   {
     id: "67890",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: "Pop",
     upcomingEvents: 42,
   },
@@ -23,14 +24,14 @@ const mockArtists = [
   {
     id: "98765",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: null,
     upcomingEvents: 0,
   },
   {
     id: "24680",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: "Pop",
     upcomingEvents: 0,
   },
@@ -44,24 +45,24 @@ const mockArtists = [
   {
     id: "86420",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: "Alternative",
     upcomingEvents: 31,
   },
   {
     id: "11223",
     name: "Drake",
-    image: "../assets/artistImg.jpg",
+    image: artistImg,
     genre: "Hip-Hop/Rap",
     upcomingEvents: 12,
   },
 ];
-const mockArtistConcerts = [
+const mockEvents = [
   {
     eventDate: "2024-08-15",
     artistId: "12345",
     artistName: "Drake",
-    artistImage: "../assets/artistImg.jpg",
+    artistImage: artistImg,
     artistGenre: "Hip-Hop/Rap",
     venueName: "Madison Square Garden",
     venueCity: "New York",
@@ -73,7 +74,7 @@ const mockArtistConcerts = [
     eventDate: "2024-09-20",
     artistId: "67890",
     artistName: "Taylor Swift",
-    artistImage: "../assets/artistImg.jpg",
+    artistImage: artistImg,
     artistGenre: "Pop",
     venueName: "SoFi Stadium",
     venueCity: "Los Angeles",
@@ -97,7 +98,7 @@ const mockArtistConcerts = [
     eventDate: "2024-07-30",
     artistId: "98765",
     artistName: "Beyoncé",
-    artistImage: "../assets/artistImg.jpg",
+    artistImage: artistImg,
     artistGenre: null,
     venueName: "Accor Arena",
     venueCity: "Paris",
@@ -109,7 +110,7 @@ const mockArtistConcerts = [
     eventDate: "2024-11-12",
     artistId: "24680",
     artistName: "Ed Sheeran",
-    artistImage: "../assets/artistImg.jpg",
+    artistImage: artistImg,
     artistGenre: "Pop",
     venueName: "Rod Laver Arena",
     venueCity: "Melbourne",
@@ -121,7 +122,7 @@ const mockArtistConcerts = [
     eventDate: "2024-08-22",
     artistId: "13579",
     artistName: "Bad Bunny",
-    artistImage: "../assets/artistImg.jpg",
+    artistImage: artistImg,
     artistGenre: "Reggaeton",
     venueName: "Estadio Azteca",
     venueCity: "Mexico City",
@@ -143,4 +144,59 @@ const mockArtistConcerts = [
   },
 ];
 
-export { mockEvents, mockArtistConcerts };
+function getMockArtistData(keyword) {
+  return mockArtists.filter(
+    (artistData) => artistData.name.toLowerCase() === keyword.toLowerCase(),
+  );
+}
+
+function searchMockEvents(
+  attractionId,
+  keyword,
+  startDate,
+  endDate,
+  countryCode,
+  city,
+) {
+  // Filter by attractionId if provided
+  let filteredEvents = attractionId
+    ? mockEvents.filter((event) => event.artistId === attractionId)
+    : mockEvents;
+
+  // Filter by keyword if provided (case-insensitive)
+  if (keyword) {
+    const lowerKeyword = keyword.toLowerCase();
+    filteredEvents = filteredEvents.filter(
+      (event) =>
+        event.artistName.toLowerCase().includes(lowerKeyword) ||
+        event.venueName.toLowerCase().includes(lowerKeyword) ||
+        event.artistGenre.toLowerCase().includes(lowerKeyword),
+    );
+  }
+
+  // Filter by countryCode if provided
+  if (countryCode) {
+    filteredEvents = filteredEvents.filter(
+      (event) => event.venueCountry === countryCode,
+    );
+  }
+
+  // Filter by city if provided (case-insensitive)
+  if (city) {
+    const lowerCity = city.toLowerCase();
+    filteredEvents = filteredEvents.filter((event) =>
+      event.venueCity.toLowerCase().includes(lowerCity),
+    );
+  }
+
+  // Filter by date range (simple string comparison for demo)
+  if (startDate && endDate) {
+    filteredEvents = filteredEvents.filter(
+      (event) => event.eventDate >= startDate && event.eventDate <= endDate,
+    );
+  }
+
+  return filteredEvents;
+}
+
+export { getMockArtistData, searchMockEvents };
