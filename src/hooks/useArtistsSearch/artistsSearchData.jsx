@@ -1,7 +1,6 @@
-import {
-  getMockArtistData,
-  searchMockEvents,
-} from "../../data/mock/ticketmaster-mock";
+import { useState, useContext, useEffect } from "react";
+import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
+import Styles from "./artistsSearch.module.css";
 
 function Artists({ imagesrc, name, dataID }) {
   const { concertLocation } = useContext(concertsLocationContext);
@@ -13,7 +12,7 @@ function Artists({ imagesrc, name, dataID }) {
   useEffect(() => {
     if (attractionId) {
       const inforConcerts = async () => {
-        return getMockArtistData(
+        return searchMockEvents(
           attractionId,
           name,
           dateDuration.startDate,
@@ -40,7 +39,7 @@ function Artists({ imagesrc, name, dataID }) {
       onClick={handleClick}
     >
       <img
-        src={artistImg}
+        src={imagesrc}
         alt={`${name}`}
         className={Styles.artistImg}
         aria-hidden="true"
@@ -49,5 +48,39 @@ function Artists({ imagesrc, name, dataID }) {
         {name}
       </span>
     </button>
+  );
+}
+
+export default function Data({ artistsInfor }) {
+  const [artistCount, setArtistCount] = useState(3);
+
+  function handleClick() {
+    setArtistCount((prev) => prev + 3);
+  }
+
+  return (
+    <div className={Styles.artistsContainer}>
+      <span className={Styles.artists}>Artists</span>
+
+      {artistsInfor.slice(0, artistCount).map((artist) => {
+        return (
+          <Artists
+            imagesrc={artist.image}
+            name={artist.name}
+            dataId={artist.id}
+          />
+        );
+      })}
+
+      {artistsInfor.length > artistCount && (
+        <button
+          type="button"
+          className={Styles.showMoreBTN}
+          onClick={handleClick}
+        >
+          Show More
+        </button>
+      )}
+    </div>
   );
 }
