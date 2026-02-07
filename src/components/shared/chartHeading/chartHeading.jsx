@@ -30,7 +30,7 @@ export default function ChartHeading({
   const displayChartBTN = useRef(null);
 
   function handleViewCharts() {
-    navigate(`/charts/top50/${userCountry}`);
+    navigate(`/charts/top50/${userCountry}`, { state: { from: "home" } });
   }
 
   return (
