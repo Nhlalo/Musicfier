@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import Styles from "./artistsSearch.module.css";
 export default function ErrorMessage() {
   return (
