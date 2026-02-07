@@ -1,0 +1,88 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.artistsContainer,
+.errorContainer {
+  position: absolute;
+  top: 62px;
+  z-index: 12;
+  width: 100%;
+  border-radius: 8px;
+  color: #000;
+  background-color: rgb(255, 255, 255);
+}
+.errorContainer {
+  padding: 40px 20px;
+}
+.artistsContainer {
+  overflow-y: auto;
+  max-height: 60vh;
+  padding: 0.9375rem 0.9375rem 0.625rem;
+}
+.showMoreBTN {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.artists {
+  width: 100%;
+  display: inline-block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-align: left;
+}
+.artistInfor {
+  display: flex;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 0.625rem 0.9375rem;
+  align-items: center;
+}
+.artistInfor:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.artistImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.artistName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+}
+.showMoreBTN {
+  padding: 16px 0;
+  color: #066bff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.75rem;
+  width: 100%;
+}
+.noResults {
+  padding: 0.9375rem;
+}
+.suggestion {
+  color: #636366;
+  font-size: 12px;
+}
+.searchIconContainer,
+.noResults,
+.suggestion {
+  text-align: center;
+}
+.searchIcon {
+  width: 25px;
+  height: 25px;
+  color: rgb(59, 134, 247);
+}
