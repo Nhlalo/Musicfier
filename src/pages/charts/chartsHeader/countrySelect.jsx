@@ -16,7 +16,6 @@ export default function CountrySelect({ classname, classPrefix }) {
 
   useEffect(() => {
     if (country) {
-      localStorage.setItem("location", countryname);
       const countryChart = getMockCountryCharts(countryname);
       setChart(countryChart);
     }
