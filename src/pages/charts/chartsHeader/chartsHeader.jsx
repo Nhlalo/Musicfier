@@ -1,7 +1,9 @@
 import { useEffect, useState, useContext, useMemo } from "react";
-import { useNavigate, useLoaderData } from "react-router";
+import { useNavigate, useLoaderData, useParams } from "react-router";
 import { ChevronDown } from "lucide-react";
+import usePressBack from "../../../hooks/usePressBack";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
+import setBTNStatus from "../../../utils/updateBTNStatus";
 import { chartContext, countryContext } from "../charts";
 import CountrySelect from "./countrySelect";
 import Chart from "../chartList/chartList";
@@ -32,13 +34,15 @@ function GenreBTNs() {
 
 export default function ChartHeader() {
   const chartTypes = ["Top 50", "Viral", "Discovery", "Genres"];
-  const { colors } = useLoaderData();
+
+  const { chartType } = useParams();
 
   const navigate = useNavigate();
 
+  const { colors } = useLoaderData();
+
   const { setChart, chart } = useContext(chartContext);
   const { country } = useContext(countryContext);
-  console.log(country);
 
   //Records the clicked button
   const [buttonClickStatus, setButtonClickStatus] = useState({
@@ -47,6 +51,8 @@ export default function ChartHeader() {
     Discovery: false,
     Genres: false,
   });
+
+  const [isRefreshed, setIsRefreshed] = useState(true);
   const buttonClicked = useMemo(() => buttonClickStatus, [buttonClickStatus]);
 
   const sectionBG = colors.default.bg;
@@ -56,7 +62,24 @@ export default function ChartHeader() {
       const chartData = getMockCountryCharts(country);
       setChart(chartData);
     }
+    //After refreshing the  page, let the chart type button that was pressed continue being pressed
+    if (isRefreshed) {
+      setBTNStatus(chartType, passToPressBack);
+      setIsRefreshed(false);
+    }
   }, [buttonClicked]);
+
+  useEffect(() => {
+    sessionStorage.setItem("reload", "false");
+  }, [chartType]);
+
+  //This is specifically for refreshable, so that refreshing does not remove any routing history because refreshing counts as pressing the browser's back button. It is specifically place here to execute after the previous useEffect which sets reload 'false'.
+  useEffect(() => {
+    sessionStorage.setItem("reload", "true");
+  }, []);
+
+  //This determines the logic when the browser back button is pressed
+  usePressBack(passToPressBack);
 
   function changeBTNStatus(top50, viral, discovery, genres) {
     setButtonClickStatus({
@@ -67,20 +90,29 @@ export default function ChartHeader() {
     });
   }
 
-  const handleChartTypeClick = (e) => {
-    const item = e.currentTarget.dataset.item;
-    if (item === "Top 50") {
+  //The usePressBack hook will use function to update the button states in the parent component(chartHeader)
+  function passToPressBack(top50, viral, discovery, genres) {
+    changeBTNStatus(top50, viral, discovery, genres);
+  }
+
+  function updateBTNStatus(item) {
+    if (item === "Top 50" || item === "top50") {
       changeBTNStatus(true, false, false, false);
       navigate(`/charts/top50/${country}`);
-    } else if (item === "Viral") {
+    } else if (item === "Viral" || item === "viral") {
       changeBTNStatus(false, true, false, false);
       navigate(`/charts/viral/${country}`);
-    } else if (item === "Discovery") {
+    } else if (item === "Discovery" || item === "discovery") {
       changeBTNStatus(false, false, true, false);
       navigate(`/charts/discovery/${country}`);
     } else {
       changeBTNStatus(false, false, false, true);
     }
+  }
+  const handleChartTypeClick = (e) => {
+    const item = e.currentTarget.dataset.item;
+    sessionStorage.setItem("reload", "false");
+    updateBTNStatus(item);
   };
   return (
     <>
