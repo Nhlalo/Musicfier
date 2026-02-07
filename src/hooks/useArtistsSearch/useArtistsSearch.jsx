@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getMockArtistData } from "../../data/mock/ticketmaster-mock";
 export default function useArtistSearch(characterChange) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -8,7 +9,7 @@ export default function useArtistSearch(characterChange) {
     // const abortController = new AbortController();
     // const signal = abortController.signal;
 
-    getArtistData(characterChange)
+    getMockArtistData(characterChange)
       .then((value) => {
         // Check if request was cancelled
         if (value === undefined) {
