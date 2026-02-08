@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Calendar, Rows3 } from "lucide-react";
 import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
+import {
+  concertsDurationContext,
+  concertsLocationContext,
+  concertsInformationContext,
+} from "../concerts";
 import { searchMockEvents } from "../../../data/mock/ticketmaster-mock";
 import {
   getTodayDate,
