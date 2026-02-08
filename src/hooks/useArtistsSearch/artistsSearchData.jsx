@@ -1,4 +1,9 @@
 import { useState, useContext, useEffect } from "react";
+import {
+  concertsDurationContext,
+  concertsLocationContext,
+  concertsInformationContext,
+} from "../../pages/concerts/concerts";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
 import Styles from "./artistsSearch.module.css";
 
