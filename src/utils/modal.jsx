@@ -8,3 +8,8 @@ function displayModal(modal, focusableElements) {
   // Add focus trap
   modal.addEventListener("keydown", (e) => trapFocus(e, focusableElements));
 }
+
+//Make dialog element be visible
+function openDialog(dialog) {
+  dialog.show();
+}
