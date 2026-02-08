@@ -31,9 +31,21 @@ const mockLocation = [
   },
   {
     city: "London",
-    country: "Englan",
+    country: "England",
     countryCode: "GB",
     key: crypto.randomUUID(), // Keys are needed for any list creation
   },
 ];
+
+export default function getLocation(locationInput) {
+  if (!location || location.trim() === "") {
+    return;
+  }
+  const lowerCaseInput = locationInput.toLowerCase();
+  return mockLocation.filter(
+    (location) =>
+      location.country.toLowerCase().includes(lowerCaseInput) ||
+      location.city.toLowerCase().includes(lowerCaseInput),
+  );
+}
 export { mockLocation };
