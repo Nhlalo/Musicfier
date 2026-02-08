@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, forwardRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Calendar, Rows3 } from "lucide-react";
 import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
+import { searchMockEvents } from "../../../data/mock/ticketmaster-mock";
 import {
   getTodayDate,
   getTomorrowDate,
@@ -96,6 +97,59 @@ function ArtistDetails({ showFilter }) {
         <Rows3 className={Styles.filterIcon} aria-hidden="true" />
         <span className={Styles.filter}>Filter</span>
       </button>
+    </div>
+  );
+}
+
+export default function ConcertsInformation({ visibilityConcert, showFilter }) {
+  const { dateDuration } = useContext(concertsDurationContext);
+  const { concertLocation } = useContext(concertsLocationContext);
+  const { concertsDetails, setConcertsDetails } = useContext(
+    concertsInformationContext,
+  );
+
+  useEffect(() => {
+    const getConcertDetails = async () => {
+      const startDate = `${dateDuration.startDate}T00:00:00Z`;
+      const endDate = `${dateDuration.endDate}T23:59:59Z`;
+      //Get the available concerts details within the the user's area
+      const concertInfor = searchMockEvents(
+        null,
+        null,
+        startDate,
+        endDate,
+        concertLocation.country_code,
+        concertLocation.city,
+      );
+      return concertInfor;
+    };
+
+    setConcertsDetails(getConcertDetails());
+  }, []);
+
+  return (
+    <div className={Styles.allConcertsWrapper}>
+      <h1 className={Styles.concertCountry}>
+        Concerts in <span className={Styles.country}>South Africa</span>{" "}
+      </h1>
+      <p className={Styles.allConcertsDescr}>
+        Find live music events in South Africa, get concert tickets, see tour
+        dates and more.
+      </p>
+      <ArtistDetails showFilter={showFilter} />
+      {/* Concerts by the searched artists will dynamically appear here */}
+      {visibilityConcert && (
+        <div className={Styles.artistConcertContainer}>
+          {concertsDetails.map((concertDetails) => {
+            return (
+              <ArtistConcert
+                artist={concertDetails.artistName}
+                location={`${concertDetails.venueName}, ${(concertDetails.venueCity ? concertDetails.venueCity : concertDetails.venueState, concertDetails.artistGenre, concertDetails.venueCountry)}`}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
