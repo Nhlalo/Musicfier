@@ -36,4 +36,4 @@ const mockLocation = [
     key: crypto.randomUUID(), // Keys are needed for any list creation
   },
 ];
-export default { mockLocation };
+export { mockLocation };
