@@ -13,3 +13,12 @@ function displayModal(modal, focusableElements) {
 function openDialog(dialog) {
   dialog.show();
 }
+function closeDialog(dialog, focusableElements, previouslyFocusedElement) {
+  dialog.close();
+  dialog.removeEventListener("keydown", (e) => trapFocus(e, focusableElements));
+
+  // Return focus
+  if (previouslyFocusedElement) {
+    previouslyFocusedElement.focus();
+  }
+}
