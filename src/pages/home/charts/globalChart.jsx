@@ -15,6 +15,7 @@ const content = {
   featuredArtists: <FeaturedArtists />,
 };
 export default function GlobalCharts({ location }) {
+  const userCountry = location?.country;
   return (
     <ChartHeading
       mainBG={content.mainBG}
@@ -26,7 +27,7 @@ export default function GlobalCharts({ location }) {
       subHeading={content.subHeading}
       chartContainer={content.chartContainer}
       featuredArtists={content.featuredArtists}
-      userCountry={location}
+      userCountry={userCountry}
     />
   );
 }

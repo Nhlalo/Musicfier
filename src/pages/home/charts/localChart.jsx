@@ -3,14 +3,15 @@ import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
 
 export default function LocalCharts({ location }) {
+  const userCountry = location?.country;
   const content = {
     mainBG: "#f2f2f7",
     displayFeaturedArtistsImg: true,
-    heading: `DISCOVERY ${location?.toUpperCase()}`,
+    heading: `DISCOVERY ${userCountry?.toUpperCase()}`,
     headingDescr: "Rising tracks from new and upcoming artists",
     miniHeading: "Be the first to listen to these future hit songs",
     displayChart: false,
-    subHeading: `Discovery ${location} Tracks`,
+    subHeading: `Discovery ${userCountry?.country} Tracks`,
     chartContainer: <ChartContainer />,
     featuredArtists: <FeaturedArtists />,
   };

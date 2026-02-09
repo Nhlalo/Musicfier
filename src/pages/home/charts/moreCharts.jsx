@@ -5,11 +5,12 @@ import { mockCharts } from "../../../data/mock/spotify-mock";
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
 function MoreChart({ location }) {
+  const userCountry = location?.country;
   return (
     <Link
       to={"/charts"}
       className={Styles.chartLink}
-      aria-label={`View the Top 50 ${location} chart`}
+      aria-label={`View the Top 50 ${userCountry} chart`}
     >
       <div className={Styles.featuredSongCoverContainer} aria-hidden="true">
         {mockCharts.slice(0, 3).map((songData, index) => (
@@ -27,7 +28,7 @@ function MoreChart({ location }) {
         <div className={Styles.chartDescrWrapper}>
           <span className={Styles.chartDescrHeading}>Top 50</span>
           <br />
-          <span className={Styles.chartDescrHeading}>{location}</span>
+          <span className={Styles.chartDescrHeading}>{userCountry}</span>
           <p className={Styles.featuredArtists}>
             {"Featuring songs from ".concat(
               mockCharts
