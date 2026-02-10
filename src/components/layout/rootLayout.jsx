@@ -45,7 +45,6 @@ export default function RootLayout() {
     localStorage.setItem("location", userLocation);
     setLocation(userLocation);
   }, []);
-
   return (
     <>
       <LocationContext.Provider value={location}>
