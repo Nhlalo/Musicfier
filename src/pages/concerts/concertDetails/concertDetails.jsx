@@ -1,160 +1,217 @@
-import { useState, useEffect, useRef } from "react";
-import { Calendar, Rows3 } from "lucide-react";
-import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
-import {
-  concertsDurationContext,
-  concertsLocationContext,
-  concertsInformationContext,
-} from "../concerts";
-import { searchMockEvents } from "../../../data/mock/ticketmaster-mock";
-import {
-  getTodayDate,
-  getTomorrowDate,
-  getDayAfterTomorrowDate,
-  getThisWeekendDates,
-} from "../../../utils/dates";
-import ErrorMessage from "../../../hooks/useArtistsSearch/artistsSearchError";
-import Data from "../../../hooks/useArtistsSearch/artistsSearchData";
-import LoadingSpinner from "../../../components/ui/loadingSpinner/loadingSpinner";
+import { useState, useEffect, useRef, forwardRef } from "react";
+import { Map, ListCollapse } from "lucide-react";
+import debounce from "../../../utils/debounce";
+import getFocusableElements from "../../../utils/focusableElements";
+import { displayModal } from "../../../utils/modal";
+import ConcertsInformation from "./findConcerts";
+import SidebarVisibility, { Sidebar } from "../sidebar/sidebar";
+import ArtistImg from "../../../assets/images/artistImg.jpg";
+import Styles from "./concertDetails.module.css";
 
-function ArtistInfor({ characterChange }) {
-  const { data, loading, error } = useArtistSearch(characterChange);
-
-  if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage />;
-  if (data) return <Data artistsInfor={data} />;
-}
-
-function ArtistConcert({
-  artist,
-  location,
-  date,
-  genre,
-  artistImg,
-  concertLink,
-}) {
-  return (
-    <a
-      href={concertLink}
-      aria-label={`Purchase ticket for ${artist}'s concert on ${date} in ${location}`}
-      className={Styles.concertLink}
-    >
-      <img
-        src={artistImg}
-        alt={`${artist}`}
-        loading="lazy"
-        aria-hidden="true"
-        className={Styles.artistImage}
-      />
-      <div aria-hidden="true" className={Styles.concertInfor}>
-        <span className={Styles.date}>
-          <Calendar className={Styles.calendarIcon} />
-          {date}
-        </span>
-        <span className={Styles.artistName}>{artist}</span>
-        <span className={Styles.location}>{location}</span>
-        <span className={Styles.genre}>{genre}</span>
-      </div>
-    </a>
-  );
-}
-
-//This is the component that will search and display the artist information
-function ArtistDetails({ showFilter }) {
-  const [displayArtistData, setDisplayArtistData] = useState(false);
-  const [inputChange, setInputChange] = useState("");
-  const searchInputRef = useRef(null);
-
-  //Initiate the user's desired concert location
-  const handleArtistSearch = debounce(() => {
-    const inputValue = searchInputRef.current.value;
-
-    //Display if the input value is not empty or only contains one character or is only filled with white spaces
-    if (inputValue.trim().length > 1) {
-      setDisplayArtistData(true);
-      setInputChange(inputValue);
+//Custom hook that will make the body not be scrollable if the side bar is open
+function useBodyScrollLock(isButtonPressed) {
+  useEffect(() => {
+    if (isButtonPressed) {
+      document.body.classList.add("sidebarOpen");
     } else {
-      setDisplayArtistData(false);
+      document.body.classList.remove("sidebarOpen");
     }
-  }, 250);
 
-  function handleShowFilter() {
-    showFilter(true);
+    return () => {
+      document.body.classList.remove("sidebarOpen");
+    };
+  }, [isButtonPressed]);
+}
+
+const FilterSidebarHeader = forwardRef(function (props, ref) {
+  const { showSidebar, sideBarVisible } = props;
+
+  function handleCloseModal() {
+    showSidebar(false);
   }
   return (
-    <div className={Styles.searchFilterContainer}>
-      {/* Search results of artist information, error or loading will be displayed when the search input is not empty or filled with white spaces */}
-      {displayArtistData && <ArtistInfor characterChange={inputChange} />}
-      <input
-        type="text"
-        name="concerts"
-        className={Styles.concertInputSearch}
-        placeholder="Artists or Bands"
-        aria-label="Search for an artist's or a bands's concerts"
-        onChange={handleArtistSearch}
-        ref={searchInputRef}
-      />
-      <button
-        type="button"
-        className={Styles.filterBTN}
-        onClick={handleShowFilter}
-      >
-        <Rows3 className={Styles.filterIcon} aria-hidden="true" />
-        <span className={Styles.filter}>Filter</span>
-      </button>
+    <div ref={ref}>
+      <div className={sideBarVisible ? Styles.filterConcerts : Styles.hidden}>
+        <div className={Styles.headingContainer}>
+          <h2 className={Styles.heading}>Filter Concerts</h2>
+          <button
+            type="button"
+            className={Styles.hideBTN}
+            aria-label="Close the side bar"
+            onClick={handleCloseModal}
+          >
+            <X aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+      {/* This will make the side bar be visible when the filter button is pressed */}
+      <Sidebar sideBarClassName="show" ref={ref} />
     </div>
   );
-}
+});
 
-export default function ConcertsInformation({ visibilityConcert, showFilter }) {
-  const { dateDuration } = useContext(concertsDurationContext);
-  const { concertLocation } = useContext(concertsLocationContext);
-  const { concertsDetails, setConcertsDetails } = useContext(
-    concertsInformationContext,
-  );
+export default function Concerts() {
+  //This will aid in the tracking of the visibility of the concert filter side bar
+  const [filterVisibility, setFilterVisibility] = useState(false);
+  /*const [switchContainerVisibility, setSwitchContainerVisibility] =
+    useState(false); */
+  const [visibility, setVisibility] = useState({
+    mapVisibility: false,
+    concertVisibility: true,
+  });
+  const [viewportWidthStatus, setViewportWidthStatus] = useState(true);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const sidebarRef = useRef(null);
+  const previousFocusedElement = useRef(null);
+
+  useBodyScrollLock(filterVisibility);
 
   useEffect(() => {
-    const getConcertDetails = async () => {
-      const startDate = `${dateDuration.startDate}T00:00:00Z`;
-      const endDate = `${dateDuration.endDate}T23:59:59Z`;
-      //Get the available concerts details within the the user's area
-      const concertInfor = searchMockEvents(
-        null,
-        null,
-        startDate,
-        endDate,
-        concertLocation.country_code,
-        concertLocation.city,
-      );
-      return concertInfor;
-    };
+    if (filterVisibility) {
+      const sideBarvalue = sidebarRef.current;
+      displayModal(sideBarvalue, getFocusableElements(sideBarvalue));
+    }
+  }, [filterVisibility]);
 
-    setConcertsDetails(getConcertDetails());
-  }, []);
+  useEffect(() => {
+    // Debounced resize handler
+    const widthSize = windowSize.width;
+    const handleResize = debounce(() => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+
+      /* display the filter at a viewport less than 1024px(laptop) and expands the view port than decreases the viewport the viewport should be clear & clean thus making the filter disappear */
+    }, 250);
+    if (widthSize >= 1024) {
+      setFilterVisibility(false);
+      // setSwitchContainerVisibility(false);
+      setViewportWidthStatus(true);
+    }
+    if (widthSize < 1024) {
+      setViewportWidthStatus(false);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [windowSize.width]);
+
+  //Change concert layout based on viewport width, if it is greater than 1024 then button viewing is activated
+  useEffect(() => {
+    if (viewportWidthStatus) {
+      setVisibility({
+        mapVisibility: true,
+        concertVisibility: true,
+      });
+    } else {
+      setVisibility({
+        mapVisibility: false,
+        concertVisibility: true,
+      });
+    }
+  }, [viewportWidthStatus]);
+
+  // This will pass the setFilterVisibility function to the sideBarFilter, so that it can be able to close the sidebar
+  function passDataToChild(showSidebar) {
+    setFilterVisibility(showSidebar);
+  }
+
+  //Will display the concert filter side bar when the filter button is pressed
+  function handleShowFilter(value) {
+    setFilterVisibility(value);
+
+    //Trap Focus
+    previousFocusedElement.current = document.activeElement;
+  }
+
+  function handleToggle() {
+    setVisibility({
+      mapVisibility: false,
+      concertVisibility: true,
+    });
+  }
+  function handleMap() {
+    setVisibility({
+      mapVisibility: true,
+      concertVisibility: false,
+    });
+  }
 
   return (
-    <div className={Styles.allConcertsWrapper}>
-      <h1 className={Styles.concertCountry}>
-        Concerts in <span className={Styles.country}>South Africa</span>{" "}
-      </h1>
-      <p className={Styles.allConcertsDescr}>
-        Find live music events in South Africa, get concert tickets, see tour
-        dates and more.
-      </p>
-      <ArtistDetails showFilter={showFilter} />
-      {/* Concerts by the searched artists will dynamically appear here */}
-      {visibilityConcert && (
-        <div className={Styles.artistConcertContainer}>
-          {concertsDetails.map((concertDetails) => {
-            return (
-              <ArtistConcert
-                artist={concertDetails.artistName}
-                location={`${concertDetails.venueName}, ${(concertDetails.venueCity ? concertDetails.venueCity : concertDetails.venueState, concertDetails.artistGenre, concertDetails.venueCountry)}`}
+    <>
+      <section className={Styles.allConcertsContainer}>
+        <ConcertsInformation
+          visibilityConcert={visibility.concertVisibility}
+          showFilter={handleShowFilter}
+        />
+
+        {/* This will make the side bar be visible when the filter button is pressed */}
+        {filterVisibility && (
+          <FilterSidebarHeader
+            ref={sidebarRef}
+            showSidebar={passDataToChild}
+            sideBarVisible={filterVisibility}
+          />
+        )}
+
+        {visibility.mapVisibility && (
+          <div className={Styles.mapContainer}>
+            {/* This will automatically display the concert filter side bar when the viewport width is greater or equal to 1024px */}
+            {windowSize.width >= 1024 && <SidebarVisibility />}
+            <img src={ArtistImg} alt="Musicfier" className={Styles.logoImg} />
+          </div>
+        )}
+        {windowSize.width < 1024 && (
+          <div className={Styles.switchBTNsContainer}>
+            <button
+              type="button"
+              aria-label="View the list of concerts"
+              className={
+                visibility.concertVisibility
+                  ? `${Styles.switchBTN} ${Styles.blueBG}`
+                  : `${Styles.switchBTN}`
+              }
+              onClick={handleToggle}
+            >
+              <ListCollapse
+                aria-hidden="true"
+                className={
+                  visibility.concertVisibility
+                    ? `${Styles.toggleIcon} ${Styles.colorWhite}`
+                    : `${Styles.toggleIcon}`
+                }
               />
-            );
-          })}
-        </div>
-      )}
-    </div>
+            </button>
+            <button
+              type="button"
+              aria-label="View the map for the concerts location"
+              className={
+                visibility.mapVisibility
+                  ? `${Styles.switchBTN} ${Styles.blueBG}`
+                  : `${Styles.switchBTN}`
+              }
+              onClick={handleMap}
+            >
+              <Map
+                aria-hidden="true"
+                className={
+                  visibility.mapVisibility
+                    ? `${Styles.mapIcon} ${Styles.colorWhite}`
+                    : `${Styles.mapIcon}`
+                }
+              />
+            </button>
+          </div>
+        )}
+      </section>
+    </>
   );
 }
