@@ -1,0 +1,232 @@
+:root {
+  --mapContainer-height: calc(100vh - 74px);
+  --allConcertWrapper-height: 100%;
+}
+.filterConcerts {
+  position: absolute;
+  top: 70px;
+  z-index: 45;
+  color: #000;
+  padding: 1rem 0;
+  width: 100%;
+  right: 0;
+  background-color: #eae8e8;
+}
+.headingContainer {
+  padding: 1.25rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: center;
+}
+.hideBTN {
+  color: #066bff;
+  font-size: 0.875rem;
+}
+.concertLink {
+  padding: 20px 0 20px 20px;
+  width: 100%;
+  display: flex;
+  color: #000;
+}
+.concertLink:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.artistImage {
+  width: 100px;
+  height: 120px;
+  border-radius: 8px;
+}
+.concertInfor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 15px;
+}
+.date {
+  font-size: 12px;
+  color: #636366;
+}
+.calendarIcon {
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
+  color: #d00000;
+}
+.artistName {
+  font-size: 18px;
+  font-weight: 500;
+}
+.location {
+  font-size: 14px;
+}
+.genre {
+  border: 1px solid #636366;
+  font-size: 12px;
+  border-radius: 8px;
+  color: #636366;
+  align-self: flex-start;
+  padding: 5px;
+  margin-top: auto;
+}
+.allConcertsContainer {
+  padding: 20px 20px 0 20px;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 54px;
+}
+.concertCountry,
+.allConcertsDescr {
+  text-align: center;
+}
+.concertCountry {
+  font-size: 24px;
+  color: #000;
+  font-weight: 700;
+  margin: 15px 0;
+}
+.country {
+  color: #0077ff;
+}
+.allConcertsDescr {
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: #3a3a3c;
+}
+.searchFilterContainer {
+  position: relative;
+  padding: 16px 0;
+  display: flex;
+  gap: 20px;
+}
+.concertInputSearch {
+  appearance: none;
+  font-size: 16px;
+  padding: 11px 20px 11px 37px;
+  width: 100%;
+  background-color: #f4f4f4;
+  border-radius: 9999px;
+  flex-grow: 1;
+  border: none;
+}
+/* Browser support for place holder styling*/
+::placeholder,
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+:-moz-placeholder {
+  color: #8f8f8f;
+  opacity: 1; /* Firefox reduces opacity by default */
+}
+.filterBTN,
+.filterIcon {
+  color: rgb(59, 134, 247);
+}
+.filterBTN {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  background-color: rgba(0, 102, 255, 0.1);
+  border-radius: 999px;
+}
+.filterIcon {
+  width: 18px;
+  height: 18px;
+}
+.filter {
+  display: none;
+}
+.artistConcertContainer {
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+}
+.allConcertsWrapper {
+  height: var(--allConcertWrapper-height);
+}
+.switchBTNsContainer {
+  position: fixed;
+  bottom: 35px;
+  background-color: #fff;
+  padding: 2px;
+  z-index: 13;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+.switchBTNsContainer,
+.switchBTN {
+  border-radius: 999px;
+}
+.switchBTN {
+  width: 48px;
+  height: 28px;
+  background-color: transparent;
+}
+.mapIcon,
+.toggleIcon {
+  color: #066bff;
+  width: 18px;
+  height: 18px;
+}
+.blueBG {
+  background-color: #066bff;
+}
+.colorWhite {
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .filterConcerts {
+    background-color: #e1eae7;
+    border-radius: 16px;
+    width: 325px;
+    right: 15px;
+    top: 80px;
+  }
+  .filter {
+    display: inline;
+  }
+  .allConcertsWrapper {
+    margin: 0 10%;
+  }
+  .heading {
+    font-size: 1.125rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --mapContainer-height: calc(100vh - 74px);
+    --allConcertWrapper-height: calc(100vh - 74px);
+  }
+  .allConcertsContainer {
+    flex-direction: row;
+    padding-right: 0;
+  }
+  .filterBTN {
+    display: none;
+  }
+  .allConcertsWrapper {
+    width: 400px;
+    overflow-y: scroll;
+    height: var(--allConcertWrapper-height);
+    margin: 0;
+  }
+  .mapContainer {
+    flex-grow: 1;
+    height: var(--mapContainer-height);
+    overflow: hidden;
+  }
+  .artistConcertContainer {
+    margin: 0;
+  }
+}
