@@ -3,34 +3,48 @@ import {
   concertsDurationContext,
   concertsLocationContext,
   concertsInformationContext,
+  artistInforContext,
 } from "../../pages/concerts/concerts";
+import { LocationContext } from "../../components/layout/rootLayout";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
 import Styles from "./artistsSearch.module.css";
 
 function Artists({ imagesrc, name, dataID }) {
+  const userLocation = useContext(LocationContext);
   const { concertLocation } = useContext(concertsLocationContext);
   const { dateDuration } = useContext(concertsDurationContext);
   const { setConcertsDetails } = useContext(concertsInformationContext);
+  const { setArtistInfor } = useContext(artistInforContext);
 
   const [attractionId, setAttractionID] = useState(null);
+  console.log("Name", name);
+  console.log("dataId", dataID);
 
   useEffect(() => {
     if (attractionId) {
-      const inforConcerts = async () => {
-        return searchMockEvents(
-          attractionId,
-          name,
-          dateDuration.startDate,
-          dateDuration.endDate,
-          concertLocation.country_code,
-          concertLocation.city,
-        );
-      };
+      //if the location has not been changed, use the default country code, user's country code.
+      const countryCode = concertLocation?.country_code
+        ? concertLocation.country_code
+        : userLocation.country_code;
+      //if the location has not been changed, use the default city, user's city.
+      const city = concertLocation?.city
+        ? concertLocation.city
+        : userLocation.city;
+      const inforConcerts = searchMockEvents(
+        attractionId,
+        name,
+        dateDuration.startDate,
+        dateDuration.endDate,
+        countryCode,
+        city,
+      );
+      setArtistInfor({ artistID: attractionId, artistName: name });
       setConcertsDetails(inforConcerts);
     }
   }, [attractionId]);
 
   function handleClick(event) {
+    console.log("Pressed");
     const button = event.currentTarget;
     const id = button.dataset.id;
     setAttractionID(id);
@@ -67,12 +81,13 @@ export default function Data({ artistsInfor }) {
     <div className={Styles.artistsContainer}>
       <span className={Styles.artists}>Artists</span>
 
-      {artistsInfor.slice(0, artistCount).map((artist) => {
+      {artistsInfor.slice(0, artistCount).map((artist, index) => {
         return (
           <Artists
             imagesrc={artist.image}
             name={artist.name}
-            dataId={artist.id}
+            dataID={artist.id}
+            key={index}
           />
         );
       })}
