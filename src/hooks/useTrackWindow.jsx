@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import debounce from "../utils/debounce";
+
 export default function useTrackWindow() {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -5,7 +8,7 @@ export default function useTrackWindow() {
   });
 
   useEffect(() => {
-    // Debounced resize handler
+    //  250ms after resizing the window, then you update the window width and size. This prevents constants rerendering due to every resizing.
     const handleResize = debounce(() => {
       setWindowSize({
         width: window.innerWidth,
@@ -21,7 +24,6 @@ export default function useTrackWindow() {
       height: window.innerHeight,
     });
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
     };
