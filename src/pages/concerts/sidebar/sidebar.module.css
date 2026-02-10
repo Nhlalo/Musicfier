@@ -1,0 +1,278 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.filterConcerts {
+  position: absolute;
+  top: 15px;
+  z-index: 2;
+  border-radius: 0px;
+  overflow: hidden;
+  color: #000;
+  background-color: #eae8e8;
+  padding: 1rem 0;
+  width: 100%;
+  right: 0;
+  z-index: 15;
+}
+.sidebarContainer {
+  border: none;
+  width: 100%;
+  top: 110px;
+  outline: 0;
+  /* Make the side bar scrollable when it exceeds the viewport height */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 80vh;
+  /* Hide the scroll bar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+/* Chrome, Safari, Edge */
+.element::-webkit-scrollbar {
+  display: none; /* This will hide the scroll bar */
+}
+.sidebarContainer .headingContainer,
+.clearContainer,
+.endDate,
+.startDate {
+  display: flex;
+  justify-content: space-between;
+}
+.headingContainer {
+  padding: 1.25rem 1rem;
+}
+
+.hideBTN,
+.showBTN {
+  margin-left: auto;
+}
+.hideBTN,
+.customRangeBTN,
+.newLocationBTN,
+.clearBTN,
+.startDate,
+.endDate,
+.showBTN {
+  color: #066bff;
+}
+.hideBTN,
+.BTNs,
+.showBTN {
+  font-size: 0.875rem;
+}
+.whenContainer,
+.whereContainer {
+  background-color: #eae8e8;
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  border-radius: 6px;
+}
+.whereContainer {
+  margin-top: 6px;
+}
+.when,
+.customRangeBTN,
+.newLocationBTN,
+.startDateContainer,
+.endDateContainer,
+.endDate,
+.startDate {
+  display: flex;
+  align-items: center;
+}
+.setCustomRangeBTN {
+  color: #fff;
+  background-color: #066bff;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  margin: 0 auto;
+}
+
+.when,
+.where {
+  padding: 18px 0;
+  margin: 0;
+}
+.concertDate,
+.concertLocationContainer,
+.todayContainer,
+.tomorrowContainer,
+.locationContainer,
+.nearMeContainer {
+  display: flex;
+  flex-direction: row;
+}
+.concertDate,
+.concertLocationContainer {
+  gap: 8px;
+}
+
+.BTNs {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background-color: #fff;
+  font-weight: bold;
+}
+.todayContainer,
+.tomorrowContainer,
+.nearMeContainer,
+.locationContainer {
+  gap: 8px;
+}
+.tomorrowContainer,
+.locationContainer {
+  margin-top: 0px;
+}
+.customRangeBTN,
+.newLocationBTN {
+  margin-top: 16px;
+}
+
+.customRange,
+.newLocation {
+  margin-left: 6px;
+}
+
+.dateContainer {
+  padding: 1rem;
+  border-radius: 16px;
+  margin-top: 16px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.start,
+.end {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+/* Remove calendar icon in Chrome, Safari, Edge */
+.startDate::-webkit-calendar-picker-indicator,
+.endDate::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.startDate::after,
+.endDate::after {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93bi1pY29uIGx1Y2lkZS1jaGV2cm9uLWRvd24iPjxwYXRoIGQ9Im02IDkgNiA2IDYtNiIvPjwvc3ZnPg==);
+  color: #066bff;
+}
+.startDate,
+.endDate {
+  appearance: none;
+  border: none;
+  padding: 0.625rem 0.625rem 0.625rem 1rem;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 16px;
+}
+.endDate {
+  margin-top: 16px;
+}
+.heading {
+  font-size: 1.125rem;
+}
+.countryInputContainer {
+  margin-top: 16px;
+  position: relative;
+  color: rgba(60, 60, 67, 0.6);
+}
+.countryInputContainer:focus-within {
+  color: rgb(0, 136, 255);
+}
+.countryInput {
+  appearance: none;
+  border: none;
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  padding-left: 35px;
+}
+.countryInput:focus {
+  outline: 0.1rem solid #066bff;
+}
+.searchIcon {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+}
+.noVisibility {
+  display: none;
+}
+.backdrop {
+  z-index: 14;
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #eae8e8;
+  pointer-events: auto; /*This will make the content behind the backdrop to be non-interactive */
+}
+.show {
+  display: block;
+}
+.blue {
+  background-color: #066bff;
+  color: #fff;
+}
+.headingContainer {
+  padding: 0.2rem 1rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .backdrop {
+    display: none;
+  }
+  .filterConcerts {
+    background-color: #e1eae7;
+    border-radius: 16px;
+    width: 325px;
+    right: 15px;
+  }
+  .whenContainer,
+  .whereContainer {
+    background-color: #edf2f4;
+  }
+  .sidebarContainer {
+    top: 120px;
+    margin-right: 0;
+    width: 325px;
+    height: auto;
+  }
+  .concertDate,
+  .concertLocationContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .tomorrowContainer,
+  .locationContainer {
+    margin-top: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .headingContainer {
+    display: flex;
+  }
+  .filterConcerts {
+    top: 80px;
+  }
+  .sidebarContainer {
+    top: 120px;
+  }
+}
