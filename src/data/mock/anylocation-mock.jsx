@@ -18,15 +18,15 @@ const mockLocation = [
     key: crypto.randomUUID(), // Keys are needed for any list creation
   },
   {
-    city: "Lisbon",
-    country: "Portugal",
-    countryCode: "PT",
-    key: crypto.randomUUID(), // Keys are needed for any list creation
+    city: "New York",
+    country: "United States",
+    countryCode: "US",
+    key: crypto.randomUUID(),
   },
   {
-    city: "Rosario",
-    country: "Argentina",
-    countryCode: "AR",
+    city: "Melbourne",
+    country: "Australia",
+    countryCode: "AU",
     key: crypto.randomUUID(), // Keys are needed for any list creation
   },
   {
@@ -38,14 +38,19 @@ const mockLocation = [
 ];
 
 export default function getLocation(locationInput) {
-  if (!location || location.trim() === "") {
+  if (!locationInput || locationInput.trim() === "") {
     return;
   }
   const lowerCaseInput = locationInput.toLowerCase();
-  return mockLocation.filter(
-    (location) =>
-      location.country.toLowerCase().includes(lowerCaseInput) ||
-      location.city.toLowerCase().includes(lowerCaseInput),
-  );
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const filteredLocation = mockLocation.filter(
+        (location) =>
+          location.country.toLowerCase().includes(lowerCaseInput) ||
+          location.city.toLowerCase().includes(lowerCaseInput),
+      );
+      resolve(filteredLocation);
+    }, 5000);
+  });
 }
 export { mockLocation };
