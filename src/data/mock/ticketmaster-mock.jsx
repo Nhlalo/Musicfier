@@ -1,4 +1,18 @@
 import artistImg from "../../assets/images/artistImg.jpg";
+
+function getFormattedDate(daysOffset) {
+  const date = new Date();
+  date.setDate(date.getDate() + daysOffset);
+  return date.toISOString().split("T")[0]; // "YYYY-MM-DD"
+}
+
+const today = getFormattedDate(0);
+const tomorrow = getFormattedDate(1); // After 1 day
+const after3Days = getFormattedDate(3); // After 3 days
+const after4Days = getFormattedDate(4); // After 4 days
+const after7Days = getFormattedDate(7); // After 7 days
+const after14Days = getFormattedDate(14); // After 14 days
+
 const mockArtists = [
   {
     id: "12345",
@@ -43,15 +57,36 @@ const mockArtists = [
     upcomingEvents: 18,
   },
   {
-    id: "86420",
+    id: "13575",
     name: "Drake",
+    image: null,
+    genre: "R&B",
+    upcomingEvents: 18,
+  },
+  {
+    id: "13279",
+    name: "Kendrick Lamar",
+    image: null,
+    genre: "R&B",
+    upcomingEvents: 18,
+  },
+  {
+    id: "13283",
+    name: "Billie Eilish",
+    image: null,
+    genre: "R&B",
+    upcomingEvents: 18,
+  },
+  {
+    id: "86420",
+    name: "Offset",
     image: artistImg,
     genre: "Alternative",
     upcomingEvents: 31,
   },
   {
     id: "11223",
-    name: "Drake",
+    name: "Bad Bunny",
     image: artistImg,
     genre: "Hip-Hop/Rap",
     upcomingEvents: 12,
@@ -60,7 +95,7 @@ const mockArtists = [
 
 const mockEvents = [
   {
-    eventDate: "2026-02-13",
+    eventDate: today,
     artistId: "12345",
     artistName: "Drake",
     artistImage: artistImg,
@@ -72,7 +107,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/drake-nyc",
   },
   {
-    eventDate: "2026-02-14",
+    eventDate: today,
     artistId: "67890",
     artistName: "Taylor Swift",
     artistImage: artistImg,
@@ -84,7 +119,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/taylor-la",
   },
   {
-    eventDate: "2026-02-12", // This Friday
+    eventDate: after3Days,
     artistId: "54321",
     artistName: "Coldplay",
     artistImage: null,
@@ -96,7 +131,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/coldplay-london",
   },
   {
-    eventDate: "2026-02-15",
+    eventDate: tomorrow,
     artistId: "98765",
     artistName: "Beyoncé",
     artistImage: artistImg,
@@ -108,7 +143,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/beyonce-paris",
   },
   {
-    eventDate: "2026-02-16",
+    eventDate: after3Days,
     artistId: "24680",
     artistName: "Ed Sheeran",
     artistImage: artistImg,
@@ -120,7 +155,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/ed-melbourne",
   },
   {
-    eventDate: "2026-02-14",
+    eventDate: after14Days,
     artistId: "13579",
     artistName: "Bad Bunny",
     artistImage: artistImg,
@@ -132,7 +167,7 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/badbunny-johannesburg",
   },
   {
-    eventDate: "2026-02-17",
+    eventDate: after4Days,
     artistId: "11223",
     artistName: "The Weeknd",
     artistImage: null,
@@ -144,9 +179,9 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/weeknd-toronto",
   },
   {
-    eventDate: "2026-02-13", // Tomorrow
+    eventDate: tomorrow,
     artistId: "33445",
-    artistName: "Black Coffee", // South African DJ
+    artistName: "Black Coffee",
     artistImage: artistImg,
     artistGenre: "House",
     venueName: "Cape Town Stadium",
@@ -156,32 +191,32 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/blackcoffee-cape-town",
   },
   {
-    eventDate: "2026-02-15",
-    artistId: "55667",
-    artistName: "Bruno Mars",
+    eventDate: today,
+    artistId: "12345",
+    artistName: "Drake",
     artistImage: artistImg,
-    artistGenre: "Pop/R&B",
+    artistGenre: "Hip-Hop/Rap",
     venueName: "Durban International Convention Centre",
     venueCity: "Durban",
     venueState: "KwaZulu-Natal",
     venueCountry: "ZA",
-    ticketUrl: "https://ticketmaster.com/brunomars-durban",
+    ticketUrl: "https://ticketmaster.com/drake-durban",
   },
   {
-    eventDate: "2026-02-18",
-    artistId: "77889",
-    artistName: "Lady Gaga",
+    eventDate: after7Days,
+    artistId: "12345",
+    artistName: "Drake",
     artistImage: artistImg,
-    artistGenre: "Pop",
+    artistGenre: "Hip-Hop/Rap",
     venueName: "Montecasino Outdoor Events Arena",
     venueCity: "Johannesburg",
     venueState: "Gauteng",
     venueCountry: "ZA",
-    ticketUrl: "https://ticketmaster.com/ladygaga-johannesburg",
+    ticketUrl: "https://ticketmaster.com/drake-johannesburg",
   },
   {
-    eventDate: "2026-02-19",
-    artistId: "88990",
+    eventDate: tomorrow,
+    artistId: "13279",
     artistName: "Kendrick Lamar",
     artistImage: null,
     artistGenre: "Hip-Hop",
@@ -192,8 +227,8 @@ const mockEvents = [
     ticketUrl: "https://ticketmaster.com/kendrick-cape-town",
   },
   {
-    eventDate: "2026-02-20",
-    artistId: "99001",
+    eventDate: today,
+    artistId: "13283",
     artistName: "Billie Eilish",
     artistImage: artistImg,
     artistGenre: "Alternative Pop",
@@ -206,9 +241,14 @@ const mockEvents = [
 ];
 
 function getMockArtistData(keyword) {
-  return mockArtists.filter(
-    (artistData) => artistData.name.toLowerCase() === keyword.toLowerCase(),
-  );
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const filteredArtists = mockArtists.filter((artistData) =>
+        artistData.name.toLowerCase().includes(keyword.toLowerCase()),
+      );
+      resolve(filteredArtists);
+    }, 5000);
+  });
 }
 
 function searchMockEvents(
@@ -221,41 +261,40 @@ function searchMockEvents(
 ) {
   // Filter by attractionId if provided
   let filteredEvents = attractionId
-    ? mockEvents.filter((event) => event.artistId === attractionId)
+    ? mockEvents.filter(
+        (concertEvent) => concertEvent.artistId === attractionId,
+      )
     : mockEvents;
 
   // Filter by keyword if provided (case-insensitive)
   if (keyword) {
     const lowerKeyword = keyword.toLowerCase();
-    filteredEvents = filteredEvents.filter(
-      (event) =>
-        event.artistName.toLowerCase().includes(lowerKeyword) ||
-        event.venueName.toLowerCase().includes(lowerKeyword) ||
-        event.artistGenre.toLowerCase().includes(lowerKeyword),
+    filteredEvents = filteredEvents.filter((concertEvent) =>
+      concertEvent.artistName.toLowerCase().includes(lowerKeyword),
     );
   }
 
   // Filter by countryCode if provided
   if (countryCode) {
     filteredEvents = filteredEvents.filter(
-      (event) => event.venueCountry === countryCode,
+      (concertEvent) => concertEvent.venueCountry === countryCode,
     );
   }
 
   // Filter by city if provided (case-insensitive)
   if (city) {
     const lowerCity = city.toLowerCase();
-    filteredEvents = filteredEvents.filter((event) =>
-      event.venueCity.toLowerCase().includes(lowerCity),
+    filteredEvents = filteredEvents.filter((concertEvent) =>
+      concertEvent.venueCity.toLowerCase().includes(lowerCity),
     );
   }
 
-  // Filter by date range (simple string comparison for demo)
+  /* // Filter by date range (simple string comparison for demo)
   if (startDate && endDate) {
     filteredEvents = filteredEvents.filter(
-      (event) => event.eventDate >= startDate && event.eventDate <= endDate,
+      (concertEvent) => concertEvent.eventDate >= startDate && concertEvent.eventDate <= endDate,
     );
-  }
+  } */
 
   return filteredEvents;
 }
