@@ -13,7 +13,7 @@ export default function useLocationSearch(characterChange) {
     getLocation(characterChange)
       .then((value) => {
         // Check if request was cancelled
-        if (value === undefined) {
+        if (value === undefined || value === null || value.length == 0) {
           throw new Error("No location");
         }
         /* if (!signal.aborted) {
