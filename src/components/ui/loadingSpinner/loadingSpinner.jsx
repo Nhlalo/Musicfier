@@ -1,4 +1,5 @@
 import { LoaderCircle } from "lucide-react";
+import Styles from "./loadingSpinner.module.css";
 export default function LoadingSpinner() {
   return (
     <div className={Styles.loadingContainer}>
