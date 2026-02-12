@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, createContext } from "react";
 import { ChevronDown, ChevronUp, MapPinCheck, Search } from "lucide-react";
 import useLocationSearch from "../../../../hooks/useLocationSearch/useLocationSearch";
 import debounce from "../../../../utils/debounce";
@@ -7,6 +7,7 @@ import ErrorMessage from "../../../../hooks/useLocationSearch/locationSearchErro
 import Loading from "../../../../hooks/useLocationSearch/locationSearchLoading";
 import Styles from "../sidebar.module.css";
 
+const InputContext = createContext("");
 //This will display the optional concert location as you search for your desired concert location.
 export default function ConcertLocationOptions() {
   const searchInputBTNRef = useRef(null);
@@ -19,6 +20,8 @@ export default function ConcertLocationOptions() {
   //Determine the visibility of the location input search
   const [locationSearchVisibility, setLocationSearchVisibility] =
     useState("hide");
+
+  const inputAdjustment = useMemo(() => searchInputBTNRef, [searchInputBTNRef]);
 
   //show the location search input & results
   function handleShowLocationSearch() {
@@ -48,41 +51,43 @@ export default function ConcertLocationOptions() {
 
   return (
     <>
-      <button
-        type="button"
-        className={Styles.newLocationBTN}
-        onClick={
-          locationSearchVisibility == "hide"
-            ? handleShowLocationSearch
-            : handleHideLocationSearch
-        }
-      >
-        <MapPinCheck aria-hidden="true" />
-        <span className={Styles.newLocation}>New Location</span>{" "}
-        {locationSearchVisibility == "hide" ? (
-          <ChevronDown aria-hidden="true" />
-        ) : (
-          <ChevronUp aria-hidden="true" />
-        )}
-      </button>
-      <div
-        className={
-          locationSearchVisibility == "show"
-            ? Styles.countryInputContainer
-            : Styles.noVisibility
-        }
-      >
-        <Search className={Styles.searchIcon} />
-        <input
-          type="text"
-          name="country"
-          className={Styles.countryInput}
-          ref={searchInputBTNRef}
-          disabled={locationSearchVisibility == "show" ? false : true}
-          onChange={handleLocationSearch}
-        />
-      </div>
-      {displayLocationStatus && <Location characterChange={inputChange} />}
+      <InputContext.Provider value={inputAdjustment}>
+        <button
+          type="button"
+          className={Styles.newLocationBTN}
+          onClick={
+            locationSearchVisibility == "hide"
+              ? handleShowLocationSearch
+              : handleHideLocationSearch
+          }
+        >
+          <MapPinCheck aria-hidden="true" />
+          <span className={Styles.newLocation}>New Location</span>{" "}
+          {locationSearchVisibility == "hide" ? (
+            <ChevronDown aria-hidden="true" />
+          ) : (
+            <ChevronUp aria-hidden="true" />
+          )}
+        </button>
+        <div
+          className={
+            locationSearchVisibility == "show"
+              ? Styles.countryInputContainer
+              : Styles.noVisibility
+          }
+        >
+          <Search className={Styles.searchIcon} />
+          <input
+            type="text"
+            name="country"
+            className={Styles.countryInput}
+            ref={searchInputBTNRef}
+            disabled={locationSearchVisibility == "show" ? false : true}
+            onChange={handleLocationSearch}
+          />
+        </div>
+        {displayLocationStatus && <Location characterChange={inputChange} />}
+      </InputContext.Provider>
     </>
   );
 }
@@ -94,3 +99,5 @@ function Location({ characterChange }) {
   if (error) return <ErrorMessage />;
   if (data) return <Data locationData={data} />;
 }
+
+export { InputContext };
