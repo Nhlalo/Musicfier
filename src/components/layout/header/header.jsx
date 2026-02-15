@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { useMatches, useLoaderData, useNavigate, Link } from "react-router";
+import { useMatches, useLoaderData, Link } from "react-router";
 import { Menu } from "lucide-react";
 import { LocationContext } from "../rootLayout.jsx";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
 import handleScrollToTop from "../../../utils/scrollToTop.jsx";
+import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
 import Styles from "./header.module.css";
 import Logo from "../../../assets/images/logo.png";
@@ -14,13 +15,16 @@ export default function Header({}) {
 
   const location = useContext(LocationContext);
 
-  const navigate = useNavigate();
-
   const lastFocusedElement = useRef(null);
 
   const matches = useMatches();
 
+  const startDate = `${getTodayDate()}T00:00:00Z`;
+  const endDate = `${getTomorrowDate()}T23:59:59Z`;
+
   const userCountry = location?.country;
+  const countryCode = location?.country_code;
+  const userCity = location?.city;
   // Find the current route that has loader data
   const currentMatch = matches.find((match) => match.loaderData);
   const chartColors = currentMatch?.loaderData?.colors;
@@ -47,7 +51,7 @@ export default function Header({}) {
 
   function determinePageNavigation(linkName) {
     if (linkName == "Concerts") {
-      return `/concerts/${userCountry}`;
+      return `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}&c=${userCity}`;
     }
     if (linkName == "Charts") {
       return `/charts/top50/${userCountry}`;
