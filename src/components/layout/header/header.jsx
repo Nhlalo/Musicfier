@@ -12,7 +12,7 @@ export default function Header({}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const userCountry = useContext(LocationContext);
+  const location = useContext(LocationContext);
 
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ export default function Header({}) {
 
   const matches = useMatches();
 
+  const userCountry = location?.country;
   // Find the current route that has loader data
   const currentMatch = matches.find((match) => match.loaderData);
   const chartColors = currentMatch?.loaderData?.colors;
