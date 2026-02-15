@@ -5,6 +5,7 @@ import {
   concertsInformationContext,
   artistInforContext,
 } from "../../pages/concerts/concerts";
+import { ArtistInputContext } from "../../pages/concerts/concertDetails/findConcerts";
 import { LocationContext } from "../../components/layout/rootLayout";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
 import Styles from "./artistsSearch.module.css";
@@ -15,6 +16,8 @@ function Artists({ imagesrc, name, dataID }) {
   const { dateDuration } = useContext(concertsDurationContext);
   const { setConcertsDetails } = useContext(concertsInformationContext);
   const { setArtistInfor } = useContext(artistInforContext);
+  const { searchInputRef, setDisplayArtistData } =
+    useContext(ArtistInputContext);
 
   const [attractionId, setAttractionID] = useState(null);
   console.log("Name", name);
@@ -40,6 +43,8 @@ function Artists({ imagesrc, name, dataID }) {
       );
       setArtistInfor({ artistID: attractionId, artistName: name });
       setConcertsDetails(inforConcerts);
+      //Remove the artist suggestion after clicking on your preferred artist.
+      setDisplayArtistData(false);
     }
   }, [attractionId]);
 
@@ -47,6 +52,8 @@ function Artists({ imagesrc, name, dataID }) {
     console.log("Pressed");
     const button = event.currentTarget;
     const id = button.dataset.id;
+    //Clear the input bar after clicking on your desired artist.
+    searchInputRef.current.value = "";
     setAttractionID(id);
   }
   return (
