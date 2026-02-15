@@ -1,45 +1,43 @@
 import { useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams, useParams } from "react-router";
 import {
-  concertsDurationContext,
-  concertsLocationContext,
   concertsInformationContext,
   artistInforContext,
 } from "../../pages/concerts/concerts";
 import { ArtistInputContext } from "../../pages/concerts/concertDetails/findConcerts";
-import { LocationContext } from "../../components/layout/rootLayout";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
 import Styles from "./artistsSearch.module.css";
 
 function Artists({ imagesrc, name, dataID }) {
-  const userLocation = useContext(LocationContext);
-  const { concertLocation } = useContext(concertsLocationContext);
-  const { dateDuration } = useContext(concertsDurationContext);
   const { setConcertsDetails } = useContext(concertsInformationContext);
   const { setArtistInfor } = useContext(artistInforContext);
   const { searchInputRef, setDisplayArtistData } =
     useContext(ArtistInputContext);
 
   const [attractionId, setAttractionID] = useState(null);
-  console.log("Name", name);
-  console.log("dataId", dataID);
+
+  const navigate = useNavigate();
+
+  const params = useParams();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const countryCode = params.countrycode;
+  const startDate = searchParams.get("sd");
+  const endDate = searchParams.get("ed");
+  const city = searchParams.get("c");
+  const cityParam = city ? `&c=${city}` : "";
 
   useEffect(() => {
     if (attractionId) {
-      //if the location has not been changed, use the default country code, user's country code.
-      const countryCode = concertLocation?.country_code
-        ? concertLocation.country_code
-        : userLocation.country_code;
-      //if the location has not been changed, use the default city, user's city.
-      const city = concertLocation?.city
-        ? concertLocation.city
-        : userLocation.city;
+      const cityName = city ? city : null;
       const inforConcerts = searchMockEvents(
         attractionId,
-        name,
-        dateDuration.startDate,
-        dateDuration.endDate,
+        null,
+        startDate,
+        endDate,
         countryCode,
-        city,
+        cityName,
       );
       setArtistInfor({ artistID: attractionId, artistName: name });
       setConcertsDetails(inforConcerts);
@@ -49,12 +47,14 @@ function Artists({ imagesrc, name, dataID }) {
   }, [attractionId]);
 
   function handleClick(event) {
-    console.log("Pressed");
     const button = event.currentTarget;
     const id = button.dataset.id;
-    //Clear the input bar after clicking on your desired artist.
+    //Clear the input bar after clicking on your des`ired artist.
     searchInputRef.current.value = "";
     setAttractionID(id);
+    navigate(
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}&ad=${id}`,
+    );
   }
   return (
     <button
