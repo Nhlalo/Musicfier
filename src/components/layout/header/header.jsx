@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { useMatches, useLoaderData } from "react-router";
+import { useState, useEffect, useRef, useContext } from "react";
+import { useMatches, useLoaderData, useNavigate, Link } from "react-router";
 import { Menu } from "lucide-react";
+import { LocationContext } from "../rootLayout.jsx";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
 import handleScrollToTop from "../../../utils/scrollToTop.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
@@ -10,6 +11,10 @@ import Logo from "../../../assets/images/logo.png";
 export default function Header({}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+
+  const userCountry = useContext(LocationContext);
+
+  const navigate = useNavigate();
 
   const lastFocusedElement = useRef(null);
 
@@ -38,11 +43,19 @@ export default function Header({}) {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); //
+
+  function determinePageNavigation(linkName) {
+    if (linkName == "Concerts") {
+      return `/concerts/${userCountry}`;
+    }
+    if (linkName == "Charts") {
+      return `/charts/top50/${userCountry}`;
+    }
+  }
   //This will display the side bar
   function handleOpeningSidebar() {
     //Store the last focused element before opening the sidebar
     lastFocusedElement.current = document.activeElement;
-
     setShowSidebar(true);
   }
 
@@ -87,13 +100,13 @@ export default function Header({}) {
             <ul className={Styles.listContainer}>
               {navLinksContent.map((element) => (
                 <li className={Styles.navListItem} key={element.key}>
-                  <a
-                    href=""
+                  <Link
+                    to={determinePageNavigation(element.content)}
                     className={Styles.navlink}
                     style={{ color: currentColors.color }}
                   >
                     {element.content}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
