@@ -1,24 +1,34 @@
-import { useContext, useEffect, useState } from "react";
-import { concertsLocationContext } from "../../pages/concerts/concerts";
+import { useContext } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { ChevronRight } from "lucide-react";
 import { previousLocationSearchesContext } from "../../pages/concerts/sidebar/concertLocation/concertLocation";
 import { InputContext } from "../../pages/concerts/sidebar/concertLocation/searchLocation";
 import Styles from "./locationSearch.module.css";
+
 export default function Data({ locationData }) {
   const { previousConcertLocations, setPreviousConcertLocations } = useContext(
     previousLocationSearchesContext,
   );
-  const { setConcertsLocation } = useContext(concertsLocationContext);
   const searchInputBTNRef = useContext(InputContext);
+
+  const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleLocation(event) {
     // Get data from the button's data attribute
     const button = event.currentTarget;
     const city = button.dataset.city;
     const country = button.dataset.country;
-    const countryCode = button.dataset.countryCode;
+    const countryCode = button.dataset.countrycode;
     const updatedLocations = [...previousConcertLocations];
     searchInputBTNRef.current.value = ""; //Clear the input after searching
+
+    const startDate = searchParams.get("sd");
+    const endDate = searchParams.get("ed");
+    const id = searchParams.get("id");
+    const cityParam = city ? `&c=${city}` : "";
+    const idParam = id ? `&id=${id}` : "";
 
     if (updatedLocations.length >= 4) {
       updatedLocations.pop();
@@ -30,11 +40,10 @@ export default function Data({ locationData }) {
       city: city,
     });
     setPreviousConcertLocations(updatedLocations);
-    setConcertsLocation({
-      country: country,
-      country_code: countryCode,
-      city: city,
-    });
+
+    navigate(
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
+    );
   }
 
   return (
@@ -54,7 +63,7 @@ export default function Data({ locationData }) {
                 onClick={(e) => handleLocation(e, index)}
                 data-city={location?.city}
                 data-country={location.country}
-                data-countryCode={location.country_code}
+                data-countrycode={location.countryCode}
               >
                 <div className={Styles.locationContainer}>
                   <span className={Styles.locationCity}>{location.city}</span>
