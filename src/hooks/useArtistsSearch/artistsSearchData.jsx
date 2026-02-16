@@ -26,22 +26,11 @@ function Artists({ imagesrc, name, dataID }) {
   const startDate = searchParams.get("sd");
   const endDate = searchParams.get("ed");
   const city = searchParams.get("c");
+
   const cityParam = city ? `&c=${city}` : "";
 
   useEffect(() => {
     if (attractionId) {
-      const cityName = city ? city : null;
-      const inforConcerts = searchMockEvents(
-        attractionId,
-        null,
-        startDate,
-        endDate,
-        countryCode,
-        cityName,
-      );
-      setArtistInfor({ artistID: attractionId, artistName: name });
-      setConcertsDetails(inforConcerts);
-      //Remove the artist suggestion after clicking on your preferred artist.
       setDisplayArtistData(false);
     }
   }, [attractionId]);
@@ -49,11 +38,11 @@ function Artists({ imagesrc, name, dataID }) {
   function handleClick(event) {
     const button = event.currentTarget;
     const id = button.dataset.id;
-    //Clear the input bar after clicking on your des`ired artist.
+    //Clear the input bar after clicking on your desired artist.
     searchInputRef.current.value = "";
     setAttractionID(id);
     navigate(
-      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}&ad=${id}`,
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}&id=${id}`,
     );
   }
   return (
