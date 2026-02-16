@@ -6,10 +6,17 @@ import Styles from "../sidebar.module.css";
 
 const userLocation = mockUserLocation;
 const previousLocationSearchesContext = createContext([]);
+const previousLocationsBTNContext = createContext();
 
 //This displays the previous location searches and the input to search for new locations, within the side bar.
 export default function ConcertLocations() {
   const [previousConcertLocations, setPreviousConcertLocations] = useState([]);
+  const [isLocationClicked, setIsLocationClicked] = useState({
+    location0: false,
+    location1: false,
+    location2: false,
+    location3: false,
+  });
 
   const previousConcertLocationsAdjustement = useMemo(
     () => ({
@@ -17,6 +24,13 @@ export default function ConcertLocations() {
       setPreviousConcertLocations,
     }),
     [previousConcertLocations],
+  );
+  const previousConcertLocationsBTNAdjustement = useMemo(
+    () => ({
+      isLocationClicked,
+      setIsLocationClicked,
+    }),
+    [isLocationClicked],
   );
 
   useEffect(() => {
@@ -35,12 +49,16 @@ export default function ConcertLocations() {
     <previousLocationSearchesContext.Provider
       value={previousConcertLocationsAdjustement}
     >
-      <div className={Styles.whereContainer}>
-        <PreviousLocations />
-        <ConcertLocationOptions />
-      </div>
+      <previousLocationsBTNContext.Provider
+        value={previousConcertLocationsBTNAdjustement}
+      >
+        <div className={Styles.whereContainer}>
+          <PreviousLocations />
+          <ConcertLocationOptions />
+        </div>
+      </previousLocationsBTNContext.Provider>
     </previousLocationSearchesContext.Provider>
   );
 }
 
-export { previousLocationSearchesContext };
+export { previousLocationSearchesContext, previousLocationsBTNContext };
