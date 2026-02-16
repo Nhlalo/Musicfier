@@ -289,12 +289,17 @@ function searchMockEvents(
     );
   }
 
-  /* // Filter by date range (simple string comparison for demo)
+  // Filter by date range (simple string comparison for demo)
   if (startDate && endDate) {
-    filteredEvents = filteredEvents.filter(
-      (concertEvent) => concertEvent.eventDate >= startDate && concertEvent.eventDate <= endDate,
-    );
-  } */
+    filteredEvents = filteredEvents.filter((concertEvent) => {
+      const startDuration = startDate.slice(0, 10);
+      const endDuration = endDate.slice(0, 10);
+      return (
+        concertEvent.eventDate >= startDuration &&
+        concertEvent.eventDate <= endDuration
+      );
+    });
+  }
 
   return filteredEvents;
 }
