@@ -1,4 +1,5 @@
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { searchMockEvents } from "../../../../data/mock/ticketmaster-mock";
 import {
   concertsDurationContext,
@@ -7,6 +8,7 @@ import {
 } from "../../concerts";
 import { previousLocationSearchesContext } from "./concertLocation";
 import Styles from "../sidebar.module.css";
+import { LocationContext } from "../../../../components/layout/rootLayout";
 
 const countryKeys = [
   crypto.randomUUID(),
@@ -24,6 +26,9 @@ export default function PreviousLocations() {
   const { previousConcertLocations, setPreviousConcertLocations } = useContext(
     previousLocationSearchesContext,
   );
+
+  const { setConcertsLocation } = useContext(concertsLocationContext);
+
   const [isLocationClicked, setIsLocationClicked] = useState({
     location0: false,
     location1: false,
@@ -31,14 +36,27 @@ export default function PreviousLocations() {
     location3: false,
   });
 
-  const { concertsLocation, setConcertsLocation } = useContext(
-    concertsLocationContext,
-  );
+  const navigate = useNavigate();
 
-  const locationState = useMemo(
-    () => isLocationClicked,
-    [isLocationClicked], // Dependency on parent
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const locationState = useMemo(() => isLocationClicked, [isLocationClicked]);
+
+  function changeURL(index) {
+    const startDate = searchParams.get("sd");
+    const endDate = searchParams.get("ed");
+    const id = searchParams.get("id");
+
+    const location = previousConcertLocations[index];
+    const countryCode = location.country_code;
+    const city = location.city;
+    const cityParam = city ? `&c=${city}` : "";
+    const idParam = id ? `&id=${id}` : "";
+
+    navigate(
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
+    );
+  }
 
   //Function to help establish which location button has been pressed by the user.
   function changeClickedLocation(
@@ -54,6 +72,7 @@ export default function PreviousLocations() {
       location3: fourthLocation,
     });
   }
+
   //Clear the location search
   function handleClearLocation() {
     //Only leave the default location, user's location, after clearing the search location history.
@@ -61,24 +80,30 @@ export default function PreviousLocations() {
     //After clearing the location search history, return to the default location , user location, and ensure the button is clicked.
     changeClickedLocation(true, false, false, false);
     setConcertsLocation(previousConcertLocations[0]);
+    changeURL(0);
   }
 
   //Clicking button will allow concerts within the user's desired area
   function handleLocationChange(event) {
     const button = event.currentTarget;
     const index = button.dataset.index;
+
     if (index == 0) {
       changeClickedLocation(true, false, false, false);
       setConcertsLocation(previousConcertLocations[0]);
+      changeURL(0);
     } else if (index == 1) {
       changeClickedLocation(false, true, false, false);
       setConcertsLocation(previousConcertLocations[1]);
+      changeURL(1);
     } else if (index == 2) {
       changeClickedLocation(false, false, true, false);
       setConcertsLocation(previousConcertLocations[2]);
+      changeURL(2);
     } else if (index == 3) {
       changeClickedLocation(false, false, false, true);
       setConcertsLocation(previousConcertLocations[3]);
+      changeURL(3);
     }
   }
   return (
