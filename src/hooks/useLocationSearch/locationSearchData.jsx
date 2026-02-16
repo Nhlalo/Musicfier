@@ -1,13 +1,19 @@
 import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { ChevronRight } from "lucide-react";
-import { previousLocationSearchesContext } from "../../pages/concerts/sidebar/concertLocation/concertLocation";
+import {
+  previousLocationSearchesContext,
+  previousLocationsBTNContext,
+} from "../../pages/concerts/sidebar/concertLocation/concertLocation";
 import { InputContext } from "../../pages/concerts/sidebar/concertLocation/searchLocation";
 import Styles from "./locationSearch.module.css";
 
 export default function Data({ locationData }) {
   const { previousConcertLocations, setPreviousConcertLocations } = useContext(
     previousLocationSearchesContext,
+  );
+  const { isLocationClicked, setIsLocationClicked } = useContext(
+    previousLocationsBTNContext,
   );
   const searchInputBTNRef = useContext(InputContext);
 
@@ -40,6 +46,13 @@ export default function Data({ locationData }) {
       city: city,
     });
     setPreviousConcertLocations(updatedLocations);
+    //Make the added concert location button be clicked (have a blue background)
+    setIsLocationClicked({
+      location0: false,
+      location1: false,
+      location2: false,
+      location3: true,
+    });
 
     navigate(
       `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
