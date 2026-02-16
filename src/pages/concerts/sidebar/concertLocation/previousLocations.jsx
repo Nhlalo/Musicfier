@@ -6,7 +6,10 @@ import {
   concertsLocationContext,
   concertsInformationContext,
 } from "../../concerts";
-import { previousLocationSearchesContext } from "./concertLocation";
+import {
+  previousLocationSearchesContext,
+  previousLocationsBTNContext,
+} from "./concertLocation";
 import Styles from "../sidebar.module.css";
 import { LocationContext } from "../../../../components/layout/rootLayout";
 
@@ -26,15 +29,11 @@ export default function PreviousLocations() {
   const { previousConcertLocations, setPreviousConcertLocations } = useContext(
     previousLocationSearchesContext,
   );
+  const { isLocationClicked, setIsLocationClicked } = useContext(
+    previousLocationsBTNContext,
+  );
 
   const { setConcertsLocation } = useContext(concertsLocationContext);
-
-  const [isLocationClicked, setIsLocationClicked] = useState({
-    location0: false,
-    location1: false,
-    location2: false,
-    location3: false,
-  });
 
   const navigate = useNavigate();
 
