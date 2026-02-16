@@ -100,64 +100,65 @@ export default function ConcertDuration() {
       endDate: tomorrowDateRef.current,
     });
   }
-
-  <div className={Styles.whenContainer}>
-    <span className={Styles.visuallyHidden}>
-      Select the date of the concerts
-    </span>
-    <h3 className={Styles.when} aria-hidden="true">
-      When?
-    </h3>
-    <div className={Styles.concertDate}>
-      <div className={Styles.todayContainer}>
-        <button
-          type="button"
-          className={
-            upcomingStatus
-              ? ` ${Styles.BTNs} ${Styles.blue}`
-              : ` ${Styles.BTNs}`
-          }
-          ref={upcomingInputRef}
-          onClick={handleUpcoming}
-        >
-          All Upcoming
-        </button>
-        <button
-          type="button"
-          className={
-            todayStatus ? `${Styles.BTNs} ${Styles.blue} ` : `${Styles.BTNs}`
-          }
-          ref={todayBTNRef}
-          onClick={handleToday}
-        >
-          Today
-        </button>
+  return (
+    <div className={Styles.whenContainer}>
+      <span className={Styles.visuallyHidden}>
+        Select the date of the concerts
+      </span>
+      <h3 className={Styles.when} aria-hidden="true">
+        When?
+      </h3>
+      <div className={Styles.concertDate}>
+        <div className={Styles.todayContainer}>
+          <button
+            type="button"
+            className={
+              upcomingStatus
+                ? ` ${Styles.BTNs} ${Styles.blue}`
+                : ` ${Styles.BTNs}`
+            }
+            ref={upcomingInputRef}
+            onClick={handleUpcoming}
+          >
+            All Upcoming
+          </button>
+          <button
+            type="button"
+            className={
+              todayStatus ? `${Styles.BTNs} ${Styles.blue} ` : `${Styles.BTNs}`
+            }
+            ref={todayBTNRef}
+            onClick={handleToday}
+          >
+            Today
+          </button>
+        </div>
+        <div className={Styles.tomorrowContainer}>
+          <button
+            type="button"
+            className={
+              tomorrowStatus
+                ? ` ${Styles.BTNs} ${Styles.blue}`
+                : ` ${Styles.BTNs}`
+            }
+            ref={tomorrowBTNRef}
+            onClick={handleTomorrow}
+          >
+            Tomorrow
+          </button>
+          <button
+            type="button"
+            className={
+              weekendStatus ? `${Styles.BTNs} ${Styles.blue}` : `${Styles.BTNs}`
+            }
+            ref={weekendBTNRef}
+            onClick={handleWeekend}
+          >
+            This Weekend
+          </button>
+        </div>
       </div>
-      <div className={Styles.tomorrowContainer}>
-        <button
-          type="button"
-          className={
-            tomorrowStatus
-              ? ` ${Styles.BTNs} ${Styles.blue}`
-              : ` ${Styles.BTNs}`
-          }
-          ref={tomorrowBTNRef}
-          onClick={handleTomorrow}
-        >
-          Tomorrow
-        </button>
-        <button
-          type="button"
-          className={
-            weekendStatus ? `${Styles.BTNs} ${Styles.blue}` : `${Styles.BTNs}`
-          }
-          ref={weekendBTNRef}
-          onClick={handleWeekend}
-        >
-          This Weekend
-        </button>
-      </div>
+      <ConcertCustomDuration startDate={startDate} endDate={endDate} />
     </div>
-    <ConcertCustomDuration startDate={startDate} endDate={endDate} />
-  </div>;
+  );
 }
