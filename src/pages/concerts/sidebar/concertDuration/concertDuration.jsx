@@ -1,10 +1,6 @@
-import { useState, useRef, useContext, useEffect } from "react";
-import { searchMockEvents } from "../../../../data/mock/ticketmaster-mock";
-import {
-  concertsDurationContext,
-  concertsLocationContext,
-  concertsInformationContext,
-} from "../../concerts";
+import { useState, useRef, useMemo } from "react";
+import { useNavigate, useSearchParams, useParams } from "react-router";
+
 import {
   getTodayDate,
   getTomorrowDate,
@@ -25,80 +21,80 @@ export default function ConcertDuration() {
   const weekendBTNRef = useRef(null);
   const upcomingInputRef = useRef(null);
 
-  const [upcomingStatus, setUpcomingStatus] = useState(false);
-  const [todayStatus, setTodayStatus] = useState(false);
-  const [tomorrowStatus, setTomorrowStatus] = useState(false);
-  const [weekendStatus, setWeekendStatus] = useState(false);
-  const [startDate, setStartDate] = useState(todayDateRef.current);
-  const [endDate, setEndDate] = useState(tomorrowDateRef.current);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { dateDuration, setDateDuration } = useContext(concertsDurationContext);
-  const { concertsLocation } = useContext(concertsLocationContext);
-  const { concertsDetails, setConcertsDetails } = useContext(
-    concertsInformationContext,
-  );
+  const startDate = searchParams.get("sd").slice(0, 10);
+  const endDate = searchParams.get("ed").slice(0, 10);
 
-  //Changing the time period will cause another concerts search for that period
-  useEffect(() => {
-    const anyTimePeriodClicked =
-      upcomingStatus || tomorrowStatus || todayStatus || weekendStatus;
-    if (anyTimePeriodClicked) {
-      const inforConcerts = searchMockEvents(
-        concertsDetails.artistId,
-        concertsDetails.artistName,
-        dateDuration.startDate,
-        dateDuration.endDate,
-        concertsLocation.country_code,
-        concertsLocation.city,
-      );
+  const [buttonStatus, setButtonStatus] = useState({
+    upcomingStatus: false,
+    todayStatus: false,
+    tomorrowStatus: false,
+    weekendStatus: false,
+  });
+  const [dateDuration, setDateDuration] = useState({
+    startDate: startDate,
+    endDate: endDate,
+  });
 
-      setConcertsDetails(inforConcerts);
-    }
-  }, [upcomingStatus, todayStatus, tomorrowStatus, weekendStatus]);
+  const adjustDateDuration = useMemo(() => {
+    return { dateDuration, setDateDuration };
+  }, [dateDuration]);
 
+  const navigate = useNavigate();
+
+  const params = useParams();
+
+  function changeURL(startDuration, endDuration) {
+    const startDate = `${startDuration}T00:00:00Z`;
+    const endDate = `${endDuration}T23:59:59Z`;
+    const id = searchParams.get("id");
+
+    const countryCode = params.countrycode;
+    const city = searchParams.get("c");
+    const cityParam = city ? `&c=${city}` : "";
+    const idParam = id ? `&id=${id}` : "";
+
+    navigate(
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
+    );
+  }
   //This will show which of the four buttons is clicked
   function updateConcertDurationBTNs(upcoming, today, tommorrow, weekend) {
-    setUpcomingStatus(upcoming);
-    setTodayStatus(today);
-    setTomorrowStatus(tommorrow);
-    setWeekendStatus(weekend);
+    setButtonStatus({
+      upcomingStatus: upcoming,
+      todayStatus: today,
+      tomorrowStatus: tommorrow,
+      weekendStatus: weekend,
+    });
   }
   function handleToday() {
-    setStartDate(todayDateRef.current);
-    setEndDate(tomorrowDateRef.current);
+    const startDate = todayDateRef.current;
+    const endDate = tomorrowDateRef.current;
     updateConcertDurationBTNs(false, true, false, false);
-    setDateDuration({
-      startDate: todayDateRef.current,
-      endDate: tomorrowDateRef.current,
-    });
+    setDateDuration({ startDate: startDate, endDate: endDate });
+    changeURL(startDate, endDate);
   }
   function handleTomorrow() {
-    setStartDate(tomorrowDateRef.current);
-    setEndDate(dayAfterTomorrowRef.current);
+    const startDate = tomorrowDateRef.current;
+    const endDate = dayAfterTomorrowRef.current;
     updateConcertDurationBTNs(false, false, true, false);
-    setDateDuration({
-      startDate: tomorrowDateRef.current,
-      endDate: dayAfterTomorrowRef.current,
-    });
+    setDateDuration({ startDate: startDate, endDate: endDate });
+    changeURL(startDate, endDate);
   }
   function handleWeekend() {
-    setStartDate(fridayRef.current);
-    setEndDate(sundayRef.current);
-
+    const startDate = fridayRef.current;
+    const endDate = sundayRef.current;
     updateConcertDurationBTNs(false, false, false, true);
-    setDateDuration({
-      startDate: fridayRef.current,
-      endDate: sundayRef.current,
-    });
+    setDateDuration({ startDate: startDate, endDate: endDate });
+    changeURL(startDate, endDate);
   }
   function handleUpcoming() {
-    setStartDate(todayDateRef.current);
-    setEndDate(tomorrowDateRef.current);
+    const startDate = todayDateRef.current;
+    const endDate = tomorrowDateRef.current;
     updateConcertDurationBTNs(true, false, false, false);
-    setDateDuration({
-      startDate: todayDateRef.current,
-      endDate: tomorrowDateRef.current,
-    });
+    setDateDuration({ startDate: startDate, endDate: endDate });
+    changeURL(startDate, endDate);
   }
   return (
     <div className={Styles.whenContainer}>
@@ -113,7 +109,7 @@ export default function ConcertDuration() {
           <button
             type="button"
             className={
-              upcomingStatus
+              buttonStatus.upcomingStatus
                 ? ` ${Styles.BTNs} ${Styles.blue}`
                 : ` ${Styles.BTNs}`
             }
@@ -125,7 +121,9 @@ export default function ConcertDuration() {
           <button
             type="button"
             className={
-              todayStatus ? `${Styles.BTNs} ${Styles.blue} ` : `${Styles.BTNs}`
+              buttonStatus.todayStatus
+                ? `${Styles.BTNs} ${Styles.blue} `
+                : `${Styles.BTNs}`
             }
             ref={todayBTNRef}
             onClick={handleToday}
@@ -137,7 +135,7 @@ export default function ConcertDuration() {
           <button
             type="button"
             className={
-              tomorrowStatus
+              buttonStatus.tomorrowStatus
                 ? ` ${Styles.BTNs} ${Styles.blue}`
                 : ` ${Styles.BTNs}`
             }
@@ -149,7 +147,9 @@ export default function ConcertDuration() {
           <button
             type="button"
             className={
-              weekendStatus ? `${Styles.BTNs} ${Styles.blue}` : `${Styles.BTNs}`
+              buttonStatus.weekendStatus
+                ? `${Styles.BTNs} ${Styles.blue}`
+                : `${Styles.BTNs}`
             }
             ref={weekendBTNRef}
             onClick={handleWeekend}
@@ -158,7 +158,7 @@ export default function ConcertDuration() {
           </button>
         </div>
       </div>
-      <ConcertCustomDuration startDate={startDate} endDate={endDate} />
+      <ConcertCustomDuration duration={adjustDateDuration} />
     </div>
   );
 }
