@@ -1,4 +1,5 @@
 const mockCountries = [
+  { value: "Global", label: "Global" },
   { value: "United States", label: "United States" },
   { value: "United Kingdom", label: "United Kingdom" },
   { value: "Canada", label: "Canada" },
