@@ -16,6 +16,7 @@ export default function ChartHeading({
   subHeading,
   chartContainer,
   featuredArtists,
+  seeAllGlobal,
   userCountry,
 }) {
   const imgClasses = [
@@ -29,7 +30,10 @@ export default function ChartHeading({
 
   const displayChartBTN = useRef(null);
 
-  function handleViewCharts() {
+  function handleViewGlobalCharts() {
+    navigate(`/charts/top50/Global`, { state: { from: "home" } });
+  }
+  function handleViewLocalCharts() {
     navigate(`/charts/top50/${userCountry}`, { state: { from: "home" } });
   }
 
@@ -67,7 +71,7 @@ export default function ChartHeading({
             ref={displayChartBTN}
             onMouseEnter={() => setHoverStatus(true)}
             onMouseLeave={() => setHoverStatus(false)}
-            onClick={handleViewCharts}
+            onClick={handleViewGlobalCharts}
             style={{ display: displayChart ? "block" : "none" }}
           >
             <img
@@ -111,7 +115,9 @@ export default function ChartHeading({
               type="button"
               aria-label="View the whole global top 50 chart"
               className={Styles.viewTop50BTN}
-              onClick={handleViewCharts}
+              onClick={
+                seeAllGlobal ? handleViewGlobalCharts : handleViewLocalCharts
+              }
             >
               SEE ALL <ChevronRight aria-hidden="true" />
             </button>
