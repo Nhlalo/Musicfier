@@ -1,24 +1,36 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef } from "react";
+import { useNavigate, useSearchParams, useParams } from "react-router";
 import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { concertsDurationContext } from "../../concerts";
 import Styles from "../sidebar.module.css";
 
 function DurationInput({
-  firstDate,
-  lastDate,
+  duration,
   customRangeClassName,
   valueConcertDurationVisibility,
-  startDateRef,
-  endDateRef,
 }) {
-  const { setDateDuration } = useContext(concertsDurationContext);
+  const startDateInputRef = useRef(null);
+  const endDateInputRef = useRef(null);
 
-  //Clicking this button will adjust the time period to display the concerts available
+  const navigate = useNavigate();
+
+  const params = useParams();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { dateDuration, setDateDuration } = duration;
+
   function handleClick() {
-    setDateDuration({
-      startDate: startDateRef.current,
-      endDate: endDateRef.current,
-    });
+    const startDate = `${startDateInputRef.current.value}T00:00:00Z`;
+    const endDate = `${endDateInputRef.current.value}T23:59:59Z`;
+    const id = searchParams.get("id");
+
+    const countryCode = params.countrycode;
+    const city = searchParams.get("c");
+    const cityParam = city ? `&c=${city}` : "";
+    const idParam = id ? `&id=${id}` : "";
+
+    navigate(
+      `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
+    );
   }
   return (
     <div className={customRangeClassName}>
@@ -31,10 +43,15 @@ function DurationInput({
           id="startDate"
           name="start_date"
           className={Styles.startDate}
-          value={firstDate}
-          ref={startDateRef}
+          value={dateDuration.startDate}
+          ref={startDateInputRef}
           disabled={(valueConcertDurationVisibility = "show" ? false : true)}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) =>
+            setDateDuration((prev) => ({
+              ...prev,
+              startDate: e.target.value,
+            }))
+          }
         />
       </div>
       <div className={Styles.endDateContainer}>
@@ -46,10 +63,15 @@ function DurationInput({
           id="endDate"
           name="end_date"
           className={Styles.endDate}
-          value={lastDate}
-          ref={endDateRef}
-          disabled={valueConcertDurationVisibility == "show" ? false : true}
-          onChange={(e) => setValue(e.target.value)}
+          value={dateDuration.endDate}
+          ref={endDateInputRef}
+          disabled={(valueConcertDurationVisibility = "show" ? false : true)}
+          onChange={(e) =>
+            setDateDuration((prev) => ({
+              ...prev,
+              endDate: e.target.value,
+            }))
+          }
         />
       </div>
       <button
@@ -63,11 +85,9 @@ function DurationInput({
   );
 }
 
-export default function ConcertCustomDuration({ startDate, endDate }) {
+export default function ConcertCustomDuration({ duration }) {
   const [concertDurationVisibility, setConcertDurationVisibility] =
     useState("hide");
-  const startDateInputRef = useRef(null);
-  const endDateInputRef = useRef(null);
 
   //Display the concert duration
   function handleShowCustomDurationVisibility() {
@@ -99,16 +119,13 @@ export default function ConcertCustomDuration({ startDate, endDate }) {
         )}
       </button>
       <DurationInput
-        firstDate={startDate}
-        lastDate={endDate}
+        duration={duration}
         customRangeClassName={
           concertDurationVisibility == "show"
             ? Styles.dateContainer
             : Styles.noVisibility
         }
         valueConcertDurationVisibility={concertDurationVisibility}
-        startDateRef={startDateInputRef}
-        endDateRef={endDateInputRef}
       />
     </>
   );
