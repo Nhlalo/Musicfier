@@ -27,7 +27,7 @@ export default function GlobalCharts({ location }) {
       subHeading={content.subHeading}
       chartContainer={content.chartContainer}
       featuredArtists={content.featuredArtists}
-      userCountry={userCountry}
+      seeAllGlobal={true}
     />
   );
 }
