@@ -134,6 +134,17 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
       {/* Concerts by the searched artists will dynamically appear here */}
       {visibilityConcert && (
         <div className={Styles.artistConcertContainer}>
+          {!concertsDetails.length && !artistID && (
+            <div className={Styles.NoConcerts}>
+              <span className={Styles.NoConcertsIndication}>
+                No Concerts Here
+              </span>
+              <span className={Styles.NoConcertsDescr}>
+                Looks like there are no upcoming concerts with your preferred
+                options
+              </span>
+            </div>
+          )}
           {!concertsDetails.length && artistID && (
             <div className={Styles.NoConcerts}>
               <img
