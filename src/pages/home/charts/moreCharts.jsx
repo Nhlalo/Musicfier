@@ -6,9 +6,10 @@ const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
 function MoreChart({ location }) {
   const userCountry = location?.country;
+
   return (
     <Link
-      to={"/charts"}
+      to={`/charts/top50/${userCountry}`}
       className={Styles.chartLink}
       aria-label={`View the Top 50 ${userCountry} chart`}
     >
@@ -39,20 +40,23 @@ function MoreChart({ location }) {
             )}
           </p>
         </div>
-        <div className={Styles.viewMoreBTN}>VIEW</div>
+        <div type="button" className={Styles.viewMoreBTN}>
+          VIEW
+        </div>
       </div>
     </Link>
   );
 }
 
 export default function MoreCharts({ location }) {
+  const US = { country: "United States", country_code: "US" };
   return (
     <section className={Styles.moreChartsContainer}>
       <div className={Styles.moreChartsWrapper}>
         <h2 className={Styles.moreChartsHeading}>More Charts</h2>
         <div className={Styles.miniChartsContainer}>
           <MoreChart location={location} />
-          <MoreChart location={location} />
+          <MoreChart location={US} />
         </div>
       </div>
     </section>
