@@ -11,7 +11,7 @@ export default function LocalCharts({ location }) {
     headingDescr: "Rising tracks from new and upcoming artists",
     miniHeading: "Be the first to listen to these future hit songs",
     displayChart: false,
-    subHeading: `Discovery ${userCountry?.country} Tracks`,
+    subHeading: `Discovery ${userCountry} Tracks`,
     chartContainer: <ChartContainer />,
     featuredArtists: <FeaturedArtists />,
   };
