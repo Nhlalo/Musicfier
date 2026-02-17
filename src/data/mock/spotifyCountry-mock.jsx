@@ -1,5 +1,7 @@
 import ArtistImg from "../../assets/images/artistImg.jpg";
 
+//Unique position for global
+let positionGlobal = 0;
 // Unique position variables for each country
 let positionUS = 0;
 let positionUK = 0;
@@ -34,6 +36,42 @@ function createMockSong(
     spotifyArtistId,
   };
 }
+
+const globalChart = {
+  country: "Global",
+  songs: [
+    createMockSong(
+      ++positionGlobal,
+      "Cruel Summer",
+      "Taylor Swift",
+      ArtistImg,
+      ArtistImg,
+      "https://open.spotify.com/track/1BxfuPKGuaTgP7aM0Bbdwr",
+      "preview_url_1",
+      "06HL4z0CvFAxyc27GXpf02",
+    ),
+    createMockSong(
+      ++positionGlobal,
+      "Last Night",
+      "Morgan Wallen",
+      ArtistImg,
+      ArtistImg,
+      "https://open.spotify.com/track/7K3BhSpAxZBznislvUMVtn",
+      "preview_url_2",
+      "4QTxD5qJ3K5C5Q5d5y0q5J",
+    ),
+    createMockSong(
+      ++positionGlobal,
+      "Fast Car",
+      "Luke Combs",
+      ArtistImg,
+      ArtistImg,
+      "https://open.spotify.com/track/1Lo0QY9cvc8sUB2vnIOxDT",
+      "preview_url_3",
+      "4L2sR2j6dJg5hT6f8kOO6t",
+    ),
+  ],
+};
 
 // Create individual country chart objects
 const usChart = {
@@ -398,6 +436,7 @@ const southAfricaChart = {
 
 // Large array to store all country chart objects
 const mockChartsArray = [
+  globalChart,
   usChart,
   ukChart,
   canadaChart,
