@@ -69,8 +69,7 @@
 .artistName {
   color: #3f3f41;
 }
-.artistName:hover,
-.songName:hover {
+.artistName:hover {
   text-decoration: underline;
 }
 .hr {
