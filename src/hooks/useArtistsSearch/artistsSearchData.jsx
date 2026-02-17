@@ -38,11 +38,14 @@ function Artists({ imagesrc, name, dataID }) {
   function handleClick(event) {
     const button = event.currentTarget;
     const id = button.dataset.id;
+    const imageSrc = button.dataset.imagesrc;
+    const artistName = button.dataset.name;
     //Clear the input bar after clicking on your desired artist.
     searchInputRef.current.value = "";
     setAttractionID(id);
     navigate(
       `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}&id=${id}`,
+      { state: { imageSrc: imageSrc, artistName: artistName } },
     );
   }
   return (
@@ -50,6 +53,8 @@ function Artists({ imagesrc, name, dataID }) {
       type="button"
       aria-label={`Select to view ${name} concert details`}
       data-id={dataID}
+      data-imagesrc={imagesrc}
+      data-name={name}
       className={Styles.artistInfor}
       onClick={handleClick}
     >
