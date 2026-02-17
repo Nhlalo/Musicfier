@@ -1,12 +1,8 @@
 import { useState, useContext, useRef, createContext, useMemo } from "react";
+import { useSearchParams, useLocation } from "react-router";
 import { Calendar, Rows3 } from "lucide-react";
 import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
-import {
-  concertsDurationContext,
-  concertsLocationContext,
-  concertsInformationContext,
-} from "../concerts";
-import { searchMockEvents } from "../../../data/mock/ticketmaster-mock";
+import { concertsInformationContext } from "../concerts";
 import debounce from "../../../utils/debounce";
 import formatDate from "../../../utils/dateConversion";
 import ErrorMessage from "../../../hooks/useArtistsSearch/artistsSearchError";
@@ -114,6 +110,17 @@ function ArtistConcert({
 export default function ConcertsInformation({ visibilityConcert, showFilter }) {
   const { concertsDetails } = useContext(concertsInformationContext);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const location = useLocation();
+
+  const artistID = searchParams.get("id");
+
+  const navigationState = location?.state;
+  const imageSrc = navigationState?.imageSrc;
+  console.log("FindConcerts", imageSrc);
+  const artistName = navigationState?.artistName;
+
   return (
     <div className={Styles.allConcertsWrapper}>
       <h1 className={Styles.concertCountry}>
@@ -127,7 +134,24 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
       {/* Concerts by the searched artists will dynamically appear here */}
       {visibilityConcert && (
         <div className={Styles.artistConcertContainer}>
-          {concertsDetails &&
+          {!concertsDetails.length && artistID && (
+            <div className={Styles.NoConcerts}>
+              <img
+                src={imageSrc}
+                alt={artistName}
+                className={Styles.NoConcertsArtistImg}
+              />
+              <span className={Styles.NoConcertsIndication}>
+                No Concerts Here
+              </span>
+              <span className={Styles.NoConcertsDescr}>
+                Looks like this artist has no concerts with your preferred
+                options
+              </span>
+            </div>
+          )}
+
+          {concertsDetails.length > 0 &&
             concertsDetails.map((concertDetails, index) => {
               return (
                 <ArtistConcert
