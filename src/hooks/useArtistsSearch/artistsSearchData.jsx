@@ -6,6 +6,7 @@ import {
 } from "../../pages/concerts/concerts";
 import { ArtistInputContext } from "../../pages/concerts/concertDetails/findConcerts";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
+import ImageReplacement from "../../components/ui/imageReplacement";
 import Styles from "./artistsSearch.module.css";
 
 function Artists({ imagesrc, name, dataID }) {
@@ -58,12 +59,15 @@ function Artists({ imagesrc, name, dataID }) {
       className={Styles.artistInfor}
       onClick={handleClick}
     >
-      <img
-        src={imagesrc}
-        alt={`${name}`}
-        className={Styles.artistImg}
-        aria-hidden="true"
-      />
+      {imagesrc && (
+        <img
+          src={imagesrc}
+          alt={`${name}`}
+          className={Styles.artistImg}
+          aria-hidden="true"
+        />
+      )}
+      {!imagesrc && <ImageReplacement iconClass={Styles.artistImg} />}
       <span className={Styles.artistName} aria-hidden="true">
         {name}
       </span>
