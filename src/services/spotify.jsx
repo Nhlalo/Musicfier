@@ -103,6 +103,12 @@ async function getArtistWithSpotify(token, id, signal) {
       },
       signal,
     });
+
+    if (!response.ok) {
+      throw new Error(
+        `Spotify API error: ${response.status} ${response.statusText}`,
+      );
+    }
     const artistData = await response.json();
     return {
       genre: artistData?.genres[0],
