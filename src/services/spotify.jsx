@@ -116,4 +116,37 @@ async function getArtistWithSpotify(token, id, signal) {
   }
 }
 
-export { getChartWithSpotify, getArtistWithSpotify };
+async function getSimilarArtists(token, artistId, signal) {
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Spotify API error: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data = await response.json();
+
+    // Return array of similar artists with relevant data
+    return data.artists.map((artist) => ({
+      genre: artist.genres?.[0],
+      spotifyHref: artist.href,
+      artistName: artist.name,
+      spotifyId: artist.id,
+      artistImage: artist.images?.[0]?.url || null,
+    }));
+  } catch (error) {
+    return [];
+  }
+}
+
+export { getChartWithSpotify, getArtistWithSpotify, getSimilarArtists };
