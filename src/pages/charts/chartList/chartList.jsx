@@ -5,6 +5,7 @@ import mockYouTubeMusicLink from "../../../data/mock/youtube-mock";
 import spotifyLogo from "../../../assets/images/spotifylogo.png";
 import youtubeLogo from "../../../assets/images/youtube.png";
 import Styles from "./chartList.module.css";
+import ImageReplacement from "../../../components/ui/imageReplacement";
 
 export default function Chart({ BG = "rgb(89, 82, 63)" }) {
   return (
@@ -37,12 +38,15 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
         </span>
         <div aria-hidden="true" className={Styles.songContainer}>
           <div className={Styles.songCoverContainer}>
-            <img
-              src={songCover}
-              alt=""
-              className={Styles.songCover}
-              loading="lazy"
-            />
+            {songCover && (
+              <img
+                src={songCover}
+                alt=""
+                className={Styles.songCover}
+                loading="lazy"
+              />
+            )}
+            {!songCover && <ImageReplacement iconClass={Styles.songCover} />}
             <div className={Styles.playIconContainer}>
               <Play className={Styles.playIcon} />
             </div>
@@ -72,7 +76,7 @@ function ChartContainer() {
               artist={song.artistName}
               songlink={song.spotifyLink}
               key={song.key}
-              songCover={song.artistImage}
+              songCover={song.songCover}
             />
           );
         })}
@@ -84,7 +88,7 @@ function MusicVideo({ BG }) {
   const firstSong = chart.length ? chart[0] : [];
   const artistName = firstSong?.artistName;
   const songName = firstSong?.songName;
-  const artistImagery = firstSong?.artistImage;
+  const songCover = firstSong?.songCover;
   const musicVideoLink = mockYouTubeMusicLink(artistName, songName);
   return (
     <div className={Styles.musicVideoContainer}>
@@ -100,13 +104,16 @@ function MusicVideo({ BG }) {
               aria-label={`play ${songName} by ${artistName} on Youtube`}
               className={Styles.musicVideoLink}
             >
-              <img
-                src={artistImagery}
-                alt={`Song cover of ${songName} by ${artistName} `}
-                aria-hidden="true"
-                className={Styles.songImg}
-                loading="lazy"
-              />
+              {songCover && (
+                <img
+                  src={songCover}
+                  alt={`Song cover of ${songName} by ${artistName} `}
+                  aria-hidden="true"
+                  className={Styles.songImg}
+                  loading="lazy"
+                />
+              )}
+              {!songCover && <ImageReplacement iconClass={Styles.songImg} />}
               <div className={Styles.playContainer}>
                 <Play className={Styles.play} aria-hidden="true" />
               </div>
