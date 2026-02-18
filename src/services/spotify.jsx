@@ -142,7 +142,6 @@ async function getSimilarArtists(token, artistId, signal) {
 
     const data = await response.json();
 
-    // Return array of similar artists with relevant data
     return data.artists.map((artist) => ({
       spotifyHref: artist.href,
       artistName: artist.name,
@@ -153,5 +152,44 @@ async function getSimilarArtists(token, artistId, signal) {
     return [];
   }
 }
+async function getArtistTopSongs(token, id, signal) {
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      },
+    );
 
-export { getChartWithSpotify, getArtistWithSpotify, getSimilarArtists };
+    if (!response.ok) {
+      throw new Error(
+        `Spotify API error: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data = await response.json();
+
+    return data.tracks.map((track) => ({
+      id: track.id,
+      name: track.name,
+      previewUrl: track.preview_url,
+      spotifyUrl: track.external_urls.spotify,
+
+      // Album image (main album art)
+      albumImage: track.album.images[0]?.url || null,
+      albumName: track.album.name,
+    }));
+  } catch (error) {
+    return [];
+  }
+}
+
+export {
+  getChartWithSpotify,
+  getArtistWithSpotify,
+  getSimilarArtists,
+  getArtistTopSongs,
+};
