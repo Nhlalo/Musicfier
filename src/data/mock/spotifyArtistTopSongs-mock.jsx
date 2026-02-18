@@ -50,4 +50,4 @@ const mockTopTracks = [
   },
 ];
 
-return { mockTopTracks };
+export { mockTopTracks };
