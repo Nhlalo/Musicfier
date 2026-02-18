@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
 import { mockCharts } from "../../../data/mock/spotify-mock";
+import ImageReplacement from "../../ui/imageReplacement";
 import Styles from "./featuredArtists.module.css";
 
 function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
@@ -12,7 +13,11 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
       aria-label={`View ${artistName} profile`}
     >
       <figure className={Styles.artistWrapper} aria-hidden="true">
-        <img src={artistImg} alt={artistName} className={Styles.artistImg} />
+        {/* Use an icon when there is no artist image source */}
+        {artistImg && (
+          <img src={artistImg} alt={artistName} className={Styles.artistImg} />
+        )}
+        {!artistImg && <ImageReplacement iconClass={Styles.artistImg} />}
         <figcaption className={Styles.artistName}>{artistName}</figcaption>
       </figure>
     </Link>
