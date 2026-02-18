@@ -144,7 +144,6 @@ async function getSimilarArtists(token, artistId, signal) {
 
     // Return array of similar artists with relevant data
     return data.artists.map((artist) => ({
-      genre: artist.genres?.[0],
       spotifyHref: artist.href,
       artistName: artist.name,
       spotifyId: artist.id,
