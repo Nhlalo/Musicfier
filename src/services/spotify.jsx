@@ -54,7 +54,7 @@ async function searchSpotifyTrack(trackName, artistName, token, signal) {
   return null;
 }
 
-export default async function getChartWithSpotify(
+async function getChartWithSpotify(
   limit = 20,
   country = "US",
   global = "true",
@@ -94,3 +94,26 @@ export default async function getChartWithSpotify(
     return [];
   }
 }
+
+async function getArtistWithSpotify(token, id, signal) {
+  try {
+    const response = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      signal,
+    });
+    const artistData = await response.json();
+    return {
+      genre: artistData?.genres[0],
+      spotifyHref: artistData.href,
+      artistName: artistData.name,
+      spotifyId: artistData.id,
+      artistImage: artistData.images[0]?.url || null,
+    };
+  } catch (error) {
+    return [];
+  }
+}
+
+export { getChartWithSpotify, getArtistWithSpotify };
