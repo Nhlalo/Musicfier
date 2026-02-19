@@ -18,6 +18,7 @@ export default function ChartHeading({
   featuredArtists,
   seeAllGlobal,
   userCountry,
+  data,
 }) {
   const imgClasses = [
     Styles.supportingImg,
@@ -48,14 +49,17 @@ export default function ChartHeading({
           className={Styles.featuredArtistsImgContainer}
           style={{ display: displayFeaturedArtistsImg ? "flex" : "none" }}
         >
-          {mockCharts.slice(0, 3).map((songData, index) => (
-            <img
-              src={songData.artistImage}
-              alt="Featured artists on this chart"
-              className={imgClasses[index]}
-              key={keys[index]}
-            />
-          ))}
+          {data.length &&
+            data
+              .slice(0, 3)
+              .map((songData, index) => (
+                <img
+                  src={songData.artistImage}
+                  alt="Featured artists on this chart"
+                  className={imgClasses[index]}
+                  key={keys[index]}
+                />
+              ))}
         </div>
         <div className={Styles.chartDesriptionContainer}>
           <div className={Styles.chartDescriptionWrapper}>
