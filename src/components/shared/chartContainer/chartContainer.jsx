@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
-import { mockCharts } from "../../../data/mock/spotify-mock";
 import Song from "./song";
 import Styles from "./chartContainer.module.css";
-export default function ChartContainer() {
+
+export default function ChartContainer({ data }) {
   const [scrollStartStatus, setScrollStartStatus] = useState(true);
   const [scrollEndStatus, setScrollEndStatus] = useState(false);
 
@@ -34,17 +34,18 @@ export default function ChartContainer() {
       <div className={Styles.chartContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.chartWrapper} ref={chartContainerRef}>
-          {mockCharts.map((songData, index) => (
-            <Song
-              songLink={songData.spotifyLink}
-              songName={songData.songName}
-              index={index}
-              image={songData.songCover}
-              actName={songData.artistName}
-              artistID={songData.spotifyArtistId}
-              key={songData.key}
-            />
-          ))}
+          {data.length &&
+            data.map((songData, index) => (
+              <Song
+                songLink={songData.spotifyLink}
+                songName={songData.songName}
+                index={index}
+                image={songData.songCover}
+                actName={songData.artistName}
+                artistID={songData.spotifyArtistId}
+                key={songData.key}
+              />
+            ))}
         </div>
       </div>
       <div className={Styles.chartNavigatorBTNContainer}>
