@@ -23,7 +23,7 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
     </Link>
   );
 }
-export default function FeaturedArtists() {
+export default function FeaturedArtists({ data }) {
   const [scrollStartStatus, setScrollStartStatus] = useState(true);
   const [scrollEndStatus, setScrollEndStatus] = useState(false);
 
@@ -53,14 +53,15 @@ export default function FeaturedArtists() {
       <div className={Styles.featuredArtistsContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.featuredArtistsWrapper} ref={chartContainerRef}>
-          {mockCharts.map((songData) => (
-            <FeaturedArtist
-              artistSpotifyID={songData.spotifyArtistId}
-              artistName={songData.artistName}
-              artistImg={songData.artistImage}
-              key={songData.key}
-            />
-          ))}
+          {data.length &&
+            data.map((songData) => (
+              <FeaturedArtist
+                artistSpotifyID={songData.spotifyArtistId}
+                artistName={songData.artistName}
+                artistImg={songData.artistImage}
+                key={songData.key}
+              />
+            ))}
         </div>
       </div>
       <div className={Styles.artistNavigatorBTNContainer}>
