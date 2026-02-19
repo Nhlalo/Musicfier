@@ -1,3 +1,5 @@
+import { useEffect, useState, useMemo } from "react";
+import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
 import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
@@ -12,9 +14,18 @@ export default function LocalCharts({ location }) {
     miniHeading: "Be the first to listen to these future hit songs",
     displayChart: false,
     subHeading: `Discovery ${userCountry} Tracks`,
-    chartContainer: <ChartContainer />,
-    featuredArtists: <FeaturedArtists />,
   };
+
+  const [localChart, setLocalChart] = useState([]);
+
+  useEffect(() => {
+    if (userCountry) {
+      const mockLocalChart = getMockCountryCharts(userCountry);
+      if (mockLocalChart) {
+        setLocalChart(mockLocalChart);
+      }
+    }
+  }, [userCountry]);
 
   return (
     <ChartHeading
@@ -25,10 +36,11 @@ export default function LocalCharts({ location }) {
       miniHeading={content.miniHeading}
       displayChart={content.displayChart}
       subHeading={content.subHeading}
-      chartContainer={content.chartContainer}
-      featuredArtists={content.featuredArtists}
+      chartContainer={<ChartContainer data={localChart} />}
+      featuredArtists={<FeaturedArtists data={localChart} />}
       userCountry={userCountry}
       seeAllGlobal={false}
+      data={localChart}
     />
   );
 }
