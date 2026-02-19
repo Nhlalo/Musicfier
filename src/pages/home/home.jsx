@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <About />
-      <GlobalCharts location={userLocation} />
+      <GlobalCharts />
       <LocalCharts location={userLocation} />
       <MoreCharts location={userLocation} />
     </>
