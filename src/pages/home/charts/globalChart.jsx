@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { mockCharts } from "../../../data/mock/spotify-mock";
 import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
 import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
@@ -11,11 +13,17 @@ const content = {
     "See who made it on the list of the top songs worldwide on Shazam",
   displayChart: true,
   subHeading: "Global Top 200 Chart",
-  chartContainer: <ChartContainer />,
-  featuredArtists: <FeaturedArtists />,
 };
-export default function GlobalCharts({ location }) {
-  const userCountry = location?.country;
+export default function GlobalCharts() {
+  const [globalChart, setGlobalChart] = useState([]);
+
+  useEffect(() => {
+    const mockGlobalChart = mockCharts;
+    if (mockGlobalChart) {
+      setGlobalChart(mockGlobalChart);
+    }
+  }, []);
+
   return (
     <ChartHeading
       mainBG={content.mainBG}
@@ -25,9 +33,10 @@ export default function GlobalCharts({ location }) {
       miniHeading={content.miniHeading}
       displayChart={content.displayChart}
       subHeading={content.subHeading}
-      chartContainer={content.chartContainer}
-      featuredArtists={content.featuredArtists}
+      chartContainer={<ChartContainer data={globalChart} />}
+      featuredArtists={<FeaturedArtists data={globalChart} />}
       seeAllGlobal={true}
+      data={[]}
     />
   );
 }
