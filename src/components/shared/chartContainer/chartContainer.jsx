@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useLocation } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
 import Song from "./song";
@@ -14,6 +15,10 @@ export default function ChartContainer({ data }) {
   const isResizingRef = useRef(false);
   const originalScrollBehaviorRef = useRef("smooth"); // Store original behavior
   const scrollGridCallbackRef = useRef(null);
+
+  const location = useLocation();
+
+  const hasArtistInUrl = location.pathname.includes("artist");
 
   useScrollLogic(
     chartContainerRef,
@@ -34,15 +39,15 @@ export default function ChartContainer({ data }) {
       <div className={Styles.chartContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.chartWrapper} ref={chartContainerRef}>
-          {data.length &&
+          {data.length > 0 &&
             data.map((songData, index) => (
               <Song
-                songLink={songData.spotifyLink}
-                songName={songData.songName}
+                songLink={songData?.spotifyLink}
+                songName={songData?.songName}
                 index={index}
-                image={songData.songCover}
-                actName={songData.artistName}
-                artistID={songData.spotifyArtistId}
+                image={songData?.songCover}
+                actName={songData?.artistName}
+                artistID={songData?.spotifyArtistId}
                 key={songData.key}
               />
             ))}
@@ -75,6 +80,7 @@ export default function ChartContainer({ data }) {
         >
           <ChevronRight aria-hidden="true" className={Styles.toRightIcon} />
         </button>
+        <div></div>
       </div>
     </>
   );
