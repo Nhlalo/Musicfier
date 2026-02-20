@@ -76,7 +76,7 @@ export default function ArtistInforHeader({ artistData, concerts }) {
         <div className={Styles.artistInforContainer}>
           <h2 className={Styles.genre}>{genre}</h2>
           <h1 className={Styles.headerArtistName}>{artistName}</h1>
-          {concerts.length && (
+          {concerts.length > 0 && (
             <span className={Styles.tour}>
               {" "}
               <Ticket aria-hidden="true" className={Styles.ticketIcon} /> On
@@ -86,8 +86,8 @@ export default function ArtistInforHeader({ artistData, concerts }) {
           {!concerts.length && (
             <span className={Styles.tour}>
               {" "}
-              <Ticket aria-hidden="true" className={Styles.ticketIcon} />{" "}
-              Currently,Not On Tour
+              <Ticket aria-hidden="true" className={Styles.ticketIcon} /> Not On
+              Tour
             </span>
           )}
         </div>
