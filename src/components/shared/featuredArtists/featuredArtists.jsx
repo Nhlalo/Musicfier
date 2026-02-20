@@ -53,7 +53,7 @@ export default function FeaturedArtists({ data }) {
       <div className={Styles.featuredArtistsContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.featuredArtistsWrapper} ref={chartContainerRef}>
-          {data.length &&
+          {data.length > 0 &&
             data.map((songData) => (
               <FeaturedArtist
                 artistSpotifyID={songData.spotifyArtistId}
