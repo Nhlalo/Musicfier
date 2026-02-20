@@ -9,7 +9,7 @@ import Styles from "./featuredArtists.module.css";
 function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
   return (
     <Link
-      to={`artist/${artistSpotifyID}`}
+      to={`artist/${artistName}/${artistSpotifyID}`}
       aria-label={`View ${artistName} profile`}
     >
       <figure className={Styles.artistWrapper} aria-hidden="true">
