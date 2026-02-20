@@ -1,0 +1,153 @@
+/*Header*/
+
+.headerArtistImgContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.headerWrapper {
+  width: 90%;
+}
+.headerArtistImgContainer {
+  padding-block: 1.25rem;
+}
+.headerArtistImgWrapper {
+  height: 400px;
+  width: 400px;
+}
+.headerArtistImg {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.genre {
+  margin-bottom: 0.625rem;
+  color: #fff;
+  opacity: 0.7;
+  font-weight: 400;
+}
+.headerArtistName {
+  font-size: clamp(60px, 6cqw, 120px);
+  color: white;
+  margin: 0;
+}
+.tour {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  gap: 8px;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 20px;
+  height: 36px;
+  margin-top: 1.25rem;
+}
+.ticketIcon {
+  fill: none;
+  transform: rotate(-45deg);
+}
+/* Top Songs */
+.topSongsHeading {
+  padding-top: 2.5rem;
+}
+/* Upcoming Concerts */
+.upcomingConcertsHeader,
+.upcomingConcertsInfor,
+.concertLink,
+.calendarIcon,
+.concertInfor,
+.artistPageLink {
+  display: flex;
+}
+.upcomingConcertsHeader {
+  justify-content: space-between;
+}
+.upcomingConcertsInfor,
+.artistPageLink {
+  align-items: center;
+}
+.upcomingConcertsHeader {
+  padding-top: 2.5rem;
+  padding-bottom: 0.9375rem;
+}
+.artistPageLink {
+  text-transform: uppercase;
+  color: #066bff;
+  font-weight: 700;
+}
+.upcomingConcertsDescr {
+  color: #636366;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.concertsInforContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.concertLink {
+  gap: 0.9375rem;
+  cursor: pointer;
+  padding: 1.25rem 0;
+}
+.calendarIcon {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+.iconMonth {
+  font-size: 0.5625rem;
+  color: #d00000;
+}
+.iconDay {
+  color: #000;
+  font-weight: 700;
+}
+.concertInfor {
+  flex-direction: column;
+}
+.day {
+  font-size: 0.75rem;
+  letter-spacing: 0.29px;
+  margin-bottom: 0.3125rem;
+  color: #3a3a3c;
+}
+.venue {
+  font-size: 1.125rem;
+  font-weight: 550;
+  color: #1c1c1e;
+  margin-bottom: 0.3125rem;
+}
+.city {
+  font-size: 14px;
+  color: #1c1c1e;
+}
+/* Similar Artists */
+.similarArtistsHeader {
+  padding-top: 2.5rem;
+  padding-bottom: 0.9375rem;
+}
+.similarArtistsDescr {
+  color: #636366;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  /* Header */
+  .headerArtistName,
+  .tour,
+  .genre {
+    color: #000;
+  }
+  .ticketIcon {
+    fill: black;
+  }
+}
