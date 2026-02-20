@@ -29,10 +29,12 @@ export default function Footer() {
               </span>
             </button>
             <p className={Styles.motivation}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              dolorum facilis minima debitis ut veritatis quasi earum neque iste
-              excepturi optio cupiditate, necessitatibus, tempora molestias
-              consequatur nihil omnis in suscipit?
+              Musicfier is a powerful audio recognition platform that identifies
+              any song playing around you in seconds. Using advanced acoustic
+              technology, we help curious listeners discover new music, access
+              artist details, and build a personal history of their finds.
+              Whether you are in a crowd or relaxing at home, Musicfier ensures
+              you never have to wonder, 'What song is this?' again.
             </p>
           </div>
           <div className={Styles.websiteInfor}>
