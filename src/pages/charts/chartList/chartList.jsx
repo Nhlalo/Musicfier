@@ -31,17 +31,21 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
       <div className={Styles.songlink}>
         <span className={Styles.chartNumber}>{chartNumber}</span>
         <div aria-hidden="true" className={Styles.songContainer}>
-          <button className={Styles.songCoverContainer}>
+          <button
+            aria-label={`Play ${songName} by ${artist}`}
+            className={Styles.songCoverContainer}
+          >
             {songCover && (
               <img
                 src={songCover}
                 alt=""
                 className={Styles.songCover}
                 loading="lazy"
+                aria-hidden="true"
               />
             )}
             {!songCover && <ImageReplacement iconClass={Styles.songCover} />}
-            <div className={Styles.playIconContainer}>
+            <div className={Styles.playIconContainer} aria-hidden="true">
               <Play className={Styles.playIcon} />
             </div>
           </button>
