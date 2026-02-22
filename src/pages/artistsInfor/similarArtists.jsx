@@ -32,7 +32,7 @@ export default function SimilarArtists({ artistData }) {
         Discover more music and artists similar to {artistName}, like{" "}
         {artistsSimilar}
       </p>
-      {similarArtists.length > 0 && <FeaturedArtists data={similarArtists} />}
+      <FeaturedArtists data={similarArtists} />
     </Container>
   );
 }
