@@ -56,6 +56,25 @@
   color: #fff;
   fill: #fff;
 }
+.loaderCircleIcon {
+  fill: none;
+  animation: spin 1s linear infinite;
+}
+
+/* This animation will make the loading wheel spin. It will also make it disappear and appear */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
 .songInforWrapper {
   display: flex;
   flex-direction: column;
@@ -66,10 +85,11 @@
 .songName {
   font-weight: 700;
 }
-.artistName {
+.artistName,
+.artistNameLink {
   color: #3f3f41;
 }
-.artistName:hover {
+.artistNameLink:hover {
   text-decoration: underline;
 }
 .hr {
