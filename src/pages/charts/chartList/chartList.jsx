@@ -28,15 +28,10 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
           className={Styles.spotifyLogo}
         />
       </div>
-      <div
-        aria-label={`play ${songName} by ${artist} on Spotify`}
-        className={Styles.songlink}
-      >
-        <span aria-hidden="true" className={Styles.chartNumber}>
-          {chartNumber}
-        </span>
+      <div className={Styles.songlink}>
+        <span className={Styles.chartNumber}>{chartNumber}</span>
         <div aria-hidden="true" className={Styles.songContainer}>
-          <div className={Styles.songCoverContainer}>
+          <button className={Styles.songCoverContainer}>
             {songCover && (
               <img
                 src={songCover}
@@ -49,7 +44,7 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
             <div className={Styles.playIconContainer}>
               <Play className={Styles.playIcon} />
             </div>
-          </div>
+          </button>
           <div className={Styles.songInforContainer}>
             <span className={Styles.artistName}>{artist}</span>
             <span className={Styles.songName}>{songName}</span>
