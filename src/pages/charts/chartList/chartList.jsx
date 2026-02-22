@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState, useMemo } from "react";
 import { Play } from "lucide-react";
 import { chartContext } from "../charts";
+import Song from "../../../components/shared/chartContainer/song";
 import mockYouTubeMusicLink from "../../../data/mock/youtube-mock";
 import spotifyLogo from "../../../assets/images/spotifylogo.png";
 import youtubeLogo from "../../../assets/images/youtube.png";
@@ -18,63 +19,29 @@ export default function Chart({ BG = "rgb(89, 82, 63)" }) {
   );
 }
 
-function Song({ songlink, chartNumber, songName, artist, songCover }) {
-  return (
-    <li className={Styles.chartSong}>
-      <div className={Styles.overlay} aria-hidden="true">
-        <img
-          src={spotifyLogo}
-          alt="Spotify Logo"
-          className={Styles.spotifyLogo}
-        />
-      </div>
-      <div className={Styles.songlink}>
-        <span className={Styles.chartNumber}>{chartNumber}</span>
-        <div aria-hidden="true" className={Styles.songContainer}>
-          <button
-            aria-label={`Play ${songName} by ${artist}`}
-            className={Styles.songCoverContainer}
-          >
-            {songCover && (
-              <img
-                src={songCover}
-                alt=""
-                className={Styles.songCover}
-                loading="lazy"
-                aria-hidden="true"
-              />
-            )}
-            {!songCover && <ImageReplacement iconClass={Styles.songCover} />}
-            <div className={Styles.playIconContainer} aria-hidden="true">
-              <Play className={Styles.playIcon} />
-            </div>
-          </button>
-          <div className={Styles.songInforContainer}>
-            <span className={Styles.artistName}>{artist}</span>
-            <span className={Styles.songName}>{songName}</span>
-          </div>
-        </div>
-      </div>
-      <hr aria-hidden="true" />
-    </li>
-  );
-}
-
 function ChartContainer() {
   const { chart } = useContext(chartContext);
+
+  const [artistSong, setArtistSong] = useState(null);
+
+  const handleArtistSong = useMemo(
+    () => [artistSong, setArtistSong],
+    [artistSong],
+  );
 
   return (
     <ul className={Styles.chartSongContainer}>
       {chart?.length &&
-        chart.map((song) => {
+        chart.map((song, index) => {
           return (
             <Song
-              chartNumber={song.position}
               songName={song.songName}
-              artist={song.artistName}
-              songlink={song.spotifyLink}
-              key={song.key}
-              songCover={song.songCover}
+              actName={song.artistName}
+              songPreview={song.songPreviewUrl}
+              image={song.songCover}
+              index={index}
+              artistID={song.spotifyArtistId}
+              handleArtistSong={handleArtistSong}
             />
           );
         })}
