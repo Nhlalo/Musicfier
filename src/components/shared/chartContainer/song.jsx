@@ -11,7 +11,6 @@ for (let i = 0; i < 20; i++) {
   keys.push(crypto.randomUUID());
 }
 export default function Song({
-  songLink,
   songName,
   index,
   image,
@@ -59,7 +58,6 @@ export default function Song({
   return (
     <>
       <div
-        href={songLink}
         aria-label={`information about ${songName} `}
         className={Styles.songProfileLink}
         data-song-index={index}

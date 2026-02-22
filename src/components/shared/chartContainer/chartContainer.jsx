@@ -48,7 +48,6 @@ export default function ChartContainer({ data }) {
           {data.length > 0 &&
             data.map((songData, index) => (
               <Song
-                songLink={songData?.spotifyLink}
                 songName={songData?.songName}
                 index={index}
                 image={songData?.songCover}
