@@ -28,8 +28,7 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
           className={Styles.spotifyLogo}
         />
       </div>
-      <a
-        href={songlink}
+      <div
         aria-label={`play ${songName} by ${artist} on Spotify`}
         className={Styles.songlink}
       >
@@ -56,7 +55,7 @@ function Song({ songlink, chartNumber, songName, artist, songCover }) {
             <span className={Styles.songName}>{songName}</span>
           </div>
         </div>
-      </a>
+      </div>
       <hr aria-hidden="true" />
     </li>
   );
