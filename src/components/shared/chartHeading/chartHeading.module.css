@@ -93,6 +93,7 @@
 .featuredArtists {
   bottom: 15px;
   color: #fff;
+  font-size: 0.875rem;
 }
 .viewChart {
   color: #fff;
@@ -109,7 +110,7 @@
   font-size: 1.25rem;
 }
 .top50 {
-  bottom: 40px;
+  bottom: 50px;
   color: #828282;
   font-weight: 700;
   font-size: 0.875rem;
@@ -151,6 +152,12 @@
     --maingImg-height: 166px;
     --supportingImg-width: 125px;
     --supportingImg-height: 125px;
+  }
+  .top50 {
+    bottom: 40px;
+  }
+  .featuredArtists {
+    font-size: 16px;
   }
 }
 @media (min-width: 1024px) {
