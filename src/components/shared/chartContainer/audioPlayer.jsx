@@ -26,6 +26,15 @@ export default function AudioPlay({
     }
   }, [shouldPause]);
 
+  function handlePlay() {
+    setShouldPause(false);
+    handleAudioReady(true);
+  }
+
+  function handlePause() {
+    setShouldPause(true);
+    handleAudioReady(false);
+  }
   return (
     <div
       className="previewSongContainer"
@@ -59,9 +68,9 @@ export default function AudioPlay({
           showLoopControl={false}
           loop={false}
           ref={playerRef}
-          onPause={() => setShouldPause(true)}
-          onPlay={() => setShouldPause(false)}
-          onCanPlay={handleAudioReady} //Fires when enough audio has been downloaded, not full download, to play
+          onPause={handlePause}
+          onPlay={handlePlay}
+          onCanPlay={() => handleAudioReady(true)} //Fires when enough audio has been downloaded, not full download, to play
         />
       </div>
     </div>
