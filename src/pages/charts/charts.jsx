@@ -30,9 +30,13 @@ export default function ChartList() {
   );
 
   useEffect(() => {
-    const chartSongs = getMockCountryCharts(countryName);
-    setCountry(countryName);
-    setChart(chartSongs);
+    if (countryName) {
+      const chartSongs = getMockCountryCharts(countryName);
+      setCountry(countryName);
+      if (chartSongs) {
+        setChart(chartSongs);
+      }
+    }
   }, [countryName, country, chart]);
 
   return (
