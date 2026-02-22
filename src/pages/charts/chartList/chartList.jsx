@@ -103,6 +103,8 @@ function MusicVideo({ BG }) {
               href={musicVideoLink}
               aria-label={`play ${songName} by ${artistName} on Youtube`}
               className={Styles.musicVideoLink}
+              rel="noreferrer"
+              target="_blank"
             >
               {songCover && (
                 <img
