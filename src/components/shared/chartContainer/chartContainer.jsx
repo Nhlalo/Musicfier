@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { useLocation } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
@@ -8,6 +8,7 @@ import Styles from "./chartContainer.module.css";
 export default function ChartContainer({ data }) {
   const [scrollStartStatus, setScrollStartStatus] = useState(true);
   const [scrollEndStatus, setScrollEndStatus] = useState(false);
+  const [artistSong, setArtistSong] = useState(null);
 
   const chartContainerRef = useRef(null);
   const resizeTimeoutRef = useRef(null);
@@ -31,6 +32,11 @@ export default function ChartContainer({ data }) {
     setScrollEndStatus,
   );
 
+  const handleArtistSong = useMemo(
+    () => [artistSong, setArtistSong],
+    [artistSong],
+  );
+
   const handleLeftScroll = () => scrollGridCallbackRef.current("left");
   const handleRightScroll = () => scrollGridCallbackRef.current("right");
 
@@ -46,9 +52,11 @@ export default function ChartContainer({ data }) {
                 songName={songData?.songName}
                 index={index}
                 image={songData?.songCover}
+                songPreview={songData.songPreviewUrl}
                 actName={songData?.artistName}
                 artistID={songData?.spotifyArtistId}
                 key={songData.key}
+                handleArtistSong={handleArtistSong}
               />
             ))}
         </div>
