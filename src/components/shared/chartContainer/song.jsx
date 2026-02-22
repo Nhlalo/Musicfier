@@ -34,8 +34,9 @@ export default function Song({
     () => [shouldPause, setShouldPause],
     [shouldPause],
   );
-  const handleAudioReady = useCallback(() => {
-    setIsReady(true);
+
+  const handleAudioReady = useCallback((value) => {
+    setIsReady(value);
   }, []);
 
   function handleClick(event) {
