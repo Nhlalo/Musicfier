@@ -8,7 +8,7 @@ import ArtistImg from "../../../assets/images/artistImg.jpg";
 
 export default function About() {
   // The errorStatus prop will be useful for audio searching errors/ no audio found return
-  const [isErrorClose, setIsError] = useState(false);
+  const [isErrorClose, setIsErrorClose] = useState(false);
   const [isSongClose, setIsSongClose] = useState(false);
 
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function About() {
   const displayError = location.state?.errorState;
   const displaySongInfor = location.state?.songState;
   //This will allow the error element to change the state of its parent element
-  const passToError = useCallback((status) => setIsError(status));
+  const passToError = useCallback((status) => setIsErrorClose(status), []);
   function handleCloseSongInfor() {
     setIsSongClose(true);
   }
