@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { useMatches, useLoaderData, Link } from "react-router";
+import { useMatches, Link, useLocation, useNavigate } from "react-router";
 import { Menu } from "lucide-react";
 import { LocationContext } from "../rootLayout.jsx";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
@@ -10,12 +10,16 @@ import Styles from "./header.module.css";
 import Logo from "../../../assets/images/logo.png";
 
 export default function Header({}) {
+  const location = useContext(LocationContext);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const location = useContext(LocationContext);
-
   const lastFocusedElement = useRef(null);
+
+  const url = useLocation();
+
+  const navigate = useNavigate();
 
   const matches = useMatches();
 
@@ -69,6 +73,10 @@ export default function Header({}) {
     setShowSidebar(value);
   }
 
+  function handleHomePage() {
+    navigate("/");
+  }
+
   return (
     <>
       <header
@@ -81,7 +89,7 @@ export default function Header({}) {
         <div className={Styles.navContentWrapper}>
           <button
             className={Styles.logoContainer}
-            onClick={handleScrollToTop}
+            onClick={url.pathname == "/" ? handleScrollToTop : handleHomePage}
             aria-label="Scroll to the top"
           >
             <div
