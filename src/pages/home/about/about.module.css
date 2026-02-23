@@ -70,6 +70,57 @@
   object-fit: cover;
 }
 
+.songInforContainer {
+  color: #000;
+  background-color: #fff;
+  width: max-content;
+  max-width: 245px;
+  min-width: 100px;
+  border-radius: 0.9375rem;
+  position: absolute;
+  left: -70px;
+  top: -110px;
+  z-index: 1;
+  font-weight: 700;
+  text-align: left;
+}
+
+.songInforWrapper {
+  position: relative;
+  padding: 1.25rem;
+}
+.closeBTN {
+  position: absolute;
+  right: 0.125rem;
+  top: 0.0625rem;
+}
+.xIcon {
+  width: 20px;
+  height: 20px;
+  color: #3a3a3c;
+}
+.songCover {
+  width: 90px;
+  max-width: 100%;
+  border-radius: 8px;
+}
+.songContainer,
+.songData {
+  display: flex;
+  flex-direction: column;
+}
+.songContainer {
+  align-items: center;
+  justify-content: center;
+}
+.songData {
+  margin-top: 12px;
+}
+.songName {
+  margin-top: 500;
+  font-weight: 400;
+}
+
 @media (min-width: 768px) {
   :root {
     --heading-fontsize: 1.875rem;
@@ -78,6 +129,10 @@
   .aboutWrapper {
     flex-direction: row;
     justify-content: space-around;
+  }
+  .songInforContainer {
+    left: -170px;
+    top: -70px;
   }
 }
 
@@ -89,5 +144,9 @@
   }
   .aboutWrapper {
     gap: 0px;
+  }
+  .songInforContainer {
+    left: -150px;
+    top: -50px;
   }
 }
