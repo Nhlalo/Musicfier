@@ -1,16 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router";
 import Error from "../../audioRecognition/error";
-import Styles from "./about.module.css";
+import { X } from "lucide-react";
 import Logo from "../../../assets/images/logo.png";
+import Styles from "./about.module.css";
+import ArtistImg from "../../../assets/images/artistImg.jpg";
 
-export default function About({ errorStatus = true }) {
-  const navigate = useNavigate();
+export default function About() {
   // The errorStatus prop will be useful for audio searching errors/ no audio found return
-  const [error, setError] = useState(true);
+  const [isErrorClose, setIsError] = useState(false);
+  const [isSongClose, setIsSongClose] = useState(false);
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const displayError = location.state?.errorState;
+  const displaySongInfor = location.state?.songState;
   //This will allow the error element to change the state of its parent element
-  function passToError(status) {
-    setError(status);
+  const passToError = useCallback((status) => setIsError(status));
+  function handleCloseSongInfor() {
+    setIsSongClose(true);
   }
   function handleAudioRecognition() {
     navigate("/audioRecognition");
@@ -25,7 +34,38 @@ export default function About({ errorStatus = true }) {
           </p>
         </div>
         <div className={Styles.buttonWrapper}>
-          {error && errorStatus && <Error error={passToError} />}
+          {displayError && !isErrorClose && <Error error={passToError} />}
+
+          {displaySongInfor && !isSongClose && (
+            <div
+              className={Styles.songInforContainer}
+              role="status"
+              aria-live="polite"
+            >
+              <div className={Styles.songInforWrapper}>
+                <button
+                  type="button"
+                  className={Styles.closeBTN}
+                  onClick={handleCloseSongInfor}
+                >
+                  {" "}
+                  <X className={Styles.xIcon} aria-hidden="true" />
+                </button>
+                <div className={Styles.songContainer}>
+                  <img
+                    src={ArtistImg}
+                    alt="The boy"
+                    className={Styles.songCover}
+                  />
+                  <div className={Styles.songData}>
+                    <span className={Styles.artistName}>Title: The Boy</span>
+                    <span className={Styles.songName}>Artist: Drake</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           <button
             to="audioRecognition"
             aria-label="Audio recognition"
