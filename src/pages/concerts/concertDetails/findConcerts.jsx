@@ -123,7 +123,6 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
 
   const navigationState = location?.state;
   const imageSrc = navigationState?.imageSrc;
-  console.log("FindConcerts", imageSrc);
   const artistName = navigationState?.artistName;
 
   return (
@@ -139,7 +138,7 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
       {/* Concerts by the searched artists will dynamically appear here */}
       {visibilityConcert && (
         <div className={Styles.artistConcertContainer}>
-          {!concertsDetails.length && !artistID && (
+          {!concertsDetails?.length && !artistID && (
             <div className={Styles.NoConcerts}>
               <span className={Styles.NoConcertsIndication}>
                 No Concerts Here
@@ -150,7 +149,7 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
               </span>
             </div>
           )}
-          {!concertsDetails.length && artistID && (
+          {!concertsDetails?.length && artistID && (
             <div className={Styles.NoConcerts}>
               <img
                 src={imageSrc}
