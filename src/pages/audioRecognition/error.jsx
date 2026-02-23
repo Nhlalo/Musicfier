@@ -3,7 +3,7 @@ import Styles from "./audioRecognition.module.css";
 export default function Error({ error }) {
   //This make the error message disappear by turning the error state in the About component to false
   function handleClose() {
-    error(false);
+    error(true);
   }
   return (
     <div className={Styles.errorfeedback} role="status" aria-live="polite">
