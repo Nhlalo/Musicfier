@@ -112,9 +112,9 @@ async function getArtistWithSpotify(token, id, signal) {
     const artistData = await response.json();
     return {
       genre: artistData?.genres[0],
-      spotifyHref: artistData.href,
+      spotifyLink: artistData.href,
       artistName: artistData.name,
-      spotifyId: artistData.id,
+      spotifyArtistId: artistData.id,
       artistImage: artistData.images[0]?.url || null,
     };
   } catch (error) {
@@ -143,9 +143,9 @@ async function getSimilarArtists(token, artistId, signal) {
     const data = await response.json();
 
     return data.artists.map((artist) => ({
-      spotifyHref: artist.href,
+      spotifyLink: artist.href,
       artistName: artist.name,
-      spotifyId: artist.id,
+      spotifyArtistId: artist.id,
       artistImage: artist.images?.[0]?.url || null,
     }));
   } catch (error) {
@@ -173,13 +173,14 @@ async function getArtistTopSongs(token, id, signal) {
     const data = await response.json();
 
     return data.tracks.map((track) => ({
-      id: track.id,
-      name: track.name,
-      previewUrl: track.preview_url,
-      spotifyUrl: track.external_urls.spotify,
+      spotifyArtistId: track.id,
+      songName: track.name,
+      songPreviewUrl: track.preview_url,
+      spotifyLink: track.external_urls.spotify,
 
+      artistName: artists[0].name,
       // Album image (main album art)
-      albumImage: track.album.images[0]?.url || null,
+      songCover: track.album.images[0]?.url || null,
       albumName: track.album.name,
     }));
   } catch (error) {
