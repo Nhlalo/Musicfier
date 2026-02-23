@@ -22,7 +22,7 @@ const Sidebar = forwardRef(function (props, ref) {
         className={
           greaterthan1024
             ? `${Styles.filterConcerts} ${Styles.sidebarContainer}`
-            : `${Styles.filterConcerts} ${Styles.sidebarContainer} `
+            : `${Styles.filterConcerts} ${Styles.sidebarContainer} ${Styles[sideBarClassName]}`
         }
         ref={ref}
       >
