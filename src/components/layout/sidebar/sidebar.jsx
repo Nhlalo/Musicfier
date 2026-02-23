@@ -1,11 +1,13 @@
-import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useRef, useContext, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router";
 import { X } from "lucide-react";
+import { LocationContext } from "../rootLayout.jsx";
+import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
 import useFocusTrap from "../../../hooks/useFocusTrap";
 import NavLinksContentRef from "../../../data/constants/navigation";
-import Styles from "./sidebar.module.css";
 import Container from "../../ui/container/container";
 import Logo from "../../../assets/images/logo.png";
+import Styles from "./sidebar.module.css";
 
 export default function Sidebar({
   UpdateSidebarVisibility,
@@ -22,6 +24,16 @@ export default function Sidebar({
   const myMusicLinkRef = useRef(null);
   const contactsLinkRef = useRef(null);
 
+  const url = useLocation();
+  const location = useContext(LocationContext);
+
+  const startDate = `${getTodayDate()}T00:00:00Z`;
+  const endDate = `${getTomorrowDate()}T23:59:59Z`;
+
+  const userCountry = location?.country;
+  const countryCode = location?.country_code;
+  const userCity = location?.city;
+
   const refs = [
     logoLinkRef,
     closeSideBarBTNRef,
@@ -37,8 +49,25 @@ export default function Sidebar({
     myMusicLinkRef,
     contactsLinkRef,
   );
+
+  //Close the sidebar when navigating to a new page
+  useEffect(() => {
+    if (sideBarStatus) {
+      UpdateSidebarVisibility(false);
+    }
+  }, [url]);
+
   //Trap focus within the sidebar
   useFocusTrap(logoLinkRef.current, closeSideBar, refs, sideBarStatus);
+
+  function determinePageNavigation(linkName) {
+    if (linkName == "Concerts") {
+      return `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}&c=${userCity}`;
+    }
+    if (linkName == "Charts") {
+      return `/charts/top50/${userCountry}`;
+    }
+  }
 
   //Close the side bar
   function closeSideBar() {
@@ -52,7 +81,6 @@ export default function Sidebar({
   }
   function handleHomePage() {
     navigate("/");
-    closeSideBar();
   }
   return (
     <dialog
@@ -91,13 +119,13 @@ export default function Sidebar({
             <ul className={Styles.listContainer}>
               {navLinksContent.map((navLinkContent) => (
                 <li className={Styles.navListItem} key={navLinkContent.key}>
-                  <a
-                    href="google.com"
+                  <Link
+                    to={determinePageNavigation(navLinkContent.content)}
                     className={Styles.navlink}
                     ref={navLinkContent.ref}
                   >
                     {navLinkContent.content}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
