@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
-import { mockCharts } from "../../../data/mock/spotify-mock";
 import ImageReplacement from "../../ui/imageReplacement";
 import Styles from "./featuredArtists.module.css";
 
