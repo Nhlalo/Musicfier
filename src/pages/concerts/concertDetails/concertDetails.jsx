@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
-import { Map, ListCollapse } from "lucide-react";
+import { Map, ListCollapse, X } from "lucide-react";
 import debounce from "../../../utils/debounce";
 import getFocusableElements from "../../../utils/focusableElements";
 import { displayModal } from "../../../utils/modal";
