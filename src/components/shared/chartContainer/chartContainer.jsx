@@ -19,8 +19,6 @@ export default function ChartContainer({ data }) {
 
   const location = useLocation();
 
-  const hasArtistInUrl = location.pathname.includes("artist");
-
   useScrollLogic(
     chartContainerRef,
     resizeTimeoutRef,
