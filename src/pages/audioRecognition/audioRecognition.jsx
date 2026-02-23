@@ -1,14 +1,49 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AudioLines, X, Ellipsis } from "lucide-react";
+import findSong from "../../data/mock/audioRecogntion-mock";
 import Styles from "./audioRecognition.module.css";
 import searchImage from "../../assets/images/logo.png";
 
 export default function AudioRecognition() {
+  const [data, setData] = useState(null);
+  const microphonPermission = true;
   const navigate = useNavigate();
   //Direct to the home page
+  useEffect(() => {
+    if (microphonPermission) {
+      const id = "null";
+      if (id) {
+        const song = findSong(id);
+        if (song) {
+          setData(song);
+        } else {
+          setData("error");
+        }
+      }
+    }
+  }, []);
+
+  if (data && data !== "error") {
+    setData(null);
+    navigate("/", {
+      state: {
+        errorState: true,
+        songContent: data,
+      },
+    });
+  }
+  if (data == "error") {
+    navigate("/", {
+      state: {
+        errorState: true,
+      },
+    });
+  }
   function handleHomePage() {
     navigate("/");
   }
+
   return (
     <>
       <main className={Styles.main}>
