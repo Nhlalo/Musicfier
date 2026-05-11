@@ -8,7 +8,9 @@ async function getGlobalTopTracks(limit = 20, signal) {
     );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
     }
 
     const data = await response.json();
@@ -23,8 +25,11 @@ async function getGlobalTopTracks(limit = 20, signal) {
       previewUrl: null,
     }));
 
-    return tracks;
+    return tracks | null;
   } catch (error) {
+    if (error.name === "TypeError" || error.name === "SyntaxError") {
+      throw new Error(`Network/parsing error: ${error.message}`);
+    }
     return [];
   }
 }

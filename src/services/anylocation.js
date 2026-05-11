@@ -12,7 +12,20 @@ export default async function getLocation(location, signal) {
 
     const response = await fetch(url, { signal });
 
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+    }
+
     const data = await response.json();
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+    }
+
     //Throw an error if the place does not exist within the Geonames database
     if (!data.geonames || data.geonames.length === 0) {
       throw new Error("No place found");
@@ -25,8 +38,11 @@ export default async function getLocation(location, signal) {
       key: crypto.randomUUID(), // Keys are needed for any list creation
     }));
 
-    return locationResult;
+    return locationResult || null;
   } catch (error) {
-    return;
+    if (error.name === "TypeError" || error.name === "SyntaxError") {
+      throw new Error(`Network/parsing error: ${error.message}`);
+    }
+    throw error;
   }
 }
