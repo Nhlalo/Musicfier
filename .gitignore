@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#Sensitive data - ssh keys
+**/*.key
+**/*.pem
+**/id_rsa*
+**/id_ed25519*
+.ssh/
+.env
