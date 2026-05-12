@@ -11,6 +11,8 @@ const concertsInformationContext = createContext({});
 const artistInforContext = createContext({});
 
 export default function ConcertList() {
+  const userLocation = useContext(LocationContext);
+
   const [dateDuration, setDateDuration] = useState({
     startDate: getTodayDate(),
     endDate: getTomorrowDate(),
@@ -19,8 +21,6 @@ export default function ConcertList() {
   const [concertsLocation, setConcertsLocation] = useState({});
   const [concertsDetails, setConcertsDetails] = useState([]);
   const [artistInfor, setArtistInfor] = useState({});
-
-  const userLocation = useContext(LocationContext);
 
   const dateAdjustement = useMemo(
     () => ({
@@ -55,6 +55,7 @@ export default function ConcertList() {
   function searchConcertDetails(artistID, keyWord, countryCode, city) {
     const startDate = `${dateDuration.startDate}T00:00:00Z`;
     const endDate = `${dateDuration.endDate}T23:59:59Z`;
+    console.log(startDate);
 
     const getConcertDetails = () => {
       const concertInfor = searchMockEvents(
@@ -79,6 +80,7 @@ export default function ConcertList() {
   }, [userLocationStored]);
 
   useEffect(() => {
+    console.log("The Boy");
     //Use JSON.stringify for object comparisons because for object comparisons, JS compares their address in memory.
     if (JSON.stringify(concertsLocation) !== JSON.stringify({})) {
       const artistID = artistInfor?.artistId;
@@ -90,7 +92,7 @@ export default function ConcertList() {
 
       searchConcertDetails(currentartistID, currentKeyWord, countryCode, city);
     }
-  }, [locationAdjustement]);
+  }, [locationAdjustement, dateAdjustement]);
 
   return (
     <>
