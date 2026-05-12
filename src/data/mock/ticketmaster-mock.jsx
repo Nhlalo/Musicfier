@@ -104,6 +104,8 @@ const mockEvents = [
     venueCity: "New York",
     venueState: "NY",
     venueCountry: "US",
+    venueLat: 40.7505,
+    venueLng: -73.9934,
     ticketUrl: "https://ticketmaster.com/drake-nyc",
   },
   {
@@ -116,6 +118,8 @@ const mockEvents = [
     venueCity: "Los Angeles",
     venueState: "CA",
     venueCountry: "US",
+    venueLat: 33.9535,
+    venueLng: -118.3395,
     ticketUrl: "https://ticketmaster.com/taylor-la",
   },
   {
@@ -128,6 +132,8 @@ const mockEvents = [
     venueCity: "London",
     venueState: null,
     venueCountry: "GB",
+    venueLat: 51.556,
+    venueLng: -0.2795,
     ticketUrl: "https://ticketmaster.com/coldplay-london",
   },
   {
@@ -140,6 +146,8 @@ const mockEvents = [
     venueCity: "Paris",
     venueState: null,
     venueCountry: "FR",
+    venueLat: 48.8386,
+    venueLng: 2.3782,
     ticketUrl: "https://ticketmaster.com/beyonce-paris",
   },
   {
@@ -152,6 +160,8 @@ const mockEvents = [
     venueCity: "Melbourne",
     venueState: "VIC",
     venueCountry: "AU",
+    venueLat: -37.8228,
+    venueLng: 144.9785,
     ticketUrl: "https://ticketmaster.com/ed-melbourne",
   },
   {
@@ -164,6 +174,8 @@ const mockEvents = [
     venueCity: "Johannesburg",
     venueState: "Gauteng",
     venueCountry: "ZA",
+    venueLat: -26.2348,
+    venueLng: 27.9823,
     ticketUrl: "https://ticketmaster.com/badbunny-johannesburg",
   },
   {
@@ -176,6 +188,8 @@ const mockEvents = [
     venueCity: "Toronto",
     venueState: "ON",
     venueCountry: "CA",
+    venueLat: 43.6414,
+    venueLng: -79.3893,
     ticketUrl: "https://ticketmaster.com/weeknd-toronto",
   },
   {
@@ -188,6 +202,8 @@ const mockEvents = [
     venueCity: "Cape Town",
     venueState: "Western Cape",
     venueCountry: "ZA",
+    venueLat: -33.9035,
+    venueLng: 18.4113,
     ticketUrl: "https://ticketmaster.com/blackcoffee-cape-town",
   },
   {
@@ -200,6 +216,8 @@ const mockEvents = [
     venueCity: "Durban",
     venueState: "KwaZulu-Natal",
     venueCountry: "ZA",
+    venueLat: -29.8587,
+    venueLng: 31.0218,
     ticketUrl: "https://ticketmaster.com/drake-durban",
   },
   {
@@ -212,6 +230,8 @@ const mockEvents = [
     venueCity: "Johannesburg",
     venueState: "Gauteng",
     venueCountry: "ZA",
+    venueLat: -26.024,
+    venueLng: 28.0095,
     ticketUrl: "https://ticketmaster.com/drake-johannesburg",
   },
   {
@@ -224,6 +244,8 @@ const mockEvents = [
     venueCity: "Cape Town",
     venueState: "Western Cape",
     venueCountry: "ZA",
+    venueLat: -33.8702,
+    venueLng: 18.5228,
     ticketUrl: "https://ticketmaster.com/kendrick-cape-town",
   },
   {
@@ -236,6 +258,8 @@ const mockEvents = [
     venueCity: "Johannesburg",
     venueState: "Gauteng",
     venueCountry: "ZA",
+    venueLat: -26.1058,
+    venueLng: 27.9831,
     ticketUrl: "https://ticketmaster.com/billie-johannesburg",
   },
 ];
