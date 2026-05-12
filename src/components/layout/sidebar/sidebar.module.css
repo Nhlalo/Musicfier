@@ -19,7 +19,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1000; /* This is to prevent main page animations from slipping through */
+  z-index: 2000; /* This is to prevent main page animations from slipping through */
 
   /* Animation properties */
 
