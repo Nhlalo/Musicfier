@@ -1,6 +1,6 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router";
-
+import { concertsDurationContext } from "../../concerts";
 import {
   getTodayDate,
   getTomorrowDate,
@@ -11,6 +11,8 @@ import ConcertCustomDuration from "./customDuration";
 import Styles from "../sidebar.module.css";
 
 export default function ConcertDuration() {
+  const { setDateDuration } = useContext(concertsDurationContext);
+
   const todayDateRef = useRef(getTodayDate());
   const tomorrowDateRef = useRef(getTomorrowDate());
   const dayAfterTomorrowRef = useRef(getDayAfterTomorrowDate());
@@ -32,14 +34,6 @@ export default function ConcertDuration() {
     tomorrowStatus: false,
     weekendStatus: false,
   });
-  const [dateDuration, setDateDuration] = useState({
-    startDate: startDate,
-    endDate: endDate,
-  });
-
-  const adjustDateDuration = useMemo(() => {
-    return { dateDuration, setDateDuration };
-  }, [dateDuration]);
 
   const navigate = useNavigate();
 
@@ -158,7 +152,7 @@ export default function ConcertDuration() {
           </button>
         </div>
       </div>
-      <ConcertCustomDuration duration={adjustDateDuration} />
+      <ConcertCustomDuration />
     </div>
   );
 }
