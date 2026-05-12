@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router";
 import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
+import { concertsDurationContext } from "../../concerts";
 import Styles from "../sidebar.module.css";
 
 function DurationInput({
@@ -8,6 +9,12 @@ function DurationInput({
   customRangeClassName,
   valueConcertDurationVisibility,
 }) {
+  const { dateDuration, setDateDuration } = useContext(concertsDurationContext);
+
+  const [customDateDuration, setCustomDateDuration] = useState({
+    ...dateDuration,
+  });
+
   const startDateInputRef = useRef(null);
   const endDateInputRef = useRef(null);
 
@@ -16,7 +23,6 @@ function DurationInput({
   const params = useParams();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const { dateDuration, setDateDuration } = duration;
 
   function handleClick() {
     const startDate = `${startDateInputRef.current.value}T00:00:00Z`;
@@ -27,7 +33,7 @@ function DurationInput({
     const city = searchParams.get("c");
     const cityParam = city ? `&c=${city}` : "";
     const idParam = id ? `&id=${id}` : "";
-
+    setDateDuration({ ...customDateDuration });
     navigate(
       `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
     );
@@ -43,11 +49,11 @@ function DurationInput({
           id="startDate"
           name="start_date"
           className={Styles.startDate}
-          value={dateDuration.startDate}
+          value={customDateDuration.startDate}
           ref={startDateInputRef}
           disabled={(valueConcertDurationVisibility = "show" ? false : true)}
           onChange={(e) =>
-            setDateDuration((prev) => ({
+            setCustomDateDuration((prev) => ({
               ...prev,
               startDate: e.target.value,
             }))
@@ -63,11 +69,11 @@ function DurationInput({
           id="endDate"
           name="end_date"
           className={Styles.endDate}
-          value={dateDuration.endDate}
+          value={customDateDuration.endDate}
           ref={endDateInputRef}
           disabled={(valueConcertDurationVisibility = "show" ? false : true)}
           onChange={(e) =>
-            setDateDuration((prev) => ({
+            setCustomDateDuration((prev) => ({
               ...prev,
               endDate: e.target.value,
             }))
