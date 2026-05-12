@@ -137,6 +137,8 @@ async function searchEvents(
           venueCity: event._embedded?.venues?.[0]?.city?.name,
           venueState: event._embedded?.venues?.[0]?.state?.stateCode,
           venueCountry: event._embedded?.venues?.[0]?.country?.countryCode,
+          venueLng: event._embedded?.venues?.[0]?.country?.longitude,
+          venueLat: event._embedded?.venues?.[0]?.locatiion?.latitude,
 
           // Ticket info
           ticketUrl: event.url,
