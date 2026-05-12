@@ -19,8 +19,9 @@
   background-color: #eae8e8;
   padding: 1rem 0;
   width: 100%;
+
   right: 0;
-  z-index: 15;
+  z-index: 500;
 }
 .sidebarContainer {
   border: none;
@@ -30,7 +31,7 @@
   /* Make the side bar scrollable when it exceeds the viewport height */
   overflow-y: auto;
   scrollbar-width: thin;
-  max-height: 80vh;
+  max-height: 60vh;
   /* Hide the scroll bar */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
