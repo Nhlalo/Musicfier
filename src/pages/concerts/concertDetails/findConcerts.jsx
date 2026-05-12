@@ -2,7 +2,11 @@ import { useState, useContext, useRef, createContext, useMemo } from "react";
 import { useSearchParams, useLocation } from "react-router";
 import { Calendar, Rows3 } from "lucide-react";
 import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
-import { concertsInformationContext } from "../concerts";
+import {
+  concertsInformationContext,
+  concertsLocationContext,
+} from "../concerts";
+import { LocationContext } from "../../../components/layout/rootLayout";
 import debounce from "../../../utils/debounce";
 import formatDate from "../../../utils/dateConversion";
 import ErrorMessage from "../../../hooks/useArtistsSearch/artistsSearchError";
@@ -113,7 +117,9 @@ function ArtistConcert({
 }
 
 export default function ConcertsInformation({ visibilityConcert, showFilter }) {
+  const userLocation = useContext(LocationContext);
   const { concertsDetails } = useContext(concertsInformationContext);
+  const { concertsLocation } = useContext(concertsLocationContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -125,14 +131,21 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
   const imageSrc = navigationState?.imageSrc;
   const artistName = navigationState?.artistName;
 
+  const userSpecificLocation = concertsLocation?.city
+    ? concertsLocation.city
+    : concertsLocation?.country
+      ? concertsLocation.country
+      : userLocation?.country;
+
   return (
     <div className={Styles.allConcertsWrapper}>
       <h1 className={Styles.concertCountry}>
-        Concerts in <span className={Styles.country}>South Africa</span>{" "}
+        Concerts in{" "}
+        <span className={Styles.country}>{userSpecificLocation}</span>{" "}
       </h1>
       <p className={Styles.allConcertsDescr}>
-        Find live music events in South Africa, get concert tickets, see tour
-        dates and more.
+        Find live music events in {userSpecificLocation}, get concert tickets,
+        see tour dates and more.
       </p>
       <ArtistDetails showFilter={showFilter} />
       {/* Concerts by the searched artists will dynamically appear here */}
