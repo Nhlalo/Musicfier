@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { ChevronRight } from "lucide-react";
+import { concertsLocationContext } from "../../pages/concerts/concerts";
 import {
   previousLocationSearchesContext,
   previousLocationsBTNContext,
@@ -9,6 +10,8 @@ import { InputContext } from "../../pages/concerts/sidebar/concertLocation/searc
 import Styles from "./locationSearch.module.css";
 
 export default function Data({ locationData }) {
+  const { setConcertsLocation } = useContext(concertsLocationContext);
+
   const { previousConcertLocations, setPreviousConcertLocations } = useContext(
     previousLocationSearchesContext,
   );
@@ -53,7 +56,11 @@ export default function Data({ locationData }) {
       location2: false,
       location3: true,
     });
-
+    setConcertsLocation({
+      country: country,
+      country_code: countryCode,
+      city: city || null,
+    });
     navigate(
       `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}${cityParam}${idParam}`,
     );
