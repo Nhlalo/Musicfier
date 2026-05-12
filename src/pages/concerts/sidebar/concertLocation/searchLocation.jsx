@@ -8,6 +8,15 @@ import Loading from "../../../../hooks/useLocationSearch/locationSearchLoading";
 import Styles from "../sidebar.module.css";
 
 const InputContext = createContext("");
+
+function Location({ characterChange }) {
+  const { data, loading, error } = useLocationSearch(characterChange);
+
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage />;
+  if (data) return <Data locationData={data} />;
+}
+
 //This will display the optional concert location as you search for your desired concert location.
 export default function ConcertLocationOptions() {
   const searchInputBTNRef = useRef(null);
@@ -90,14 +99,6 @@ export default function ConcertLocationOptions() {
       </InputContext.Provider>
     </>
   );
-}
-
-function Location({ characterChange }) {
-  const { data, loading, error } = useLocationSearch(characterChange);
-
-  if (loading) return <Loading />;
-  if (error) return <ErrorMessage />;
-  if (data) return <Data locationData={data} />;
 }
 
 export { InputContext };
