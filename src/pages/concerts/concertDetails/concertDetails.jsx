@@ -5,6 +5,7 @@ import getFocusableElements from "../../../utils/focusableElements";
 import { displayModal } from "../../../utils/modal";
 import ConcertsInformation from "./findConcerts";
 import SidebarVisibility, { Sidebar } from "../sidebar/sidebar";
+import ConcertMap from "./map";
 import ArtistImg from "../../../assets/images/artistImg.jpg";
 import Styles from "./concertDetails.module.css";
 
@@ -166,7 +167,8 @@ export default function Concerts() {
           <div className={Styles.mapContainer}>
             {/* This will automatically display the concert filter side bar when the viewport width is greater or equal to 1024px */}
             {windowSize.width >= 1024 && <SidebarVisibility />}
-            <img src={ArtistImg} alt="Musicfier" className={Styles.logoImg} />
+            {/* <img src={ArtistImg} alt="Musicfier" className={Styles.logoImg} /> */}
+            <ConcertMap />
           </div>
         )}
         {windowSize.width < 1024 && (
