@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router";
+import Home from "./pages/home/home";
 import {
   homeColors,
-  chartsColors,
+  getChartColors,
   concertsColors,
   artistInforColors,
 } from "./data/constants/colors";
 import RootLayout from "./components/layout/rootLayout";
+import AudioRecognition from "./pages/audioRecognition/audioRecognition";
 
 const router = createBrowserRouter([
   {
@@ -20,29 +22,57 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "charts",
-        element: <Charts />,
-        handle: {
-          colors: { ...chartsColors },
+        lazy: async () => {
+          const module = await import("./pages/charts/charts.jsx");
+          return {
+            element: <module.default />,
+            loader: ({ params }) => {
+              // params contains { chartType: "top50", country: "US" }
+              const colors = getChartColors(params.chartType);
+
+              // Return data that will be available in the component
+              return {
+                colors: colors,
+              };
+            },
+          };
         },
+        path: "charts/:chartType/:countryname",
+        //loader is used as the header colors is based on the url params.
       },
       {
-        path: "concerts",
-        element: <Concerts />,
+        path: "concerts/:countrycode",
+        lazy: async () => {
+          const module = await import("./pages/concerts/concerts.jsx");
+          return { Component: module.default };
+        },
         handle: {
           colors: { ...concertsColors },
         },
       },
       {
-        path: "artist/id",
-        element: <ArtistInfor />,
+        path: "artist/:artist/:id",
+        lazy: async () => {
+          const module = await import("./pages/artistsInfor/artistInfor.jsx");
+          return { Component: module.default };
+        },
         handle: {
-          colors: { artistInforColors },
+          colors: { ...artistInforColors },
+        },
+      },
+      {
+        path: "mymusic",
+        lazy: async () => {
+          const module = await import("./pages/myMusic/MyMusic.jsx");
+          return { Component: module.default };
+        },
+        handle: {
+          header: "hidden",
         },
       },
       {
         path: "audioRecognition",
-        element: <AudioRecogntion />,
+        element: <AudioRecognition />,
         handle: {
           header: "hidden",
           footer: "hidden",
