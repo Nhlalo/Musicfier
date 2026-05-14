@@ -3,6 +3,7 @@ import { useMatches, Link, useLocation, useNavigate } from "react-router";
 import { Menu } from "lucide-react";
 import { LocationContext } from "../rootLayout.jsx";
 import { navLinksContent } from "../../../data/constants/navigation.jsx";
+import determinePageNavigation from "../../../utils/determinePageNavigation.js";
 import handleScrollToTop from "../../../utils/scrollToTop.jsx";
 import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
 import Sidebar from "../sidebar/sidebar.jsx";
@@ -53,14 +54,6 @@ export default function Header({}) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); //
 
-  function determinePageNavigation(linkName) {
-    if (linkName == "Concerts") {
-      return `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}&c=${userCity}`;
-    }
-    if (linkName == "Charts") {
-      return `/charts/top50/${userCountry}`;
-    }
-  }
   //This will display the side bar
   function handleOpeningSidebar() {
     //Store the last focused element before opening the sidebar
@@ -114,7 +107,14 @@ export default function Header({}) {
               {navLinksContent.map((element) => (
                 <li className={Styles.navListItem} key={element.key}>
                   <Link
-                    to={determinePageNavigation(element.content)}
+                    to={determinePageNavigation(
+                      element.content,
+                      countryCode,
+                      startDate,
+                      endDate,
+                      userCity,
+                      userCountry,
+                    )}
                     className={Styles.navlink}
                     style={{ color: currentColors.color }}
                   >

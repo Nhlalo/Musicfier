@@ -2,6 +2,7 @@ import { useRef, useContext, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router";
 import { X } from "lucide-react";
 import { LocationContext } from "../rootLayout.jsx";
+import determinePageNavigation from "../../../utils/determinePageNavigation.js";
 import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
 import useFocusTrap from "../../../hooks/useFocusTrap";
 import NavLinksContentRef from "../../../data/constants/navigation";
@@ -60,15 +61,6 @@ export default function Sidebar({
   //Trap focus within the sidebar
   useFocusTrap(logoLinkRef.current, closeSideBar, refs, sideBarStatus);
 
-  function determinePageNavigation(linkName) {
-    if (linkName == "Concerts") {
-      return `/concerts/${countryCode}?sd=${startDate}&ed=${endDate}&c=${userCity}`;
-    }
-    if (linkName == "Charts") {
-      return `/charts/top50/${userCountry}`;
-    }
-  }
-
   //Close the side bar
   function closeSideBar() {
     const elementToRestore = lastFocusedElement.current;
@@ -120,7 +112,14 @@ export default function Sidebar({
               {navLinksContent.map((navLinkContent) => (
                 <li className={Styles.navListItem} key={navLinkContent.key}>
                   <Link
-                    to={determinePageNavigation(navLinkContent.content)}
+                    to={determinePageNavigation(
+                      navLinkContent.content,
+                      countryCode,
+                      startDate,
+                      endDate,
+                      userCity,
+                      userCountry,
+                    )}
                     className={Styles.navlink}
                     ref={navLinkContent.ref}
                   >
