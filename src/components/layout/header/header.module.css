@@ -1,8 +1,3 @@
-:root {
-  --main-bg: #00bbff;
-  --main-clr: #ffffff;
-}
-
 .header {
   width: 100%;
   display: flex;
@@ -11,14 +6,14 @@
   padding-bottom: 12px;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 2000;
 }
+
 .navContentWrapper {
   width: 95%;
-  max-width: 1340px;
-
   justify-content: space-between;
 }
+
 .navContentWrapper,
 .logoWrapper {
   display: flex;
@@ -31,26 +26,32 @@
   gap: 8px;
   cursor: pointer;
 }
+
 .logoWrapper {
   justify-content: center;
   width: clamp(15px, 10%, 45px);
   border-radius: 50%;
 }
+
 .logo {
   width: 95%;
   height: auto;
 }
+
 .websiteName {
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .navContainer {
   display: none;
 }
+
 .listContainer {
   display: flex;
   gap: 40px;
 }
+
 .navListItem,
 .logoContainer {
   cursor: pointer;
@@ -59,22 +60,27 @@
 .navListItem:hover {
   text-decoration: underline;
 }
+
 .navlink {
   display: block;
   font-weight: bold;
   min-width: 9ch;
   text-align: center;
 }
+
 .dropdownBTN {
   background: transparent;
 }
+
 .dropdownMenu {
   min-width: 24px;
 }
+
 @media (min-width: 1024px) {
   .dropdownBTN {
     display: none;
   }
+
   .navContainer {
     display: block;
   }

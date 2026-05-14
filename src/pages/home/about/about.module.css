@@ -6,6 +6,7 @@
   --instructions-fontsize: 1.125rem;
   --aboutContainer-top-padding: 3.75rem;
 }
+
 .aboutContainer {
   width: 100%;
   justify-content: center;
@@ -13,10 +14,12 @@
   padding-top: var(--aboutContainer-top-padding);
   padding-bottom: 3.75rem;
 }
+
 .aboutContainer,
 .aboutWrapper {
   display: flex;
 }
+
 .aboutWrapper {
   color: var(--main-clr);
   width: 90%;
@@ -25,16 +28,26 @@
   gap: 60px;
   min-width: 45ch;
 }
+
 .heading {
   font-size: var(--heading-fontsize);
   margin-bottom: 10px;
   text-align: center;
 }
+
 .websiteDescr {
   font-size: var(--websiteDescr-fontsize);
 }
+
+.instructions {
+  text-align: center;
+  margin-top: 16px;
+  font-size: var(--websiteDescr-fontsize);
+  font-weight: bold;
+}
+
 .buttonWrapper {
-  /*This is to prevent main page animations froms slipping through */
+  /* This is to prevent main page animations from slipping through */
   position: relative;
   z-index: 1;
 }
@@ -49,12 +62,7 @@
   z-index: 1;
   cursor: pointer;
 }
-.instructions {
-  text-align: center;
-  margin-top: 16px;
-  font-size: var(--websiteDescr-fontsize);
-  font-weight: bold;
-}
+
 @keyframes detectionLink {
   0% {
     transform: scale(1);
@@ -89,35 +97,41 @@
   position: relative;
   padding: 1.25rem;
 }
+
 .closeBTN {
   position: absolute;
   right: 0.125rem;
   top: 0.0625rem;
 }
+
 .xIcon {
   width: 20px;
   height: 20px;
   color: #3a3a3c;
 }
+
 .songCover {
   width: 90px;
   max-width: 100%;
   border-radius: 8px;
 }
+
 .songContainer,
 .songData {
   display: flex;
   flex-direction: column;
 }
+
 .songContainer {
   align-items: center;
   justify-content: center;
 }
+
 .songData {
   margin-top: 12px;
 }
+
 .songName {
-  margin-top: 500;
   font-weight: 400;
 }
 
@@ -126,10 +140,12 @@
     --heading-fontsize: 1.875rem;
     --aboutContainer-top-padding: 7.5rem;
   }
+
   .aboutWrapper {
     flex-direction: row;
     justify-content: space-around;
   }
+
   .songInforContainer {
     left: -170px;
     top: -70px;
@@ -142,9 +158,11 @@
     --websiteDescr-fontsize: 1.25rem;
     --instructions-fontsize: 1.25rem;
   }
+
   .aboutWrapper {
     gap: 0px;
   }
+
   .songInforContainer {
     left: -150px;
     top: -50px;

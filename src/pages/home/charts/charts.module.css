@@ -4,6 +4,17 @@
   --featuredSongCoverContainer-xTranslation: 150px;
   --featuredSongCoverContainer-yTranslation: -360px;
 }
+
+.featuredSongCover,
+.featuredSongCoverWrapper {
+  border-radius: 8px;
+}
+
+.featuredSongCoverContainer,
+.chartDescrContainer {
+  width: 100%;
+}
+
 .chartLink {
   width: min(100%);
   background-color: #070707;
@@ -14,17 +25,18 @@
   overflow: hidden;
   padding-bottom: 25px;
 }
+
 .featuredSongCover {
   width: 100%;
   height: 100%;
-  border-radius: 8px;
 }
+
 .featuredSongCoverWrapper {
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: var(--featuredConverSong-width);
   height: var(--featuredConverSong-height);
-  border-radius: 8px;
 }
+
 .featuredSongCoverContainer {
   display: flex;
   gap: 8px;
@@ -33,10 +45,7 @@
     translateX(var(--featuredSongCoverContainer-xTranslation))
     translateY(var(--featuredSongCoverContainer-yTranslation));
 }
-.featuredSongCoverContainer,
-.chartDescrContainer {
-  width: 100%;
-}
+
 .chartDescrContainer {
   display: flex;
   padding-top: 15px;
@@ -44,10 +53,12 @@
   margin: auto;
   gap: 20px;
 }
+
 .chartDescrHeading {
   font-size: 32px;
   font-weight: 900;
 }
+
 .viewMoreBTN {
   padding: 10px 30px;
   margin-left: 15px;
@@ -58,6 +69,7 @@
   align-self: flex-end;
   z-index: 5;
 }
+
 .featuredArtists {
   margin-top: 5px;
 }
@@ -72,12 +84,14 @@
   width: min(90vw, 1128px);
   margin: auto;
 }
+
 .moreChartsHeading {
   font-size: 24px;
   margin-bottom: 25px;
   font-weight: 700;
   padding: 25px 0 12px;
 }
+
 .miniChartsContainer {
   display: flex;
   flex-direction: column;
@@ -90,14 +104,17 @@
     --featuredSongCoverContainer-yTranslation: -510px;
   }
 }
+
 @media (min-width: 888px) {
   .chartLink {
     width: min(95%, 556px);
   }
+
   :root {
     --featuredSongCoverContainer-xTranslation: 150px;
     --featuredSongCoverContainer-yTranslation: -340px;
   }
+
   .miniChartsContainer {
     flex-direction: row;
   }

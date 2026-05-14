@@ -13,7 +13,7 @@
 .errorContainer {
   position: absolute;
   top: 62px;
-  z-index: 12;
+  z-index: 700;
   width: 100%;
   border-radius: 8px;
   color: #000;

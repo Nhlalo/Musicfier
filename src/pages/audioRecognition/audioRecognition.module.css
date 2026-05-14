@@ -4,6 +4,7 @@
   --errorHeader-font-size: 0.875rem;
   --errorDescr-font-size: 0.75rem;
 }
+
 .main {
   min-height: 100vh;
   padding: 1rem;
@@ -12,15 +13,18 @@
   color: #fff;
   background: linear-gradient(135deg, #00c1ff, #0088ff);
 }
+
 .cancelIconContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
+
 .cancelIcon {
   width: var(--icon-size);
   color: #fff;
 }
+
 .searchSection {
   display: flex;
   flex-direction: column;
@@ -30,55 +34,52 @@
   gap: 2rem;
   position: relative;
 }
+
 .listening {
   animation: listening 5s 1 normal;
   animation-fill-mode: forwards;
   opacity: 1;
 }
+
 .wait {
   animation: waiting 3s 1 normal;
   animation-delay: 5s;
   animation-fill-mode: forwards;
   opacity: 0;
 }
+
 .lastTry {
   animation: lastTry 7s infinite normal;
   animation-delay: 8s;
   animation-fill-mode: forwards;
   opacity: 0;
 }
+
 @keyframes listening {
-  0% {
-    opacity: 1;
-  }
+  0%,
   99% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
   }
 }
+
 @keyframes waiting {
-  0% {
-    opacity: 1;
-  }
+  0%,
   99% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
   }
 }
+
 @keyframes lastTry {
-  0% {
-    opacity: 1;
-  }
+  0%,
   99% {
     opacity: 1;
   }
-
   100% {
     opacity: 0;
   }
@@ -89,23 +90,25 @@
   position: absolute;
   transform: translateY(50px);
 }
+
 .loadingMessageHeader {
   font-weight: bold;
   font-size: 1rem;
 }
+
 .loadingMessageDescr {
   font-size: 0.75rem;
 }
+
 .outerCircle,
 .middleCircle,
 .innerCircle {
   position: absolute;
-
   width: max(34px, 9vw);
   height: max(34px, 9vw);
-
   border-radius: 50%;
 }
+
 .outerCircle {
   background-color: rgb(98, 173, 198);
   animation: outerCircle 2s infinite normal;
@@ -117,11 +120,13 @@
   opacity: 0.1;
   animation: middleCircle 1s infinite normal;
 }
+
 .innerCircle {
   background-color: rgb(237, 242, 243);
   opacity: 0.1;
   animation: innerCircle 1.5s infinite normal;
 }
+
 .searchBTN {
   width: max(94px, 10vw);
   height: max(94px, 10vw);
@@ -133,6 +138,7 @@
   margin-bottom: var(--searchBTN-margin-bottom);
   transform: translateY(-45px);
 }
+
 .hideItem {
   display: none;
 }
@@ -148,6 +154,7 @@
     transform: translateY(-45px) scale(5.5);
   }
 }
+
 @keyframes middleCircle {
   0% {
     transform: translateY(-45px) scale(2);
@@ -159,6 +166,7 @@
     transform: translateY(-45px) scale(4);
   }
 }
+
 @keyframes innerCircle {
   0% {
     transform: translateY(-45px) scale(2);
@@ -170,14 +178,17 @@
     transform: translateY(-45px) scale(3.5);
   }
 }
+
 .searchImg {
   width: 100%;
   height: auto;
 }
+
 .icon {
   width: var(--icon-size);
   animation: icon 1s infinite alternate;
 }
+
 @keyframes icon {
   0% {
     transform: scale(1);
@@ -186,6 +197,7 @@
     transform: scale(1.1);
   }
 }
+
 .errorfeedback {
   color: #000;
   background-color: #fff;
@@ -196,35 +208,42 @@
   top: -110px;
   z-index: 1;
 }
+
 .errorfeedbackWrapper {
   position: relative;
   padding: 1.25rem;
 }
+
 .errorfeedback,
 .errorDescr {
   font-weight: 700;
   text-align: left;
 }
+
 .errorHeader {
   font-size: var(--errorHeader-font-size);
   font-weight: 700;
   margin-bottom: 0.3125rem;
 }
+
 .errorDescr {
   font-size: var(--errorDescr-font-size);
   color: #3a3a3c;
   letter-spacing: 0.5px;
 }
+
 .closeBTN {
   position: absolute;
   right: 0.125rem;
   top: 0.0625rem;
 }
+
 .xIcon {
   width: 20px;
   height: 20px;
   color: #3a3a3c;
 }
+
 @media (min-width: 768px) {
   :root {
     --icon-size: 24px;
@@ -232,9 +251,11 @@
     --errorHeader-font-size: 1.125rem;
     --errorDescr-font-size: 16px;
   }
+
   .loadingMessage {
     transform: translateY(75px);
   }
+
   .loadingMessageHeader {
     font-size: 1.5rem;
   }
@@ -242,6 +263,7 @@
   .loadingMessageDescr {
     font-size: 1.125rem;
   }
+
   .errorfeedback {
     left: -250px;
     top: -5px;
@@ -261,6 +283,7 @@
       transform: translateY(-55px) scale(3.5);
     }
   }
+
   @keyframes middleCircle {
     0% {
       transform: translateY(-55px) scale(1);
@@ -272,6 +295,7 @@
       transform: translateY(-55px) scale(2.8);
     }
   }
+
   @keyframes innerCircle {
     0% {
       transform: translateY(-55px) scale(1);

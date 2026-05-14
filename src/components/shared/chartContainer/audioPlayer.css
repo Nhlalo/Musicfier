@@ -5,6 +5,7 @@
 .audioControl {
   display: flex;
 }
+
 .previewSongContainer {
   align-items: center;
   position: fixed;
@@ -15,6 +16,7 @@
   padding: 0 20px;
   left: 0;
 }
+
 .previewSongCover {
   width: 60px;
   height: 60px;
@@ -26,11 +28,13 @@
   color: #3a3a3c;
   font-size: 10px;
 }
+
 .previewSongName {
   font-weight: 700;
   font-size: 14px;
   color: #000;
 }
+
 .previewArtist {
   color: #3a3a3c;
   font-size: 14px;
@@ -39,20 +43,24 @@
 .previewSpotifyLogo {
   width: 70px;
 }
+
 .audioControl {
   width: 100%;
   align-items: center;
   gap: 30px;
 }
+
 .customPlayer {
   border-radius: 50px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
 }
+
 .rhap_container {
   box-shadow: none;
   background-color: transparent;
 }
+
 .rhap_main-controls-button,
 .rhap_container svg,
 .rhap_volume-bar {
@@ -65,6 +73,7 @@
 .rhap_volume-indicator {
   background: #000;
 }
+
 .rhap_repeat-button {
   display: none;
 }
@@ -74,21 +83,24 @@
 .rhap_time {
   display: none;
 }
+
 .previewSongInfor {
   flex-direction: column;
   justify-content: space-between;
   width: 70px;
 }
+
 @media (min-width: 768px) {
   .rhap_volume-container {
     display: flex;
   }
+
   .rhap_time {
     display: block;
   }
+
   .previewSpotifyContainer {
     display: flex;
-
     align-items: center;
     justify-self: center;
     border-radius: 999px;
@@ -97,6 +109,7 @@
     width: 73px;
     height: 24px;
   }
+
   .previewSongInfor {
     width: 190px;
   }

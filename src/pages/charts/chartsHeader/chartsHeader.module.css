@@ -2,16 +2,19 @@
   color: #fff;
   position: relative;
   overflow: hidden;
-  margin-top: 4rem;
+  margin-top: 3.55rem;
 }
+
 .chartHeaderWrapper {
   width: 95%;
   margin: 0 auto;
 }
+
 .countryBTNContainer,
 .chartContainer {
   padding: 0.9375rem 2.5%;
 }
+
 .countryBTNContainer {
   width: 100vw;
   background-color: transparent;
@@ -19,20 +22,23 @@
   z-index: 4;
   position: relative;
 }
+
 .countryBTN {
   background-color: transparent;
 }
 
-.cheveronIcon {
+.chevronIcon {
   width: 1rem;
   height: 1rem;
   color: #fff;
 }
+
 .inforContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
+
 .chartContainer {
   padding-top: 4.625rem;
   height: 15.625rem;
@@ -41,20 +47,25 @@
   justify-content: space-between;
   gap: 1.8125rem;
 }
+
 .country,
 .chartName {
   font-weight: 700;
 }
+
 .country {
   text-transform: uppercase;
   font-size: 0.875rem;
 }
+
 .chartName {
   font-size: 32px;
 }
+
 .chartDescr {
   opacity: 0.7;
 }
+
 .buttonContainer {
   display: flex;
   gap: 0.875rem;
@@ -62,6 +73,7 @@
   position: relative;
   width: max-content;
 }
+
 .chartTypeBTNs {
   color: #fff;
   padding: 0.625rem 0.9375rem;
@@ -75,10 +87,12 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .buttonClick {
   background-color: #fff;
   color: #000;
 }
+
 .imageContainer,
 .imageContainerViral,
 .imageContainerDiscovery {
@@ -87,6 +101,7 @@
   right: 0;
   transform: rotate(45deg) translateY(-58%) translateX(17%);
 }
+
 .imageContainer::after,
 .imageContainerViral::after,
 .imageContainerDiscovery::after {
@@ -98,17 +113,21 @@
   height: 100%;
   z-index: 1;
 }
+
 .imageContainerDiscovery::after {
   background-color: rgba(89, 82, 63, 0.2);
 }
+
 .imageContainerViral::after {
   background-color: rgba(45, 118, 139, 0.2);
 }
+
 .sideImage {
   height: 192px;
   width: 192px;
   object-fit: cover;
 }
+
 .genresContainer {
   position: absolute;
   background-color: #fff;
@@ -118,29 +137,39 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
-  border-radius: 0rem;
+  border-radius: 0.5rem;
   top: -7.5rem;
   right: 1.25rem;
-  border-radius: 0.5rem;
 }
+
 .genreBTN {
   text-align: left;
   background-color: transparent;
   padding: 0;
   padding-bottom: 0.5rem;
 }
+
 .genreBTN:hover {
   color: rgba(72, 71, 71, 0.7);
 }
+
 .blueBG {
   background-color: rgb(45, 118, 139);
 }
+
 .brownBG {
   background-color: rgb(89, 82, 63);
 }
+
 @media (max-width: 390px) {
   .imageContainer {
     transform: rotate(45deg) translateY(-80%) translateX(40%);
+  }
+}
+
+@media (min-width: 600px) {
+  .chartHeaderContainer {
+    margin-top: 5rem;
   }
 }
 
@@ -148,21 +177,30 @@
   .countryBTNContainer {
     backdrop-filter: none;
   }
+
   .chartName {
     font-size: 50px;
   }
+
   .country,
   .chartDescr {
     font-size: 16px;
   }
+
   .country__control {
     width: 16.875rem;
   }
+
   .chartContainer {
     padding-top: 2.8125rem;
     height: 16.875rem;
   }
+
+  .chartHeaderContainer {
+    margin-top: 4rem;
+  }
 }
+
 @media (min-width: 1024px) {
   .genresContainer {
     padding: 0.9375rem 15px 10px;
@@ -170,6 +208,7 @@
     top: -12.1875rem;
     right: 1.875rem;
   }
+
   .genreBTN {
     padding: 0.9375rem 2.5rem 0.9375rem 0.9375rem;
   }
