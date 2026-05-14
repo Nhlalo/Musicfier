@@ -5,41 +5,63 @@ import findSong from "../../data/mock/audioRecogntion-mock";
 import Styles from "./audioRecognition.module.css";
 import searchImage from "../../assets/images/logo.png";
 
+const saveSongToLocalStorage = (song) => {
+  try {
+    const myMusic = localStorage.getItem("myMusic");
+    const existingSongs = myMusic ? JSON.parse(myMusic) : [];
+    const songExists = existingSongs.some(
+      (existingSong) => existingSong.id === song.id,
+    );
+    if (!songExists) {
+      const makeJSON = JSON.stringify([...existingSongs, song]);
+      localStorage.setItem("myMusic", makeJSON);
+    }
+  } catch (error) {
+    console.error("Failed to save song:", error);
+  }
+};
+
 export default function AudioRecognition() {
   const [data, setData] = useState(null);
   const microphonPermission = true;
   const navigate = useNavigate();
-  //Direct to the home page
+
   useEffect(() => {
-    if (microphonPermission) {
-      const id = "null";
-      if (id) {
-        const song = findSong(id);
-        if (song) {
-          setData(song);
+    let isMounted = true;
+
+    async function recognizeAudio() {
+      if (microphonPermission) {
+        const id = "Bad Guy";
+        if (id) {
+          const song = await findSong(id);
+          console.log("Song", song);
+          saveSongToLocalStorage(song);
+
+          if (!isMounted) return;
+
+          navigate("/", {
+            state: {
+              errorState: false,
+              songContent: song,
+            },
+          });
         } else {
-          setData("error");
+          navigate("/", {
+            state: {
+              errorState: true,
+            },
+          });
         }
       }
     }
+
+    recognizeAudio();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  if (data && data !== "error") {
-    setData(null);
-    navigate("/", {
-      state: {
-        errorState: true,
-        songContent: data,
-      },
-    });
-  }
-  if (data == "error") {
-    navigate("/", {
-      state: {
-        errorState: true,
-      },
-    });
-  }
   function handleHomePage() {
     navigate("/");
   }
