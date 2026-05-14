@@ -35,6 +35,12 @@ h2 {
   font-weight: 700;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+  }
+}
+
 /*This it to make the body not be scrollable when the modal is open */
 .sidebarOpen {
   overflow: hidden;
