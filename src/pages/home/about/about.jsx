@@ -2,6 +2,9 @@ import { useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router";
 import Error from "../../audioRecognition/error";
 import { X } from "lucide-react";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 import Logo from "../../../assets/images/logo.png";
 import Styles from "./about.module.css";
 import ArtistImg from "../../../assets/images/artistImg.jpg";
@@ -15,7 +18,7 @@ export default function About() {
 
   const location = useLocation();
   const displayError = location.state?.errorState;
-  const displaySongInfor = location.state?.songState;
+  const displaySongInfor = location.state?.songContent;
   //This will allow the error element to change the state of its parent element
   const passToError = useCallback((status) => setIsErrorClose(status), []);
   function handleCloseSongInfor() {
@@ -53,13 +56,19 @@ export default function About() {
                 </button>
                 <div className={Styles.songContainer}>
                   <img
-                    src={ArtistImg}
-                    alt="The boy"
+                    src={generateFallBackImage(displaySongInfor.coverUrl)}
+                    srcSet={generateSrcset(displaySongInfor.coverUrl)}
+                    sizes={generateSizes(displaySongInfor.coverUrl)}
+                    alt={`${displaySongInfor.title} by ${displaySongInfor.artist}`}
                     className={Styles.songCover}
                   />
                   <div className={Styles.songData}>
-                    <span className={Styles.artistName}>Title: The Boy</span>
-                    <span className={Styles.songName}>Artist: Drake</span>
+                    <span className={Styles.artistName}>
+                      Title: {displaySongInfor.title}
+                    </span>
+                    <span className={Styles.songName}>
+                      Artist: {displaySongInfor.artist}
+                    </span>
                   </div>
                 </div>
               </div>

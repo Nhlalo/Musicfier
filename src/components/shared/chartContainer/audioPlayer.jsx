@@ -1,5 +1,8 @@
 import { useEffect, useRef } from "react";
 import AudioPlayer from "react-h5-audio-player";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
 import SpotifyLogo from "../../../assets/images/spotifylogo.png";
 import "react-h5-audio-player/lib/styles.css";
 import "./audioPlayer.css";
@@ -45,7 +48,9 @@ export default function AudioPlay({
     >
       <div className="previewSongInforContainer">
         <img
-          src={songCover}
+          src={generateFallBackImage(songCover)}
+          srcSet={generateSrcset(songCover)}
+          sizes={generateSizes(songCover)}
           alt={artist}
           className="previewSongCover"
           aria-hidden="true"

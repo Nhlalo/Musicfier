@@ -1,6 +1,9 @@
 import { Link } from "react-router";
 import Styles from "./charts.module.css";
 import { mockCharts } from "../../../data/mock/spotify-mock";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
@@ -14,16 +17,24 @@ function MoreChart({ location }) {
       aria-label={`View the Top 50 ${userCountry} chart`}
     >
       <div className={Styles.featuredSongCoverContainer} aria-hidden="true">
-        {mockCharts.slice(0, 3).map((songData, index) => (
-          <div className={Styles.featuredSongCoverWrapper} key={imgKeys[index]}>
-            <img
-              src={songData.artistImage}
-              alt="featured song cover"
-              className={Styles.featuredSongCover}
-              loading="lazy"
-            />
-          </div>
-        ))}
+        {mockCharts.slice(0, 3).map((songData, index) => {
+          const artistImage = songData.artistImage;
+          return (
+            <div
+              className={Styles.featuredSongCoverWrapper}
+              key={imgKeys[index]}
+            >
+              <img
+                src={generateFallBackImage(artistImage)}
+                srcSet={generateSrcset(artistImage)}
+                sizes={generateSizes(artistImage)}
+                alt="featured song cover"
+                className={Styles.featuredSongCover}
+                loading="lazy"
+              />
+            </div>
+          );
+        })}
       </div>
       <div className={Styles.chartDescrContainer} aria-hidden="true">
         <div className={Styles.chartDescrWrapper}>

@@ -1,6 +1,9 @@
 import { useState, useMemo, useCallback } from "react";
 import { Link, useLocation } from "react-router";
 import { Play, Pause, LoaderCircle } from "lucide-react";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
 import ImageReplacement from "../../ui/imageReplacement";
 import AudioPlay from "./audioPlayer";
 import Styles from "./chartContainer.module.css";
@@ -82,16 +85,20 @@ export default function Song({
               data-artistsong={`${artistID}_${songName}`}
             >
               {/* When there is no image use just display an icon */}
-              {image && (
+              {image.length > 0 && (
                 <img
-                  src={image}
+                  src={generateFallBackImage(image)}
+                  srcSet={generateSrcset(image)}
+                  sizes={generateSizes(image)}
                   alt={actName}
                   aria-hidden="true"
                   className={Styles.artistImg}
                   loading="lazy"
                 />
               )}
-              {!image && <ImageReplacement iconClass={Styles.artistImg} />}
+              {image.length == 0 && (
+                <ImageReplacement iconClass={Styles.artistImg} />
+              )}
               <div className={Styles.playIconContainer}>
                 {shouldPause && !isReady && (
                   <Play aria-hidden="true" className={Styles.songPlayIcon} />

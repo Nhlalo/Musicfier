@@ -1,6 +1,9 @@
 import { useContext, useState, useMemo } from "react";
 import { Play } from "lucide-react";
 import { chartContext } from "../charts";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 import Song from "../../../components/shared/chartContainer/song";
 import mockYouTubeMusicLink from "../../../data/mock/youtube-mock";
 import spotifyLogo from "../../../assets/images/spotifylogo.png";
@@ -42,6 +45,7 @@ function ChartContainer() {
               index={index}
               artistID={song.spotifyArtistId}
               handleArtistSong={handleArtistSong}
+              key={index}
             />
           );
         })}
@@ -50,7 +54,7 @@ function ChartContainer() {
 }
 function MusicVideo({ BG }) {
   const { chart } = useContext(chartContext);
-  const firstSong = chart.length ? chart[0] : [];
+  const firstSong = chart?.length ? chart[0] : [];
   const artistName = firstSong?.artistName;
   const songName = firstSong?.songName;
   const songCover = firstSong?.songCover;
@@ -71,16 +75,20 @@ function MusicVideo({ BG }) {
               rel="noreferrer"
               target="_blank"
             >
-              {songCover && (
+              {songCover?.length > 0 && (
                 <img
-                  src={songCover}
+                  src={generateFallBackImage(songCover)}
+                  srcSet={generateSrcset(songCover)}
+                  sizes={generateSizes(songCover)}
                   alt={`Song cover of ${songName} by ${artistName} `}
                   aria-hidden="true"
                   className={Styles.songImg}
                   loading="lazy"
                 />
               )}
-              {!songCover && <ImageReplacement iconClass={Styles.songImg} />}
+              {songCover?.length == 0 && (
+                <ImageReplacement iconClass={Styles.songImg} />
+              )}
               <div className={Styles.playContainer}>
                 <Play className={Styles.play} aria-hidden="true" />
               </div>

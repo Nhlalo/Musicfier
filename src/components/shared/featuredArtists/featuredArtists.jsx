@@ -1,7 +1,10 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import useScrollLogic from "../../../hooks/scrollLogic";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
 import ImageReplacement from "../../ui/imageReplacement";
 import Styles from "./featuredArtists.module.css";
 
@@ -13,10 +16,18 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
     >
       <figure className={Styles.artistWrapper} aria-hidden="true">
         {/* Use an icon when there is no artist image source */}
-        {artistImg && (
-          <img src={artistImg} alt={artistName} className={Styles.artistImg} />
+        {artistImg.length > 0 && (
+          <img
+            src={generateFallBackImage(artistImg)}
+            srcSet={generateSrcset(artistImg)}
+            sizes={generateSizes(artistImg)}
+            alt={artistName}
+            className={Styles.artistImg}
+          />
         )}
-        {!artistImg && <ImageReplacement iconClass={Styles.artistImg} />}
+        {artistImg.length == 0 && (
+          <ImageReplacement iconClass={Styles.artistImg} />
+        )}
         <figcaption className={Styles.artistName}>{artistName}</figcaption>
       </figure>
     </Link>
@@ -53,12 +64,12 @@ export default function FeaturedArtists({ data }) {
         <div className={Styles.overlay}></div>
         <div className={Styles.featuredArtistsWrapper} ref={chartContainerRef}>
           {data.length > 0 &&
-            data.map((songData) => (
+            data.map((songData, index) => (
               <FeaturedArtist
                 artistSpotifyID={songData.spotifyArtistId}
                 artistName={songData.artistName}
                 artistImg={songData.artistImage}
-                key={songData.key}
+                key={index}
               />
             ))}
         </div>

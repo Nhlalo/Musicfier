@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
 import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
@@ -17,6 +17,16 @@ const content = {
 export default function GlobalCharts() {
   const [globalChart, setGlobalChart] = useState([]);
 
+  const memoizedChartContainer = useMemo(
+    () => <ChartContainer data={globalChart} />,
+    [globalChart], // Only recreate when data changes
+  );
+
+  const memoizedFeaturedArtists = useMemo(
+    () => <FeaturedArtists data={globalChart} />,
+    [globalChart],
+  );
+
   useEffect(() => {
     const mockGlobalChart = mockCharts;
     if (mockGlobalChart) {
@@ -33,8 +43,8 @@ export default function GlobalCharts() {
       miniHeading={content.miniHeading}
       displayChart={content.displayChart}
       subHeading={content.subHeading}
-      chartContainer={<ChartContainer data={globalChart} />}
-      featuredArtists={<FeaturedArtists data={globalChart} />}
+      chartContainer={memoizedChartContainer}
+      featuredArtists={memoizedFeaturedArtists}
       seeAllGlobal={true}
       data={[]}
     />

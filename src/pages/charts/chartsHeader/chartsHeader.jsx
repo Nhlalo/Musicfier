@@ -1,6 +1,9 @@
 import { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate, useLoaderData, useParams } from "react-router";
 import { ChevronDown } from "lucide-react";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 import usePressBack from "../../../hooks/usePressBack";
 import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
 import setBTNStatus from "../../../utils/updateBTNStatus";
@@ -179,9 +182,12 @@ export default function ChartHeader() {
           >
             {Array.isArray(chart) &&
               chart.slice(0, 2).map((songData, index) => {
+                const artistImage = songData.artistImage;
                 return (
                   <img
-                    src={songData.artistImage}
+                    src={generateFallBackImage(artistImage)}
+                    srcSet={generateSrcset(artistImage)}
+                    sizes={generateSizes(artistImage)}
                     alt="Artist"
                     key={imgKeys[index]}
                     className={Styles.sideImage}

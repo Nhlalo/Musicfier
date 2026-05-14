@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Ticket } from "lucide-react";
 import debounce from "../../utils/debounce";
+import generateFallBackImage from "../../utils/generateFallBackImage";
+import generateSizes from "../../utils/generateImgSizes";
+import generateSrcset from "../../utils/generateImgSrcset";
 import ImageReplacement from "../../components/ui/imageReplacement";
 import Styles from "./artistInfor.module.css";
 
@@ -33,7 +36,6 @@ export default function ArtistInforHeader({ artistData, concerts }) {
   const greaterthan768 = windowSize.width >= 768;
 
   useEffect(() => {
-    // Debounced resize handler
     const handleResize = debounce(() => {
       setWindowSize({
         width: window.innerWidth,
@@ -43,13 +45,11 @@ export default function ArtistInforHeader({ artistData, concerts }) {
 
     window.addEventListener("resize", handleResize);
 
-    // Initial size
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
     });
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -61,14 +61,16 @@ export default function ArtistInforHeader({ artistData, concerts }) {
         <div className={Styles.headerArtistImgContainer}>
           <div className={Styles.headerArtistImgWrapper}>
             {/* Display an icon if there is no image provided for the artist */}
-            {artistImage && greaterthan768 && (
+            {artistImage?.length > 0 && greaterthan768 && (
               <img
-                src={artistImage}
+                src={generateFallBackImage(artistImage)}
+                srcSet={generateSrcset(artistImage)}
+                sizes={generateSizes(artistImage)}
                 alt={artistName}
                 className={Styles.headerArtistImg}
               />
             )}
-            {!artistImage && greaterthan768 && (
+            {!artistImage?.length && greaterthan768 && (
               <ImageReplacement iconClass={Styles.headerArtistImg} />
             )}
           </div>

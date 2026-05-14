@@ -7,6 +7,9 @@ import {
   concertsLocationContext,
 } from "../concerts";
 import { LocationContext } from "../../../components/layout/rootLayout";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 import debounce from "../../../utils/debounce";
 import formatDate from "../../../utils/dateConversion";
 import ErrorMessage from "../../../hooks/useArtistsSearch/artistsSearchError";
@@ -24,7 +27,7 @@ function ArtistInfor({ characterChange }) {
   if (error) return <ErrorMessage />;
   if (data) return <Data artistsInfor={data} />;
 }
-//This is the component that will search and display the artist information
+
 function ArtistDetails({ showFilter }) {
   const [displayArtistData, setDisplayArtistData] = useState(false);
   const [inputChange, setInputChange] = useState("");
@@ -93,16 +96,18 @@ function ArtistConcert({
       className={Styles.concertLink}
     >
       {/* Use an icon when there is no artist image source */}
-      {artistImg && (
+      {artistImg.length > 0 && (
         <img
-          src={artistImg}
+          src={generateFallBackImage(artistImg)}
+          srcSet={generateSrcset(artistImg)}
+          sizes={generateSizes(artistImg)}
           alt={`${artist}`}
           loading="lazy"
           aria-hidden="true"
           className={Styles.artistImage}
         />
       )}
-      {!artistImg && <ImageReplacement iconClass={Styles.artistImage} />}
+      {!artistImg.length && <ImageReplacement iconClass={Styles.artistImage} />}
       <div aria-hidden="true" className={Styles.concertInfor}>
         <span className={Styles.date}>
           <Calendar className={Styles.calendarIcon} />
@@ -165,7 +170,9 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
           {!concertsDetails?.length && artistID && (
             <div className={Styles.NoConcerts}>
               <img
-                src={imageSrc}
+                src={generateFallBackImage(imageSrc)}
+                srcSet={generateSrcset(imageSrc)}
+                sizes={generateSizes(imageSrc)}
                 alt={artistName}
                 className={Styles.NoConcertsArtistImg}
               />
@@ -179,7 +186,7 @@ export default function ConcertsInformation({ visibilityConcert, showFilter }) {
             </div>
           )}
 
-          {concertsDetails.length > 0 &&
+          {concertsDetails?.length > 0 &&
             concertsDetails.map((concertDetails, index) => {
               return (
                 <ArtistConcert

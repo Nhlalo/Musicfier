@@ -6,6 +6,9 @@ import {
 } from "../../pages/concerts/concerts";
 import { ArtistInputContext } from "../../pages/concerts/concertDetails/findConcerts";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
+import generateFallBackImage from "../../utils/generateFallBackImage";
+import generateSizes from "../../utils/generateImgSizes";
+import generateSrcset from "../../utils/generateImgSrcset";
 import ImageReplacement from "../../components/ui/imageReplacement";
 import Styles from "./artistsSearch.module.css";
 
@@ -61,7 +64,9 @@ function Artists({ imagesrc, name, dataID }) {
     >
       {imagesrc && (
         <img
-          src={imagesrc}
+          src={generateFallBackImage(imagesrc)}
+          srcSet={generateSrcset(imagesrc)}
+          sizes={generateSizes(imagesrc)}
           alt={`${name}`}
           className={Styles.artistImg}
           aria-hidden="true"

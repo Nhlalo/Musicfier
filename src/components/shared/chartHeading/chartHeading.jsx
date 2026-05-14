@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { ChevronRight } from "lucide-react";
+import generateFallBackImage from "../../../utils/generateFallBackImage";
+import generateSizes from "../../../utils/generateImgSizes";
+import generateSrcset from "../../../utils/generateImgSrcset";
 import { mockCharts } from "../../../data/mock/spotify-mock";
 import Styles from "./chartHeading.module.css";
 
@@ -50,16 +53,19 @@ export default function ChartHeading({
           style={{ display: displayFeaturedArtistsImg ? "flex" : "none" }}
         >
           {data.length &&
-            data
-              .slice(0, 3)
-              .map((songData, index) => (
+            data.slice(0, 3).map((songData, index) => {
+              const artistImage = songData.artistImage;
+              return (
                 <img
-                  src={songData.artistImage}
+                  src={generateFallBackImage(artistImage)}
+                  srcSet={generateSrcset(artistImage)}
+                  sizes={generateSizes(artistImage)}
                   alt="Featured artists on this chart"
                   className={imgClasses[index]}
                   key={keys[index]}
                 />
-              ))}
+              );
+            })}
         </div>
         <div className={Styles.chartDesriptionContainer}>
           <div className={Styles.chartDescriptionWrapper}>
@@ -79,7 +85,9 @@ export default function ChartHeading({
             style={{ display: displayChart ? "block" : "none" }}
           >
             <img
-              src={mockCharts[0].artistImage}
+              src={generateFallBackImage(mockCharts[0].artistImage)}
+              srcSet={generateSrcset(mockCharts[0].artistImage)}
+              sizes={generateSizes(mockCharts[0].artistImage)}
               alt=""
               aria-hidden="true"
               className={Styles.artistImg}
