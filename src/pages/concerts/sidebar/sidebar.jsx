@@ -8,12 +8,11 @@ import ConcertLocations from "./concertLocation/concertLocation";
 import Styles from "./sidebar.module.css";
 
 const Sidebar = forwardRef(function (props, ref) {
-  // Destructure from props
   const { sideBarClassName } = props;
 
   const windowSize = useTrackWindow();
 
-  const greaterthan1024 = windowSize.width >= 1024; //Equal or greater than 768px viewport width return true
+  const greaterthan1024 = windowSize.width >= 1024;
 
   return (
     <>
