@@ -9,21 +9,6 @@ import ConcertMap from "./map";
 import ArtistImg from "../../../assets/images/artistImg.jpg";
 import Styles from "./concertDetails.module.css";
 
-//Custom hook that will make the body not be scrollable if the side bar is open
-function useBodyScrollLock(isButtonPressed) {
-  useEffect(() => {
-    if (isButtonPressed) {
-      document.body.classList.add("sidebarOpen");
-    } else {
-      document.body.classList.remove("sidebarOpen");
-    }
-
-    return () => {
-      document.body.classList.remove("sidebarOpen");
-    };
-  }, [isButtonPressed]);
-}
-
 const FilterSidebarHeader = forwardRef(function (props, ref) {
   const { showSidebar, sideBarVisible } = props;
 
@@ -68,8 +53,6 @@ export default function Concerts() {
 
   const sidebarRef = useRef(null);
   const previousFocusedElement = useRef(null);
-
-  useBodyScrollLock(filterVisibility);
 
   useEffect(() => {
     if (filterVisibility) {
@@ -167,7 +150,6 @@ export default function Concerts() {
           <div className={Styles.mapContainer}>
             {/* This will automatically display the concert filter side bar when the viewport width is greater or equal to 1024px */}
             {windowSize.width >= 1024 && <SidebarVisibility />}
-            {/* <img src={ArtistImg} alt="Musicfier" className={Styles.logoImg} /> */}
             <ConcertMap />
           </div>
         )}
