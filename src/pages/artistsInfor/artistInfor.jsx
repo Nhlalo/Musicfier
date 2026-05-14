@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router";
 import searchMockArtist from "../../data/mock/spotifyArtist-mock";
 import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
@@ -14,9 +14,6 @@ export default function ArtistInfor() {
   const url = useLocation();
 
   const params = useParams();
-
-  const artistDataAdjustement = useMemo(() => artistData, [artistData]);
-  const concertsAdjustment = useMemo(() => concerts, [concerts]);
 
   const artistID = params.id;
   const artistName = params.artist;
@@ -41,13 +38,10 @@ export default function ArtistInfor() {
 
   return (
     <>
-      <ArtistInforHeader
-        artistData={artistDataAdjustement}
-        concerts={concertsAdjustment}
-      />
+      <ArtistInforHeader artistData={artistData} concerts={concerts} />
       <TopTracks artistName={artistName} />
-      <UpcomingConcerts artistName={artistName} concerts={concertsAdjustment} />
-      <SimilarArtists artistData={artistDataAdjustement} />
+      <UpcomingConcerts artistName={artistName} concerts={concerts} />
+      <SimilarArtists artistData={artistData} />
     </>
   );
 }
