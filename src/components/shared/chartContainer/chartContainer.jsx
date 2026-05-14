@@ -52,7 +52,7 @@ export default function ChartContainer({ data }) {
                 songPreview={songData.songPreviewUrl}
                 actName={songData?.artistName}
                 artistID={songData?.spotifyArtistId}
-                key={songData.key}
+                key={index}
                 handleArtistSong={handleArtistSong}
               />
             ))}
