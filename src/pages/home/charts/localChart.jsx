@@ -18,6 +18,16 @@ export default function LocalCharts({ location }) {
 
   const [localChart, setLocalChart] = useState([]);
 
+  const memoizedChartContainer = useMemo(
+    () => <ChartContainer data={localChart} />,
+    [localChart],
+  );
+
+  const memoizedFeaturedArtists = useMemo(
+    () => <FeaturedArtists data={localChart} />,
+    [localChart],
+  );
+
   useEffect(() => {
     if (userCountry) {
       const mockLocalChart = getMockCountryCharts(userCountry);
@@ -36,8 +46,8 @@ export default function LocalCharts({ location }) {
       miniHeading={content.miniHeading}
       displayChart={content.displayChart}
       subHeading={content.subHeading}
-      chartContainer={<ChartContainer data={localChart} />}
-      featuredArtists={<FeaturedArtists data={localChart} />}
+      chartContainer={memoizedChartContainer}
+      featuredArtists={memoizedFeaturedArtists}
       userCountry={userCountry}
       seeAllGlobal={false}
       data={localChart}
