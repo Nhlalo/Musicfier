@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   getScrollAmount,
   scrollGrid,
@@ -6,6 +6,7 @@ import {
   updateLeftEdgeSong,
   scrollToSongAtLeftEdge,
 } from "../utils/scrollGrid";
+import debounce from "../utils/debounce";
 
 export default function useScrollLogic(
   chartContainerRef,
@@ -17,69 +18,80 @@ export default function useScrollLogic(
   setScrollStartStatus,
   setScrollEndStatus,
 ) {
-  const updateButtonsCallback = useCallback(() => {
-    if (!chartContainerRef.current) return;
+  // Debounced button state updater – prevents race conditions during layout thrashing
+  // (e.g., images loading, fonts rendering, scrollbar appearance)
+  const updateButtonsCallback = useCallback(
+    debounce(() => {
+      if (!chartContainerRef.current) return;
 
-    const maxScroll = Math.max(
-      0,
-      chartContainerRef.current.scrollWidth -
-        chartContainerRef.current.clientWidth,
-    );
-    const currentScroll = chartContainerRef.current.scrollLeft;
+      const maxScroll = Math.max(
+        0,
+        chartContainerRef.current.scrollWidth -
+          chartContainerRef.current.clientWidth,
+      );
+      const currentScroll = chartContainerRef.current.scrollLeft;
 
-    setScrollStartStatus(currentScroll <= 1);
-    setScrollEndStatus(currentScroll >= maxScroll - 1);
-  }, []);
+      setScrollStartStatus(currentScroll <= 1);
+      setScrollEndStatus(currentScroll >= maxScroll - 1);
+    }, 100), // Waits 100ms of no calls before executing
+    [chartContainerRef, setScrollStartStatus, setScrollEndStatus],
+  );
 
+  // Reads which song (index) is currently at the left edge of the visible area
   const updateLeftEdgeSongCallback = useCallback(() => {
     if (!chartContainerRef.current) return;
     leftEdgeSongRef.current = updateLeftEdgeSong(chartContainerRef.current);
-  }, []);
+  }, [chartContainerRef, leftEdgeSongRef]);
 
-  const scrollToSongCallback = useCallback((songIndex) => {
-    if (!chartContainerRef.current) return;
-    scrollToSongAtLeftEdge(chartContainerRef.current, songIndex);
-    leftEdgeSongRef.current = songIndex;
-  }, []);
+  // Programmatically scrolls so that a given song becomes the leftmost visible item
+  const scrollToSongCallback = useCallback(
+    (songIndex) => {
+      if (!chartContainerRef.current) return;
+      scrollToSongAtLeftEdge(chartContainerRef.current, songIndex);
+      leftEdgeSongRef.current = songIndex; // keep ref in sync
+    },
+    [chartContainerRef, leftEdgeSongRef],
+  );
 
+  // Expose scroll method to the consuming component via a mutable ref
   scrollGridCallbackRef.current = useCallback(
     (direction) => {
       if (!chartContainerRef.current || isResizingRef.current) return;
 
-      // Restore smooth scrolling if it was disabled
       const grid = chartContainerRef.current;
+      // Re-enable smooth scrolling if it was disabled during a resize
       if (grid.style.scrollBehavior === "auto") {
         grid.style.scrollBehavior =
           originalScrollBehaviorRef.current || "smooth";
       }
 
-      updateLeftEdgeSongCallback();
-
+      updateLeftEdgeSongCallback(); // capture starting left edge
       scrollGrid(
         chartContainerRef.current,
         direction,
-        updateButtonsCallback,
+        updateButtonsCallback, // called after scroll finishes
         getScrollAmount(),
       );
-
-      updateLeftEdgeSongCallback();
+      updateLeftEdgeSongCallback(); // capture new left edge after scroll
     },
     [updateButtonsCallback, updateLeftEdgeSongCallback],
   );
 
+  // Handle window resize: temporarily disable smooth scroll, preserve visible song,
+  // then re-enable after layout stabilises.
   const handleResizeCallback = useCallback(() => {
     if (!chartContainerRef.current || isResizingRef.current) return;
 
     isResizingRef.current = true;
     const grid = chartContainerRef.current;
 
-    // Store original scroll behavior BEFORE changing it
+    // Remember original scroll behaviour (e.g., "smooth", "auto") before we override it
     originalScrollBehaviorRef.current = grid.style.scrollBehavior || "smooth";
 
     updateLeftEdgeSongCallback();
     const songToKeepVisible = leftEdgeSongRef.current;
 
-    // Disable smooth scroll temporarily
+    // Disable smooth scrolling and CSS transitions during resize to avoid glitches
     grid.style.scrollBehavior = "auto";
     document.body.classList.add("no-transitions");
 
@@ -93,16 +105,17 @@ export default function useScrollLogic(
         isResizingRef,
       );
 
-      // RESTORE smooth scrolling after resize is complete
+      // Restore original smooth scrolling after a short delay, ensuring any
+      // final layout adjustments have finished.
       setTimeout(() => {
         grid.style.scrollBehavior = originalScrollBehaviorRef.current;
         document.body.classList.remove("no-transitions");
-      }, 100); // Slightly longer delay to ensure restore
+      }, 100);
     }, 200);
   }, [updateLeftEdgeSongCallback, scrollToSongCallback, updateButtonsCallback]);
 
+  // Set up initial scroll behaviour, event listeners, and clean up on unmount
   useEffect(() => {
-    // Initialize with smooth scrolling
     const grid = chartContainerRef.current;
     if (grid) {
       originalScrollBehaviorRef.current = grid.style.scrollBehavior || "smooth";
@@ -110,14 +123,14 @@ export default function useScrollLogic(
     }
 
     updateLeftEdgeSongCallback();
-    updateButtonsCallback();
+    updateButtonsCallback(); // initial button state
 
     window.addEventListener("resize", handleResizeCallback);
 
     const handleScroll = () => {
       if (!isResizingRef.current) {
-        updateLeftEdgeSongCallback();
-        updateButtonsCallback();
+        updateLeftEdgeSongCallback(); // track left edge as user scrolls
+        updateButtonsCallback(); // update button enable/disable state
       }
     };
 
