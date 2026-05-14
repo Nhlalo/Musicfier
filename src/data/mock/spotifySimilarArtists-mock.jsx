@@ -1,5 +1,5 @@
 import { mockArtists } from "./spotifyArtist-mock";
-import ArtistImg from "../../assets/images/artistImg.jpg";
+import { mockDrakeImages } from "./mockImages";
 
 const allArtists = mockArtists.map((artist) => {
   return {
@@ -12,13 +12,13 @@ const mockSimilarArtists = [
     href: "https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ",
     name: "The Weeknd",
     id: "1Xyo4u8uXC1ZmMpatF05PJ",
-    image: ArtistImg,
+    image: mockDrakeImages,
   },
   {
     href: "https://api.spotify.com/v1/artists/6qqNVTkY8uBg9cP3Jd7DAH",
     name: "Billie Eilish",
     id: "6qqNVTkY8uBg9cP3Jd7DAH",
-    image: ArtistImg,
+    image: mockDrakeImages,
   },
 ];
 

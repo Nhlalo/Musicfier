@@ -1,17 +1,21 @@
 import { mockCharts } from "./spotify-mock";
 
-export default function findSong(id) {
-  const track = mockCharts.find(
-    (song) => song.songName.toLowerCase() == id.toLowerCase(),
-  );
+export default function findSong(songName) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const track = mockCharts.find(
+        (song) => song.songName.toLowerCase() == songName.toLowerCase(),
+      );
 
-  if (track) {
-    return {
-      artist: track.artistName,
-      title: track.songName,
-      coverUrl: track.songCover,
-    };
-  }
-
-  return track;
+      if (track) {
+        resolve({
+          artist: track.artistName,
+          title: track.songName,
+          coverUrl: track.songCover,
+        });
+      } else {
+        resolve(null);
+      }
+    }, 5000);
+  });
 }
