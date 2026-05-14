@@ -5,18 +5,20 @@ import useArtistSearch from "../../../hooks/useArtistsSearch/useArtistsSearch";
 import {
   concertsInformationContext,
   concertsLocationContext,
-} from "../concerts";
-import { LocationContext } from "../../../components/layout/rootLayout";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import debounce from "../../../utils/debounce";
-import formatDate from "../../../utils/dateConversion";
+} from "../Concerts";
+import { LocationContext } from "../../../components/layout/RootLayout";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import debounce from "../../../utils/debounce-utils";
+import { formatDate } from "../../../utils/date-utils";
 import ErrorMessage from "../../../hooks/useArtistsSearch/artistsSearchError";
 import Data from "../../../hooks/useArtistsSearch/artistsSearchData";
-import LoadingSpinner from "../../../components/ui/loadingSpinner/loadingSpinner";
-import ImageReplacement from "../../../components/ui/imageReplacement";
-import Styles from "./concertDetails.module.css";
+import LoadingSpinner from "../../../components/ui/loadingSpinner/LoadingSpinner";
+import ImageReplacement from "../../../components/ui/ImageReplacement";
+import Styles from "./ConcertDetails.module.css";
 
 const ArtistInputContext = createContext({});
 

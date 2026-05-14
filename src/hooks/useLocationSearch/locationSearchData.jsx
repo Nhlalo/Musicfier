@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { ChevronRight } from "lucide-react";
-import { concertsLocationContext } from "../../pages/concerts/concerts";
+import { concertsLocationContext } from "../../pages/concerts/Concerts";
 import {
   previousLocationSearchesContext,
   previousLocationsBTNContext,
-} from "../../pages/concerts/sidebar/concertLocation/concertLocation";
-import { InputContext } from "../../pages/concerts/sidebar/concertLocation/searchLocation";
+} from "../../pages/concerts/sidebar/concertLocation/ConcertLocation";
+import { InputContext } from "../../pages/concerts/sidebar/concertLocation/SearchLocation";
 import Styles from "./locationSearch.module.css";
 
 export default function Data({ locationData }) {

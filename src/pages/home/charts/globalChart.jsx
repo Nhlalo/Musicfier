@@ -1,8 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
-import { mockCharts } from "../../../data/mock/spotify-mock";
-import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
-import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
-import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
+import { mockCharts } from "../../../data/__mocks__/spotify/spotify.mock";
+import ChartContainer from "../../../components/shared/chartContainer/ChartContainer";
+import ChartHeading from "../../../components/shared/chartHeading/ChartHeading";
+import FeaturedArtists from "../../../components/shared/featuredArtists/FeaturedArtists";
 
 const content = {
   mainBG: "#fff",

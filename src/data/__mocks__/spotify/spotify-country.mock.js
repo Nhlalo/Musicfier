@@ -1,4 +1,4 @@
-import { mockDrakeAlbumCover, mockDrakeImages } from "./mockImages";
+import { mockDrakeAlbumCover, mockDrakeImages } from "../images.mock";
 
 function createMockSong(
   position,

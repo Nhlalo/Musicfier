@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import Styles from "./locationSearch.module.css";
+
 export default function ErrorMessage() {
   return (
     <div className={Styles.container}>

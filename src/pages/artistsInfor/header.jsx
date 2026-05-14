@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Ticket } from "lucide-react";
-import debounce from "../../utils/debounce";
-import generateFallBackImage from "../../utils/generateFallBackImage";
-import generateSizes from "../../utils/generateImgSizes";
-import generateSrcset from "../../utils/generateImgSrcset";
-import ImageReplacement from "../../components/ui/imageReplacement";
-import Styles from "./artistInfor.module.css";
+import debounce from "../../utils/debounce-utils";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../utils/imagery-utils";
+import ImageReplacement from "../../components/ui/ImageReplacement";
+import Styles from "./ArtistInfor.module.css";
 
 const HeaderContainer = styled.div`
   display: flex;

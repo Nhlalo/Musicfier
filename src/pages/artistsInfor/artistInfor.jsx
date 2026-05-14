@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router";
-import searchMockArtist from "../../data/mock/spotifyArtist-mock";
-import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
-import ArtistInforHeader from "./header";
-import TopTracks from "./topSongs";
-import UpcomingConcerts from "./upcomingConcerts";
-import SimilarArtists from "./similarArtists";
+import searchMockArtist from "../../data/__mocks__/spotify/spotify-artist-mock";
+import { searchMockEvents } from "../../data/__mocks__/ticketmaster-mock";
+import ArtistInforHeader from "./Header";
+import TopTracks from "./TopSongs";
+import UpcomingConcerts from "./UpcomingConcerts";
+import SimilarArtists from "./SimilarArtists";
 
 export default function ArtistInfor() {
   const [artistData, setArtistData] = useState([]);

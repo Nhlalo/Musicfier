@@ -1,5 +1,6 @@
 import Styles from "./locationSearch.module.css";
 import { LoaderCircle } from "lucide-react";
+
 export default function Loading() {
   return (
     <div className={Styles.loadingContainer}>

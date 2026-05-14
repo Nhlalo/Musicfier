@@ -5,8 +5,8 @@ import {
   faInstagram,
   faSnapchat,
 } from "@fortawesome/free-brands-svg-icons";
-import handleScrollToTop from "../../../utils/scrollToTop";
-import Styles from "./footer.module.css";
+import { handleScrollToTop } from "../../../utils/scroll-utils";
+import Styles from "./Footer.module.css";
 import logo from "../../../assets/images/logo.png";
 
 export default function Footer() {

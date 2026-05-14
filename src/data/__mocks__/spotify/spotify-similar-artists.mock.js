@@ -1,5 +1,5 @@
-import { mockArtists } from "./spotifyArtist-mock";
-import { mockDrakeImages } from "./mockImages";
+import { mockArtists } from "./spotify-artist-mock";
+import { mockDrakeImages } from "../images.mock";
 
 const allArtists = mockArtists.map((artist) => {
   return {

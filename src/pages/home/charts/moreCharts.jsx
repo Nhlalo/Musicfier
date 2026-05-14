@@ -1,9 +1,11 @@
 import { Link } from "react-router";
-import Styles from "./charts.module.css";
-import { mockCharts } from "../../../data/mock/spotify-mock";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
+import { mockCharts } from "../../../data/__mocks__/spotify/spotify.mock";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import Styles from "./Charts.module.css";
 
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 

@@ -1,15 +1,17 @@
 import { useContext, useState, useMemo } from "react";
 import { Play } from "lucide-react";
-import { chartContext } from "../charts";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import Song from "../../../components/shared/chartContainer/song";
-import mockYouTubeMusicLink from "../../../data/mock/youtube-mock";
+import { chartContext } from "../Charts";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import mockYouTubeMusicLink from "../../../data/__mocks__/youtube.mock";
+import Song from "../../../components/shared/chartContainer/Song";
+import ImageReplacement from "../../../components/ui/ImageReplacement";
 import spotifyLogo from "../../../assets/images/spotifylogo.png";
 import youtubeLogo from "../../../assets/images/youtube.png";
-import Styles from "./chartList.module.css";
-import ImageReplacement from "../../../components/ui/imageReplacement";
+import Styles from "./ChartList.module.css";
 
 export default function Chart({ BG = "rgb(89, 82, 63)" }) {
   return (

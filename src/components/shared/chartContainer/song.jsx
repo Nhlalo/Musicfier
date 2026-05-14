@@ -1,12 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { Link, useLocation } from "react-router";
 import { Play, Pause, LoaderCircle } from "lucide-react";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import ImageReplacement from "../../ui/imageReplacement";
-import AudioPlay from "./audioPlayer";
-import Styles from "./chartContainer.module.css";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import ImageReplacement from "../../ui/ImageReplacement";
+import AudioPlay from "./AudioPlayer";
+import Styles from "./ChartContainer.module.css";
 
 //Generate keys for the list of links
 let keys = [];

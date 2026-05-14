@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLocation } from "react-router";
-import searchMockSimilarArtists from "../../data/mock/spotifySimilarArtists-mock";
-import Container from "../../components/ui/container/container";
-import FeaturedArtists from "../../components/shared/featuredArtists/featuredArtists";
-import Styles from "./artistInfor.module.css";
+import searchMockSimilarArtists from "../../data/__mocks__/spotify/spotify-similar-artists.mock";
+import Container from "../../components/ui/container/Container";
+import FeaturedArtists from "../../components/shared/featuredArtists/FeaturedArtists";
+import Styles from "./ArtistInfor.module.css";
 
 export default function SimilarArtists({ artistData }) {
   const [similarArtists, setSimilarArtists] = useState([]);

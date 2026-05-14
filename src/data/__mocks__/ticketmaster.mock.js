@@ -1,4 +1,4 @@
-import { mockDrakeImages } from "./mockImages";
+import { mockDrakeImages } from "./images.mock";
 
 function getFormattedDate(daysOffset) {
   const date = new Date();

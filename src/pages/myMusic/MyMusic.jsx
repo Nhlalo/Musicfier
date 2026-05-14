@@ -1,9 +1,11 @@
-import generateFallBackImage from "../../utils/generateFallBackImage";
-import generateSizes from "../../utils/generateImgSizes";
-import generateSrcset from "../../utils/generateImgSrcset";
-import ImageReplacement from "../../components/ui/imageReplacement";
-import Song from "../../components/shared/chartContainer/song";
-import Styles from "./myMusic.module.css";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../utils/imagery-utils";
+import ImageReplacement from "../../components/ui/ImageReplacement";
+import Song from "../../components/shared/chartContainer/Song";
+import Styles from "./MyMusic.module.css";
 
 export default function MyMusic() {
   const myMusic = localStorage.getItem("myMusic");

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import debounce from "../utils/debounce";
+import debounce from "../utils/debounce-utils";
 
 export default function useTrackWindow() {
   const [windowSize, setWindowSize] = useState({

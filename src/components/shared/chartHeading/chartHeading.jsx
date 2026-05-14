@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { ChevronRight } from "lucide-react";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import { mockCharts } from "../../../data/mock/spotify-mock";
-import Styles from "./chartHeading.module.css";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import { mockCharts } from "../../../data/__mocks__/spotify/spotify.mock";
+import Styles from "./ChartHeading.module.css";
 
 const keys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 

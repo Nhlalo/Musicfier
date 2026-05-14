@@ -1,4 +1,4 @@
-import { mockDrakeAlbumCover } from "./mockImages";
+import { mockDrakeAlbumCover } from "../images.mock";
 
 const mockTopTracks = [
   {

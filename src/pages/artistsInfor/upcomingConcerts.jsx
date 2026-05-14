@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
-import Container from "../../components/ui/container/container";
-import Styles from "./artistInfor.module.css";
+import Container from "../../components/ui/container/Container";
+import Styles from "./ArtistInfor.module.css";
 
 export default function UpcomingConcerts({ artistName, concerts }) {
   //Upcoming concert data

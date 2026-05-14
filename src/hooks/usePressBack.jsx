@@ -1,8 +1,8 @@
 import { useEffect, useContext } from "react";
 import { useNavigationType, useNavigate, useLocation } from "react-router";
 import useRoutingHistory from "./useRoutingHistory";
-import { countryContext } from "../pages/charts/charts";
-import setBTNStatus from "../utils/updateBTNStatus";
+import { countryContext } from "../pages/charts/Charts";
+import setBTNStatus from "../utils/button-status-utils";
 
 //This is the logic for pressing the browser's back button within the charts page
 export default function usePressBack(changeBTNStatus) {

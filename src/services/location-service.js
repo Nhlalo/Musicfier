@@ -1,5 +1,35 @@
+//This will acquire the location of the user without any permission granted as it is crucial in displaying the charts within the user's location
+
+async function getUserLocation(signal) {
+  try {
+    const response = await fetch("https://ipapi.co/json/", { signal });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    return (
+      {
+        city: data.city,
+        country: data.country_name,
+        country_code: data.country,
+        lat: data.latitude,
+        lon: data.longitude,
+      } || null
+    );
+  } catch (error) {
+    if (error.name === "TypeError" || error.name === "SyntaxError") {
+      throw new Error(`Network/parsing error: ${error.message}`);
+    }
+    throw error;
+  }
+}
+
 //This aids in searching for the user's desired location by using the geonames api
-export default async function getLocation(location, signal) {
+async function getAnyLocation(location, signal) {
   if (!location || location.trim() === "") {
     return;
   }
@@ -46,3 +76,5 @@ export default async function getLocation(location, signal) {
     throw error;
   }
 }
+
+export { getUserLocation, getAnyLocation };

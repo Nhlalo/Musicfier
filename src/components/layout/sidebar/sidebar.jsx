@@ -1,14 +1,14 @@
 import { useRef, useContext, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router";
 import { X } from "lucide-react";
-import { LocationContext } from "../rootLayout.jsx";
-import determinePageNavigation from "../../../utils/determinePageNavigation.js";
-import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
-import useFocusTrap from "../../../hooks/useFocusTrap";
-import NavLinksContentRef from "../../../data/constants/navigation";
-import Container from "../../ui/container/container";
+import { LocationContext } from "../RootLayout.jsx";
+import determinePageNavigation from "../../../utils/page-navigation-utils.js";
+import { getTodayDate, getTomorrowDate } from "../../../utils/date-utils.js";
+import useFocusTrap from "../../../hooks/useFocusTrap.jsx";
+import NavLinksContentRef from "../../../utils/nav-utils.js";
+import Container from "../../ui/container/Container.jsx";
 import Logo from "../../../assets/images/logo.png";
-import Styles from "./sidebar.module.css";
+import Styles from "./Sidebar.module.css";
 
 export default function Sidebar({
   UpdateSidebarVisibility,

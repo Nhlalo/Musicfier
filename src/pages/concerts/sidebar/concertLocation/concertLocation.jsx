@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState, useMemo } from "react";
-import { mockUserLocation } from "../../../../data/mock/user-location-mock";
-import PreviousLocations from "./previousLocations";
-import ConcertLocationOptions from "./searchLocation";
-import Styles from "../sidebar.module.css";
+import { mockUserLocation } from "../../../../data/__mocks__/location.mock";
+import PreviousLocations from "./PreviousLocations";
+import ConcertLocationOptions from "./SearchLocation";
+import Styles from "../Sidebar.module.css";
 
 const userLocation = mockUserLocation;
 const previousLocationSearchesContext = createContext([]);

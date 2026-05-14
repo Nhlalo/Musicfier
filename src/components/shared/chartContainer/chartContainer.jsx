@@ -1,13 +1,13 @@
 import { useState, useRef, useMemo } from "react";
 import { useLocation } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import useScrollLogic from "../../../hooks/scrollLogic";
-import Song from "./song";
-import Styles from "./chartContainer.module.css";
+import useScrollLogic from "../../../hooks/useScrollLogic";
+import Song from "./Song";
+import Styles from "./ChartContainer.module.css";
 
 export default function ChartContainer({ data }) {
   const [scrollStartStatus, setScrollStartStatus] = useState(true);
-  const [scrollEndStatus, setScrollEndStatus] = useState(false);
+  const [scrollEndStatus, setScrollEndStatus] = useState(true);
   const [artistSong, setArtistSong] = useState(null);
 
   const chartContainerRef = useRef(null);

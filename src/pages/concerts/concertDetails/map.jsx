@@ -3,9 +3,9 @@ import { Calendar } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { concertsInformationContext } from "../concerts";
-import Styles from "./concertDetails.module.css";
-import ImageReplacement from "../../../components/ui/imageReplacement";
+import { concertsInformationContext } from "../Concerts";
+import ImageReplacement from "../../../components/ui/ImageReplacement";
+import Styles from "./ConcertDetails.module.css";
 
 // Fix Leaflet default icon issue
 delete L.Icon.Default.prototype._getIconUrl;

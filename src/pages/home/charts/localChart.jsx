@@ -1,8 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
-import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
-import ChartContainer from "../../../components/shared/chartContainer/chartContainer";
-import ChartHeading from "../../../components/shared/chartHeading/chartHeading";
-import FeaturedArtists from "../../../components/shared/featuredArtists/featuredArtists";
+import getMockCountryCharts from "../../../data/__mocks__/spotify/spotify-country.mock";
+import ChartContainer from "../../../components/shared/chartContainer/ChartContainer";
+import ChartHeading from "../../../components/shared/chartHeading/ChartHeading";
+import FeaturedArtists from "../../../components/shared/featuredArtists/FeaturedArtists";
 
 export default function LocalCharts({ location }) {
   const userCountry = location?.country;

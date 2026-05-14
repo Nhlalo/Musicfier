@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
-import getMockCountryCharts from "../../data/mock/spotifyCountry-mock";
-import ChartHeader from "./chartsHeader/chartsHeader";
+import getMockCountryCharts from "../../data/__mocks__/spotify/spotify-country.mock";
+import ChartHeader from "./chartsHeader/ChartsHeader";
 
 const countryContext = createContext({});
 const chartContext = createContext({});

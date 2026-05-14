@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getLocation from "../../data/mock/anylocation-mock";
+import getLocation from "../../data/__mocks__/location.mock";
 
 export default function useLocationSearch(characterChange) {
   const [data, setData] = useState(null);

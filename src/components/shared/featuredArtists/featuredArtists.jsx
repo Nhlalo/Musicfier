@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import useScrollLogic from "../../../hooks/scrollLogic";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import ImageReplacement from "../../ui/imageReplacement";
-import Styles from "./featuredArtists.module.css";
+import useScrollLogic from "../../../hooks/useScrollLogic";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import ImageReplacement from "../../ui/ImageReplacement";
+import Styles from "./FeaturedArtists.module.css";
 
 function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
   return (
@@ -35,7 +37,7 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
 }
 export default function FeaturedArtists({ data }) {
   const [scrollStartStatus, setScrollStartStatus] = useState(true);
-  const [scrollEndStatus, setScrollEndStatus] = useState(false);
+  const [scrollEndStatus, setScrollEndStatus] = useState(true);
 
   const chartContainerRef = useRef(null);
   const resizeTimeoutRef = useRef(null);

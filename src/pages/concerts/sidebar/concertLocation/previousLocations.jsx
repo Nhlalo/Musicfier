@@ -1,17 +1,17 @@
 import { useContext, useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import { searchMockEvents } from "../../../../data/mock/ticketmaster-mock";
+import { searchMockEvents } from "../../../../data/__mocks__/ticketmaster.mock";
 import {
   concertsDurationContext,
   concertsLocationContext,
   concertsInformationContext,
-} from "../../concerts";
+} from "../../Concerts";
+import { LocationContext } from "../../../../components/layout/RootLayout";
 import {
   previousLocationSearchesContext,
   previousLocationsBTNContext,
-} from "./concertLocation";
-import Styles from "../sidebar.module.css";
-import { LocationContext } from "../../../../components/layout/rootLayout";
+} from "./ConcertLocation";
+import Styles from "../Sidebar.module.css";
 
 const countryKeys = [
   crypto.randomUUID(),

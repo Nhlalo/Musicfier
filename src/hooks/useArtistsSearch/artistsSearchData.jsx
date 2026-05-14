@@ -3,13 +3,15 @@ import { useNavigate, useSearchParams, useParams } from "react-router";
 import {
   concertsInformationContext,
   artistInforContext,
-} from "../../pages/concerts/concerts";
-import { ArtistInputContext } from "../../pages/concerts/concertDetails/findConcerts";
-import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
-import generateFallBackImage from "../../utils/generateFallBackImage";
-import generateSizes from "../../utils/generateImgSizes";
-import generateSrcset from "../../utils/generateImgSrcset";
-import ImageReplacement from "../../components/ui/imageReplacement";
+} from "../../pages/concerts/Concerts";
+import { ArtistInputContext } from "../../pages/concerts/concertDetails/FindConcerts";
+import { searchMockEvents } from "../../data/__mocks__/ticketmaster.mock";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../utils/imagery-utils";
+import ImageReplacement from "../../components/ui/ImageReplacement";
 import Styles from "./artistsSearch.module.css";
 
 function Artists({ imagesrc, name, dataID }) {

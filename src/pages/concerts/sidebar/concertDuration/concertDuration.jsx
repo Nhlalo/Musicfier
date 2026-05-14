@@ -1,14 +1,14 @@
 import { useState, useRef, useMemo, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router";
-import { concertsDurationContext } from "../../concerts";
+import { concertsDurationContext } from "../../Concerts";
 import {
   getTodayDate,
   getTomorrowDate,
   getDayAfterTomorrowDate,
   getThisWeekendDates,
-} from "../../../../utils/dates";
-import ConcertCustomDuration from "./customDuration";
-import Styles from "../sidebar.module.css";
+} from "../../../../utils/date-utils";
+import ConcertCustomDuration from "./CustomDuration";
+import Styles from "../Sidebar.module.css";
 
 export default function ConcertDuration() {
   const { setDateDuration } = useContext(concertsDurationContext);

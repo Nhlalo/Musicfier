@@ -1,4 +1,4 @@
-import { mockCharts } from "./spotify-mock";
+import { mockCharts } from "./spotify/spotify.mock";
 
 export default function findSong(songName) {
   return new Promise((resolve, reject) => {

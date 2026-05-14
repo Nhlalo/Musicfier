@@ -2,12 +2,14 @@ import { useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router";
 import Error from "../../audioRecognition/error";
 import { X } from "lucide-react";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
 import Logo from "../../../assets/images/logo.png";
-import Styles from "./about.module.css";
 import ArtistImg from "../../../assets/images/artistImg.jpg";
+import Styles from "./About.module.css";
 
 export default function About() {
   // The errorStatus prop will be useful for audio searching errors/ no audio found return

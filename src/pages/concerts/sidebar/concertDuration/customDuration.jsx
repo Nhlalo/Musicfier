@@ -1,8 +1,8 @@
 import { useState, useRef, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router";
 import { ChevronDown, ChevronUp, Calendar } from "lucide-react";
-import { concertsDurationContext } from "../../concerts";
-import Styles from "../sidebar.module.css";
+import { concertsDurationContext } from "../../Concerts";
+import Styles from "../Sidebar.module.css";
 
 function DurationInput({
   duration,

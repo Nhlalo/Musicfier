@@ -1,0 +1,23 @@
+function generateFallBackImage(images) {
+  const imagery = images.sort((a, b) => a.width - b.width);
+  return imagery[imagery.length - 1].url;
+}
+
+//This will generate value for the Srcset attribute for an image element
+function generateSrcset(images) {
+  const sorted = [...images].sort((a, b) => a.width - b.width);
+
+  return sorted.map((img) => `${img.url} ${img.width}w`).join(", ");
+}
+
+//This will generate value for the size attribute for an image element
+function generateSizes(images) {
+  const sorted = [...images].sort((a, b) => a.width - b.width);
+  const smallest = sorted[0].width;
+  const medium = sorted[1]?.width || smallest;
+  const largest = sorted[sorted.length - 1].width;
+
+  return `(max-width: ${smallest * 2}px) ${smallest}px, (max-width: ${largest}px) ${medium}px, ${largest}px`;
+}
+
+export { generateFallBackImage, generateSizes, generateSrcset };

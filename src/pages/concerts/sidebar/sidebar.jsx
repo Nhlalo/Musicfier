@@ -1,11 +1,15 @@
 import { forwardRef, useState, useRef, useEffect } from "react";
 import { X } from "lucide-react";
 import useTrackWindow from "../../../hooks/useTrackWindow";
-import { openDialog, closeDialog, displayModal } from "../../../utils/modal";
-import getFocusableElements from "../../../utils/focusableElements";
-import ConcertDuration from "./concertDuration/concertDuration";
-import ConcertLocations from "./concertLocation/concertLocation";
-import Styles from "./sidebar.module.css";
+import {
+  openDialog,
+  closeDialog,
+  displayModal,
+} from "../../../utils/dialog-utils";
+import getFocusableElements from "../../../utils/focusable-elements-utils";
+import ConcertDuration from "./concertDuration/ConcertDuration";
+import ConcertLocations from "./concertLocation/ConcertLocation";
+import Styles from "./Sidebar.module.css";
 
 const Sidebar = forwardRef(function (props, ref) {
   const { sideBarClassName } = props;

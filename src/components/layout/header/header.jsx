@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { useMatches, Link, useLocation, useNavigate } from "react-router";
 import { Menu } from "lucide-react";
-import { LocationContext } from "../rootLayout.jsx";
-import { navLinksContent } from "../../../data/constants/navigation.jsx";
-import determinePageNavigation from "../../../utils/determinePageNavigation.js";
-import handleScrollToTop from "../../../utils/scrollToTop.jsx";
-import { getTodayDate, getTomorrowDate } from "../../../utils/dates.jsx";
-import Sidebar from "../sidebar/sidebar.jsx";
-import Styles from "./header.module.css";
+import { LocationContext } from "../RootLayout.jsx";
+import { Nav_Links_Content } from "../../../data/constants/nav-constants.js";
+import determinePageNavigation from "../../../utils/page-navigation-utils.js";
+import { handleScrollToTop } from "../../../utils/scroll-utils.js";
+import { getTodayDate, getTomorrowDate } from "../../../utils/date-utils.js";
+import Sidebar from "../sidebar/Sidebar.jsx";
+import Styles from "./Header.module.css";
 import Logo from "../../../assets/images/logo.png";
 
 export default function Header({}) {
@@ -104,7 +104,7 @@ export default function Header({}) {
           </button>
           <nav className={Styles.navContainer}>
             <ul className={Styles.listContainer}>
-              {navLinksContent.map((element) => (
+              {Nav_Links_Content.map((element) => (
                 <li className={Styles.navListItem} key={element.key}>
                   <Link
                     to={determinePageNavigation(

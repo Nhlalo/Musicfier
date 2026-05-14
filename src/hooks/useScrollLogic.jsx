@@ -5,8 +5,8 @@ import {
   handleResize,
   updateLeftEdgeSong,
   scrollToSongAtLeftEdge,
-} from "../utils/scrollGrid";
-import debounce from "../utils/debounce";
+} from "../utils/scroll-utils";
+import debounce from "../utils/debounce-utils";
 
 export default function useScrollLogic(
   chartContainerRef,
@@ -33,7 +33,7 @@ export default function useScrollLogic(
 
       setScrollStartStatus(currentScroll <= 1);
       setScrollEndStatus(currentScroll >= maxScroll - 1);
-    }, 100), // Waits 100ms of no calls before executing
+    }, 150),
     [chartContainerRef, setScrollStartStatus, setScrollEndStatus],
   );
 

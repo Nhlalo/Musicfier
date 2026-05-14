@@ -1,3 +1,11 @@
+const mockUserLocation = {
+  city: "Johannesburg",
+  country: "South Africa",
+  country_code: "ZA",
+  lat: -26.195246,
+  lon: 28.034088,
+};
+
 const mockLocation = [
   {
     city: "Johannesburg",
@@ -53,4 +61,4 @@ export default function getLocation(locationInput) {
     }, 5000);
   });
 }
-export { mockLocation };
+export { mockLocation, mockUserLocation };

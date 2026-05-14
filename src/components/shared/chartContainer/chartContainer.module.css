@@ -121,7 +121,7 @@
 .chartWrapper {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(7, 80vw);
+  grid-template-columns: repeat(auto-fit, 80vw);
   grid-template-rows: repeat(3, 1fr);
   grid-auto-flow: column;
   gap: 10px 15px;
@@ -184,6 +184,6 @@
   }
 
   .chartWrapper {
-    grid-template-columns: repeat(7, 45%);
+    grid-template-columns: repeat(auto-fit, 45%);
   }
 }

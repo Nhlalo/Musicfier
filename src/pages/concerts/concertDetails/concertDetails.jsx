@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
 import { Map, ListCollapse, X } from "lucide-react";
-import debounce from "../../../utils/debounce";
-import getFocusableElements from "../../../utils/focusableElements";
-import { displayModal } from "../../../utils/modal";
-import ConcertsInformation from "./findConcerts";
-import SidebarVisibility, { Sidebar } from "../sidebar/sidebar";
-import ConcertMap from "./map";
+import debounce from "../../../utils/debounce-utils";
+import getFocusableElements from "../../../utils/focusable-elements-utils";
+import { displayModal } from "../../../utils/dialog-utils";
+import ConcertsInformation from "./FindConcerts";
+import SidebarVisibility, { Sidebar } from "../sidebar/Sidebar";
+import ConcertMap from "./Map";
 import ArtistImg from "../../../assets/images/artistImg.jpg";
-import Styles from "./concertDetails.module.css";
+import Styles from "./ConcertDetails.module.css";
 
 const FilterSidebarHeader = forwardRef(function (props, ref) {
   const { showSidebar, sideBarVisible } = props;

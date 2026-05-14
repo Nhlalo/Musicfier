@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import AudioPlayer from "react-h5-audio-player";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
 import SpotifyLogo from "../../../assets/images/spotifylogo.png";
 import "react-h5-audio-player/lib/styles.css";
-import "./audioPlayer.css";
+import "./AudioPlayer.css";
 
 export default function AudioPlay({
   songCover,

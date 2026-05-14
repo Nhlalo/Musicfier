@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import Select from "react-select";
-import { chartContext, countryContext } from "../charts";
-import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
-import { mockCountries } from "../../../data/mock/allcountries-mock";
-import "./countrySelect.css";
+import { chartContext, countryContext } from "../Charts";
+import getMockCountryCharts from "../../../data/__mocks__/spotify/spotify-country.mock";
+import { mockCountries } from "../../../data/__mocks__/countries.mock";
+import "./CountrySelect.css";
 
 export default function CountrySelect({ classname, classPrefix }) {
   const navigate = useNavigate();

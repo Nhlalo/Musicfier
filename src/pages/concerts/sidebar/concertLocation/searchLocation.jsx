@@ -1,11 +1,11 @@
 import { useState, useRef, useMemo, createContext } from "react";
 import { ChevronDown, ChevronUp, MapPinCheck, Search } from "lucide-react";
 import useLocationSearch from "../../../../hooks/useLocationSearch/useLocationSearch";
-import debounce from "../../../../utils/debounce";
+import debounce from "../../../../utils/debounce-utils";
 import Data from "../../../../hooks/useLocationSearch/locationSearchData";
 import ErrorMessage from "../../../../hooks/useLocationSearch/locationSearchError";
 import Loading from "../../../../hooks/useLocationSearch/locationSearchLoading";
-import Styles from "../sidebar.module.css";
+import Styles from "../Sidebar.module.css";
 
 const InputContext = createContext("");
 

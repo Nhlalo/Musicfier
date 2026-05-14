@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getMockArtistData } from "../../data/mock/ticketmaster-mock";
+import { getMockArtistData } from "../../data/__mocks__/ticketmaster.mock";
+
 export default function useArtistSearch(characterChange) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

@@ -1,16 +1,18 @@
 import { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate, useLoaderData, useParams } from "react-router";
 import { ChevronDown } from "lucide-react";
-import generateFallBackImage from "../../../utils/generateFallBackImage";
-import generateSizes from "../../../utils/generateImgSizes";
-import generateSrcset from "../../../utils/generateImgSrcset";
+import {
+  generateFallBackImage,
+  generateSizes,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
 import usePressBack from "../../../hooks/usePressBack";
-import getMockCountryCharts from "../../../data/mock/spotifyCountry-mock";
-import setBTNStatus from "../../../utils/updateBTNStatus";
-import { chartContext, countryContext } from "../charts";
-import CountrySelect from "./countrySelect";
-import Chart from "../chartList/chartList";
-import Styles from "./chartsHeader.module.css";
+import getMockCountryCharts from "../../../data/__mocks__/spotify/spotify-country.mock";
+import setBTNStatus from "../../../utils/button-status-utils";
+import { chartContext, countryContext } from "../Charts";
+import CountrySelect from "./CountrySelect";
+import Chart from "../chartList/ChartList";
+import Styles from "./ChartsHeader.module.css";
 
 //Generate keys for the images
 const imgKeys = Array.from({ length: 2 }, () => crypto.randomUUID());

@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect, createContext, useContext } from "react";
-import { LocationContext } from "../../components/layout/rootLayout";
-import { searchMockEvents } from "../../data/mock/ticketmaster-mock";
-import { getTodayDate, getTomorrowDate } from "../../utils/dates";
-import Concerts from "./concertDetails/concertDetails";
 import { useLocation } from "react-router";
+import { LocationContext } from "../../components/layout/RootLayout";
+import { searchMockEvents } from "../../data/__mocks__/ticketmaster.mock";
+import { getTodayDate, getTomorrowDate } from "../../utils/date-utils";
+import Concerts from "./concertDetails/ConcertDetails";
 
 const concertsDurationContext = createContext({});
 const concertsLocationContext = createContext({});

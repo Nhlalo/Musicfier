@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect, useLayoutEffect } from "react";
 import { Outlet, useMatches, useLocation } from "react-router";
-import { mockUserLocation } from "../../data/mock/user-location-mock";
-import Header from "./header/header";
-import Footer from "./footer/footer";
+import { mockUserLocation } from "../../data/__mocks__/location.mock";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
 
 const LocationContext = createContext();
 

@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLocation } from "react-router";
-import { mockTopTracks } from "../../data/mock/spotifyArtistTopSongs-mock";
-import Container from "../../components/ui/container/container";
-import ChartContainer from "../../components/shared/chartContainer/chartContainer";
-import Styles from "./artistInfor.module.css";
+import { mockTopTracks } from "../../data/__mocks__/spotify/spotify-artist-top-songs.mock";
+import Container from "../../components/ui/container/Container";
+import ChartContainer from "../../components/shared/chartContainer/ChartContainer";
+import Styles from "./ArtistInfor.module.css";
 
 export default function TopTracks({ artistName }) {
   const [topTracks, setTopTracks] = useState([]);

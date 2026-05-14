@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AudioLines, X, Ellipsis } from "lucide-react";
-import findSong from "../../data/mock/audioRecogntion-mock";
-import Styles from "./audioRecognition.module.css";
+import findSong from "../../data/__mocks__/audio-recogntion.mock";
+import Styles from "./AudioRecognition.module.css";
 import searchImage from "../../assets/images/logo.png";
 
 const saveSongToLocalStorage = (song) => {
