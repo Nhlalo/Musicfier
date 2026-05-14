@@ -59,9 +59,7 @@ async function getArtistData(keyword, signal) {
     const artists = data._embedded.attractions.map((artist) => ({
       id: artist.id,
       name: artist.name,
-      image:
-        artist.images?.find((img) => img.ratio === "16_9")?.url ||
-        artist.images?.[0]?.url,
+      image: artist.images,
       genre: artist.classifications?.[0]?.genre?.name,
       upcomingEvents: artist.upcomingEvents?._total || 0,
     }));
@@ -127,9 +125,7 @@ async function searchEvents(
           // Artist info (from attractions)
           artistId: attraction?.id,
           artistName: attraction?.name,
-          artistImage:
-            attraction?.images?.find((img) => img.ratio === "16_9")?.url ||
-            attraction?.images?.[0]?.url,
+          artistImage: attraction?.images,
           artistGenre: attraction?.classifications?.[0]?.genre?.name,
 
           // Venue info

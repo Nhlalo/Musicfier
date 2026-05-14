@@ -68,9 +68,9 @@ async function searchSpotifyTrack(trackName, artistName, token, signal) {
       return {
         spotifyLink: track.external_urls.spotify,
         previewUrl: track.preview_url,
-        songCover: track.album.images[0]?.url || null,
+        songCover: track.album.images || null,
         spotifyId: track.id,
-        artistImage: artistData.images[0]?.url || null,
+        artistImage: artistData.images || null,
       };
     }
   } catch (error) {
@@ -160,7 +160,7 @@ async function getArtistWithSpotify(token, id, signal) {
         spotifyLink: artistData.href,
         artistName: artistData.name,
         spotifyArtistId: artistData.id,
-        artistImage: artistData.images[0]?.url || null,
+        artistImage: artistData.images?.url || null,
       } || null
     );
   } catch (error) {
@@ -203,7 +203,7 @@ async function getSimilarArtists(token, artistId, signal) {
         spotifyLink: artist.href,
         artistName: artist.name,
         spotifyArtistId: artist.id,
-        artistImage: artist.images?.[0]?.url || null,
+        artistImage: artist.images?.url || null,
       })) | null
     );
   } catch (error) {
@@ -251,7 +251,7 @@ async function getArtistTopSongs(token, id, signal) {
 
         artistName: artists[0].name,
         // Album image (main album art)
-        songCover: track.album.images[0]?.url || null,
+        songCover: track.album.images || null,
         albumName: track.album.name,
       })) || null
     );
