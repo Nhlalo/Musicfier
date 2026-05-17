@@ -18,7 +18,7 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
     >
       <figure className={Styles.artistWrapper} aria-hidden="true">
         {/* Use an icon when there is no artist image source */}
-        {artistImg.length > 0 && (
+        {artistImg?.length > 0 && (
           <img
             src={generateFallBackImage(artistImg)}
             srcSet={generateSrcset(artistImg)}
@@ -27,7 +27,7 @@ function FeaturedArtist({ artistSpotifyID, artistName, artistImg }) {
             className={Styles.artistImg}
           />
         )}
-        {artistImg.length == 0 && (
+        {artistImg?.length == 0 && (
           <ImageReplacement iconClass={Styles.artistImg} />
         )}
         <figcaption className={Styles.artistName}>{artistName}</figcaption>
@@ -65,7 +65,8 @@ export default function FeaturedArtists({ data }) {
       <div className={Styles.featuredArtistsContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.featuredArtistsWrapper} ref={chartContainerRef}>
-          {data.length > 0 &&
+          {data &&
+            data?.length > 0 &&
             data.map((songData, index) => (
               <FeaturedArtist
                 artistSpotifyID={songData.spotifyArtistId}

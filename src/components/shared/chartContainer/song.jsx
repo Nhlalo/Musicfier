@@ -87,7 +87,7 @@ export default function Song({
               data-artistsong={`${artistID}_${songName}`}
             >
               {/* When there is no image use just display an icon */}
-              {image.length > 0 && (
+              {image?.length > 0 && (
                 <img
                   src={generateFallBackImage(image)}
                   srcSet={generateSrcset(image)}
@@ -98,7 +98,7 @@ export default function Song({
                   loading="lazy"
                 />
               )}
-              {image.length == 0 && (
+              {image?.length == 0 && (
                 <ImageReplacement iconClass={Styles.artistImg} />
               )}
               <div className={Styles.playIconContainer}>

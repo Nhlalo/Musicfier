@@ -43,7 +43,8 @@ export default function ChartContainer({ data }) {
       <div className={Styles.chartContainer}>
         <div className={Styles.overlay}></div>
         <div className={Styles.chartWrapper} ref={chartContainerRef}>
-          {data.length > 0 &&
+          {data &&
+            data?.length > 0 &&
             data.map((songData, index) => (
               <Song
                 songName={songData?.songName}

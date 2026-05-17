@@ -54,7 +54,7 @@ export default function ChartHeading({
           className={Styles.featuredArtistsImgContainer}
           style={{ display: displayFeaturedArtistsImg ? "flex" : "none" }}
         >
-          {data.length &&
+          {data?.length &&
             data.slice(0, 3).map((songData, index) => {
               const artistImage = songData.artistImage;
               return (
