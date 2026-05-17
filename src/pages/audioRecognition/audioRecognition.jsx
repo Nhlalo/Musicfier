@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AudioLines, X, Ellipsis } from "lucide-react";
 import findSong from "../../data/__mocks__/audio-recogntion.mock";
+import recordFromMic from "../../services/audio-recording-service";
+import recognizeWithAudD from "../../services/audio-recognition-service";
 import Styles from "./AudioRecognition.module.css";
 import searchImage from "../../assets/images/logo.png";
 
@@ -9,8 +11,9 @@ const saveSongToLocalStorage = (song) => {
   try {
     const myMusic = localStorage.getItem("myMusic");
     const existingSongs = myMusic ? JSON.parse(myMusic) : [];
+    console.log(existingSongs);
     const songExists = existingSongs.some(
-      (existingSong) => existingSong.id === song.id,
+      (existingSong) => existingSong.id === song?.id,
     );
     if (!songExists) {
       const makeJSON = JSON.stringify([...existingSongs, song]);
@@ -23,18 +26,37 @@ const saveSongToLocalStorage = (song) => {
 
 export default function AudioRecognition() {
   const [data, setData] = useState(null);
-  const microphonPermission = true;
   const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
+    let hasStartedRecording = false;
 
-    async function recognizeAudio() {
-      if (microphonPermission) {
-        const id = "Bad Guy";
-        if (id) {
-          const song = await findSong(id);
-          console.log("Song", song);
+    const AUDD_KEY = import.meta.env.VITE_AUDD_KEY;
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    const recognizeAudio = async () => {
+      if (hasStartedRecording) return; // Prevent multiple starts
+      hasStartedRecording = true;
+
+      try {
+        if (signal.aborted) return;
+
+        const audioBlob = await recordFromMic(15000, signal);
+        console.log(audioBlob);
+        if (audioBlob) {
+          if (signal.aborted) return;
+
+          const song = await recognizeWithAudD(audioBlob, AUDD_KEY, signal);
+          console.log("song", song);
+
+          if (!song) {
+            throw new Error("No Song");
+          }
+
+          if (signal.aborted) return;
+
           saveSongToLocalStorage(song);
 
           if (!isMounted) return;
@@ -46,18 +68,29 @@ export default function AudioRecognition() {
             },
           });
         } else {
+          if (!isMounted) return;
+
           navigate("/", {
             state: {
               errorState: true,
             },
           });
         }
+      } catch (error) {
+        if (!isMounted) return;
+        console.error(error);
+        navigate("/", {
+          state: {
+            errorState: true,
+          },
+        });
       }
-    }
+    };
 
     recognizeAudio();
 
     return () => {
+      abortController.abort();
       isMounted = false;
     };
   }, []);

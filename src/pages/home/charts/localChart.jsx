@@ -4,8 +4,7 @@ import ChartContainer from "../../../components/shared/chartContainer/ChartConta
 import ChartHeading from "../../../components/shared/chartHeading/ChartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/FeaturedArtists";
 
-export default function LocalCharts({ location }) {
-  const userCountry = location?.country;
+export default function LocalCharts({ localChart, userCountry }) {
   const content = {
     mainBG: "#f2f2f7",
     displayFeaturedArtistsImg: true,
@@ -16,8 +15,6 @@ export default function LocalCharts({ location }) {
     subHeading: `Discovery ${userCountry} Tracks`,
   };
 
-  const [localChart, setLocalChart] = useState([]);
-
   const memoizedChartContainer = useMemo(
     () => <ChartContainer data={localChart} />,
     [localChart],
@@ -27,15 +24,6 @@ export default function LocalCharts({ location }) {
     () => <FeaturedArtists data={localChart} />,
     [localChart],
   );
-
-  useEffect(() => {
-    if (userCountry) {
-      const mockLocalChart = getMockCountryCharts(userCountry);
-      if (mockLocalChart) {
-        setLocalChart(mockLocalChart);
-      }
-    }
-  }, [userCountry]);
 
   return (
     <ChartHeading

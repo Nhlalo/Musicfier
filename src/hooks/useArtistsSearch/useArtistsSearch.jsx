@@ -1,46 +1,56 @@
 import { useState, useEffect } from "react";
 import { getMockArtistData } from "../../data/__mocks__/ticketmaster.mock";
+import { getArtistData } from "../../services/ticketmaster-service";
+import { getAccessToken } from "../../services/ticketmaster-service";
 
 export default function useArtistSearch(characterChange) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
-    /* Implement abort Controller*/
-    // const abortController = new AbortController();
-    // const signal = abortController.signal;
+    const abortController = new AbortController();
+    const { signal } = abortController;
 
-    getMockArtistData(characterChange)
-      .then((value) => {
-        // Check if request was cancelled
-        if (value === undefined) {
-          throw new Error("No location");
+    const acquireArtistData = async () => {
+      try {
+        if (signal.aborted) return;
+
+        let token = localStorage.getItem("TicketMasterToken");
+        if (!token) {
+          token = await getAccessToken(signal);
+          console.log("Token");
+          if (signal.aborted) return;
+          if (!token) {
+            throw new Error("Failed to obtain access token");
+          }
+          localStorage.setItem("TicketMasterToken", token);
         }
-        /*if (!signal.aborted) {
-          setData(value);
-          setError(false);
-        }*/
-        //Delete this part and use the above when using real data
-        setData(value);
-        setError(false);
-      })
-      .catch((error) => {
-        // Only set error if it wasn't an abort error
-        if (error.name !== "AbortError") {
-          setError(true);
+
+        const artistData = await getArtistData(characterChange, token, signal);
+        if (signal.aborted) return;
+
+        if (!artistData) {
+          throw new Error("No artist data found");
         }
-      })
-      .finally(() => {
-        /* if (!signal.aborted) {
-          setLoading(false);
-        }*/
-        //Delete this part and use the above when using real data
+
+        setData(artistData);
+        setError(null);
         setLoading(false);
-      });
+      } catch (err) {
+        if (signal.aborted) return;
 
-    /* return () => {
+        setError(err.message || true);
+        setLoading(false);
+      }
+    };
+
+    acquireArtistData();
+
+    return () => {
       abortController.abort();
-    }; */
+    };
   }, [characterChange]);
+
   return { data, loading, error };
 }

@@ -9,8 +9,8 @@ import Styles from "./Charts.module.css";
 
 const imgKeys = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
 
-function MoreChart({ location }) {
-  const userCountry = location?.country;
+function MoreChart({ location, localChart }) {
+  const userCountry = async () => await location?.country;
 
   return (
     <Link
@@ -19,7 +19,7 @@ function MoreChart({ location }) {
       aria-label={`View the Top 50 ${userCountry} chart`}
     >
       <div className={Styles.featuredSongCoverContainer} aria-hidden="true">
-        {mockCharts.slice(0, 3).map((songData, index) => {
+        {localChart?.slice(0, 3).map((songData, index) => {
           const artistImage = songData.artistImage;
           return (
             <div
@@ -45,8 +45,8 @@ function MoreChart({ location }) {
           <span className={Styles.chartDescrHeading}>{userCountry}</span>
           <p className={Styles.featuredArtists}>
             {"Featuring songs from ".concat(
-              mockCharts
-                .slice(0, 8)
+              localChart
+                ?.slice(0, 8)
                 .map((songData) => songData.artistName)
                 .join(", "),
               " and more",

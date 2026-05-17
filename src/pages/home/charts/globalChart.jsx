@@ -3,6 +3,10 @@ import { mockCharts } from "../../../data/__mocks__/spotify/spotify.mock";
 import ChartContainer from "../../../components/shared/chartContainer/ChartContainer";
 import ChartHeading from "../../../components/shared/chartHeading/ChartHeading";
 import FeaturedArtists from "../../../components/shared/featuredArtists/FeaturedArtists";
+import {
+  getChartWithSpotify,
+  getSpotifyToken,
+} from "../../../services/spotify-service";
 
 const content = {
   mainBG: "#fff",
@@ -14,25 +18,16 @@ const content = {
   displayChart: true,
   subHeading: "Global Top 200 Chart",
 };
-export default function GlobalCharts() {
-  const [globalChart, setGlobalChart] = useState([]);
-
+export default function GlobalCharts(globalChart) {
   const memoizedChartContainer = useMemo(
     () => <ChartContainer data={globalChart} />,
-    [globalChart], // Only recreate when data changes
+    [globalChart],
   );
 
   const memoizedFeaturedArtists = useMemo(
     () => <FeaturedArtists data={globalChart} />,
     [globalChart],
   );
-
-  useEffect(() => {
-    const mockGlobalChart = mockCharts;
-    if (mockGlobalChart) {
-      setGlobalChart(mockGlobalChart);
-    }
-  }, []);
 
   return (
     <ChartHeading

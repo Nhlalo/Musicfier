@@ -1,46 +1,50 @@
 import { useEffect, useState } from "react";
-import getLocation from "../../data/__mocks__/location.mock";
+import { getAnyLocation } from "../../services/location-service";
 
 export default function useLocationSearch(characterChange) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  useEffect(() => {
-    /* Implement abort Controller*/
-    // const abortController = new AbortController();
-    // const signal = abortController.signal;
 
-    getLocation(characterChange)
-      .then((value) => {
-        // Check if request was cancelled
-        if (value === undefined || value === null || value.length == 0) {
+  useEffect(() => {
+    const GEONAMES_USERNAME = import.meta.env.VITE_GEONAMES_USERNAME;
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    const fetchLocation = async () => {
+      try {
+        if (signal.aborted) return;
+
+        const value = await getAnyLocation(
+          characterChange,
+          GEONAMES_USERNAME,
+          signal,
+        );
+
+        if (signal.aborted) return;
+
+        if (!value) {
           throw new Error("No location");
         }
-        /* if (!signal.aborted) {
-          setData(value);
-          setError(false);
-        } */
+
         setData(value);
         setError(false);
-      })
-      .catch((error) => {
-        // Only set error if it wasn't an abort error
-        if (error.name !== "AbortError") {
+        setLoading(false);
+      } catch (err) {
+        if (signal.aborted) return;
+        if (err.name !== "AbortError") {
           setError(true);
         }
-      })
-      .finally(() => {
-        /*
-        if (!signal.aborted) {
-          setLoading(false);
-        } */
-
         setLoading(false);
-      });
+      }
+    };
 
-    /* return () => {
+    fetchLocation();
+
+    return () => {
       abortController.abort();
-    }; */
+    };
   }, [characterChange]);
+
   return { data, loading, error };
 }
