@@ -11,15 +11,15 @@ async function getUserLocation(signal) {
     }
 
     const data = await response.json();
-    return (
-      {
-        city: data.city,
-        country: data.country_name,
-        country_code: data.country,
-        lat: data.latitude,
-        lon: data.longitude,
-      } || null
-    );
+    return data
+      ? {
+          city: data.city,
+          country: data.country_name,
+          country_code: data.country,
+          lat: data.latitude,
+          lon: data.longitude,
+        }
+      : null;
   } catch (error) {
     if (error.name === "TypeError" || error.name === "SyntaxError") {
       throw new Error(`Network/parsing error: ${error.message}`);
@@ -29,7 +29,7 @@ async function getUserLocation(signal) {
 }
 
 //This aids in searching for the user's desired location by using the geonames api
-async function getAnyLocation(location, signal) {
+async function getAnyLocation(location, GEONAMES_USERNAME, signal) {
   if (!location || location.trim() === "") {
     return;
   }
@@ -58,7 +58,7 @@ async function getAnyLocation(location, signal) {
 
     //Throw an error if the place does not exist within the Geonames database
     if (!data.geonames || data.geonames.length === 0) {
-      throw new Error("No place found");
+      return null;
     }
 
     const locationResult = data.geonames.map((place) => ({
@@ -68,7 +68,7 @@ async function getAnyLocation(location, signal) {
       key: crypto.randomUUID(), // Keys are needed for any list creation
     }));
 
-    return locationResult || null;
+    return locationResult;
   } catch (error) {
     if (error.name === "TypeError" || error.name === "SyntaxError") {
       throw new Error(`Network/parsing error: ${error.message}`);
