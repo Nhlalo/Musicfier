@@ -1,10 +1,12 @@
 function generateFallBackImage(images) {
+  if (!Array.isArray(images)) return;
   const imagery = images.sort((a, b) => a.width - b.width);
   return imagery[imagery.length - 1].url;
 }
 
 //This will generate value for the Srcset attribute for an image element
 function generateSrcset(images) {
+  if (!Array.isArray(images)) return;
   const sorted = [...images].sort((a, b) => a.width - b.width);
 
   return sorted.map((img) => `${img.url} ${img.width}w`).join(", ");
@@ -12,6 +14,7 @@ function generateSrcset(images) {
 
 //This will generate value for the size attribute for an image element
 function generateSizes(images) {
+  if (!Array.isArray(images)) return;
   const sorted = [...images].sort((a, b) => a.width - b.width);
   const smallest = sorted[0].width;
   const largest = sorted[sorted.length - 1].width;

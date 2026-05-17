@@ -1,4 +1,5 @@
 export default function setBTNStatus(item, changeBTNStatus) {
+  if (typeof item != "string") return;
   if (item === "Top 50" || item === "top50") {
     changeBTNStatus(true, false, false, false);
   } else if (item === "Viral" || item === "viral") {

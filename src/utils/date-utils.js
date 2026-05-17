@@ -6,21 +6,20 @@ function getTodayDate() {
 }
 function getTomorrowDate() {
   const today = new Date();
-  const tomorrow = new Date(today); // Create a copy of today
+  const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
   return tomorrow.toISOString().split("T")[0]; // "2024-01-16"
 }
 function getDayAfterTomorrowDate() {
   const today = new Date();
-  const dayAfterTomorrow = new Date(today); // Create a copy of today
+  const dayAfterTomorrow = new Date(today);
   dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
-  return dayAfterTomorrow.toISOString().split("T")[0]; // "2024-01-16"
+  return dayAfterTomorrow.toISOString().split("T")[0];
 }
 function getThisWeekendDates() {
   const today = new Date();
-  const dayOfWeek = today.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
+  const dayOfWeek = today.getDay();
 
-  // Calculate days until Friday
   let daysUntilFriday;
   if (dayOfWeek <= 5) {
     // Sunday(0) through Friday(5)
@@ -30,7 +29,6 @@ function getThisWeekendDates() {
     daysUntilFriday = 5 - dayOfWeek + 7;
   }
 
-  // Calculate Friday and Sunday dates
   const friday = new Date(today);
   friday.setDate(today.getDate() + daysUntilFriday);
 
