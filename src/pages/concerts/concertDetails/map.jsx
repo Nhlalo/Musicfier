@@ -3,9 +3,14 @@ import { Calendar } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { concertsInformationContext } from "../Concerts";
-import ImageReplacement from "../../../components/ui/ImageReplacement";
+import {
+  generateSizes,
+  generateFallBackImage,
+  generateSrcset,
+} from "../../../utils/imagery-utils";
+import { concertsInformationContext } from "../concerts";
 import Styles from "./ConcertDetails.module.css";
+import ImageReplacement from "../../../components/ui/ImageReplacement";
 
 // Fix Leaflet default icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -85,45 +90,50 @@ export default function ConcertMap() {
 
       <FitToEvents events={concertsDetails} />
 
-      {concertsDetails.map((loc) => (
-        <Marker
-          key={`${loc.artistId}-${loc.venueLat}-${loc.venueLng}`}
-          position={[loc.venueLat, loc.venueLng]}
-          icon={customImageIcon(loc.artistImage)}
-        >
-          <Popup>
-            <a
-              href={loc.ticketUrl}
-              aria-label={`Purchase ticket for ${loc.artistName}'s concert on ${loc.eventDate} in ${loc?.venueCity || loc.venueCountry}`}
-              className={Styles.concertLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {loc?.artistImage && (
-                <img
-                  src={loc.artistImage}
-                  alt={`${loc.artistName}`}
-                  loading="lazy"
-                  aria-hidden="true"
-                  className={Styles.artistImage}
-                />
-              )}
-              {!loc?.artistImage && (
-                <ImageReplacement iconClass={Styles.artistImage} />
-              )}
-              <div aria-hidden="true" className={Styles.concertInfor}>
-                <span className={Styles.date}>
-                  <Calendar className={Styles.calendarIcon} />
-                  {loc.eventDate}
-                </span>
-                <span className={Styles.artistName}>{loc.artistName}</span>
-                <span className={Styles.location}>{loc.venueName}</span>
-                <span className={Styles.genre}>{loc.artistGenre}</span>
-              </div>
-            </a>
-          </Popup>
-        </Marker>
-      ))}
+      {concertsDetails.map((loc) => {
+        const artistImage = loc.artistImage;
+        return (
+          <Marker
+            key={`${loc.artistId}-${loc.venueLat}-${loc.venueLng}`}
+            position={[loc.venueLat, loc.venueLng]}
+            icon={customImageIcon(generateFallBackImage(artistImage))}
+          >
+            <Popup>
+              <a
+                href={loc.ticketUrl}
+                aria-label={`Purchase ticket for ${loc.artistName}'s concert on ${loc.eventDate} in ${loc?.venueCity || loc.venueCountry}`}
+                className={Styles.concertLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {loc?.artistImage && (
+                  <img
+                    src={generateFallBackImage(artistImage)}
+                    srcSet={generateSrcset(artistImage)}
+                    sizes={generateSizes(artistImage)}
+                    alt={`${loc.artistName}`}
+                    loading="lazy"
+                    aria-hidden="true"
+                    className={Styles.artistImage}
+                  />
+                )}
+                {!loc?.artistImage && (
+                  <ImageReplacement iconClass={Styles.artistImage} />
+                )}
+                <div aria-hidden="true" className={Styles.concertInfor}>
+                  <span className={Styles.date}>
+                    <Calendar className={Styles.calendarIcon} />
+                    {loc.eventDate}
+                  </span>
+                  <span className={Styles.artistName}>{loc.artistName}</span>
+                  <span className={Styles.location}>{loc.venueName}</span>
+                  <span className={Styles.genre}>{loc.artistGenre}</span>
+                </div>
+              </a>
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 }
