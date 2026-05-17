@@ -14,8 +14,10 @@ function generateSrcset(images) {
 function generateSizes(images) {
   const sorted = [...images].sort((a, b) => a.width - b.width);
   const smallest = sorted[0].width;
-  const medium = sorted[1]?.width || smallest;
   const largest = sorted[sorted.length - 1].width;
+
+  // For exactly two images, use smallest as the "medium" fallback
+  const medium = sorted.length === 2 ? smallest : sorted[1]?.width || smallest;
 
   return `(max-width: ${smallest * 2}px) ${smallest}px, (max-width: ${largest}px) ${medium}px, ${largest}px`;
 }
