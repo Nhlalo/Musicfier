@@ -1,5 +1,5 @@
 // Get Access Token
-async function getAccessToken(signal) {
+async function getAccessToken(consumerKey, consumerSecret, signal) {
   try {
     const response = await fetch("https://oauth.ticketmaster.com/oauth/token", {
       method: "POST",
@@ -27,12 +27,8 @@ async function getAccessToken(signal) {
   }
 }
 
-// Search for artists
-async function getArtistData(keyword, signal) {
+async function getArtistData(keyword, token, signal) {
   try {
-    const token = await getAccessToken();
-
-    // Create URL object and append params
     const url = new URL(
       "https://app.ticketmaster.com/discovery/v2/attractions.json",
     );
@@ -54,7 +50,8 @@ async function getArtistData(keyword, signal) {
 
     const data = await response.json();
 
-    if (!data._embedded?.attractions) return [];
+    if (!data._embedded?.attractions || !data._embedded?.attractions?.length)
+      return null;
 
     const artists = data._embedded.attractions.map((artist) => ({
       id: artist.id,
@@ -82,10 +79,9 @@ async function searchEvents(
   countryCode,
   city,
   signal,
+  token,
 ) {
   try {
-    const token = await getAccessToken(signal);
-
     const url = new URL(
       "https://app.ticketmaster.com/discovery/v2/events.json",
     );
@@ -110,37 +106,31 @@ async function searchEvents(
       throw new Error(errorData.error?.message || `HTTP ${response.status}`);
     }
 
-    if (!data._embedded?.events) return [];
+    if (!data._embedded?.events || !data._embedded?.events?.length) return null;
 
     // Extract data based on the actual response structure
-    return (
-      data._embedded.events.map((event) => {
-        // Get the first attraction (artist) if available
-        const attraction = event._embedded?.attractions?.[0];
+    return data._embedded.events.map((event) => {
+      // Get the first attraction (artist) if available
+      const attraction = event._embedded?.attractions?.[0];
 
-        return {
-          // Event info
-          eventDate: event.dates?.start?.localDate,
+      return {
+        eventDate: event.dates?.start?.localDate,
 
-          // Artist info (from attractions)
-          artistId: attraction?.id,
-          artistName: attraction?.name,
-          artistImage: attraction?.images,
-          artistGenre: attraction?.classifications?.[0]?.genre?.name,
+        artistId: attraction?.id,
+        artistName: attraction?.name,
+        artistImage: attraction?.images,
+        artistGenre: attraction?.classifications?.[0]?.genre?.name,
 
-          // Venue info
-          venueName: event._embedded?.venues?.[0]?.name,
-          venueCity: event._embedded?.venues?.[0]?.city?.name,
-          venueState: event._embedded?.venues?.[0]?.state?.stateCode,
-          venueCountry: event._embedded?.venues?.[0]?.country?.countryCode,
-          venueLng: event._embedded?.venues?.[0]?.country?.longitude,
-          venueLat: event._embedded?.venues?.[0]?.locatiion?.latitude,
+        venueName: event._embedded?.venues?.[0]?.name,
+        venueCity: event._embedded?.venues?.[0]?.city?.name,
+        venueState: event._embedded?.venues?.[0]?.state?.stateCode,
+        venueCountry: event._embedded?.venues?.[0]?.country?.countryCode,
+        venueLng: event._embedded?.venues?.[0]?.country?.longitude,
+        venueLat: event._embedded?.venues?.[0]?.location?.latitude,
 
-          // Ticket info
-          ticketUrl: event.url,
-        };
-      }) || null
-    );
+        ticketUrl: event.url,
+      };
+    });
   } catch (error) {
     if (error.name === "TypeError" || error.name === "SyntaxError") {
       throw new Error(`Network/parsing error: ${error.message}`);
@@ -149,4 +139,4 @@ async function searchEvents(
   }
 }
 
-export { getArtistData, searchEvents };
+export { getArtistData, searchEvents, getAccessToken };
