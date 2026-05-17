@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useLayoutEffect } from "react";
 import { Outlet, useMatches, useLocation } from "react-router";
-import { mockUserLocation } from "../../data/__mocks__/location.mock";
+import { getUserLocation } from "../../services/location-service";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
@@ -23,28 +23,51 @@ export default function RootLayout() {
   }, [pathname]);
 
   useEffect(() => {
-    //Cache the user's location
-    const currentTime = Date.now();
-    const storedHourLater = localStorage.getItem("hourLater");
-    const expiryTime = storedHourLater ? Number(storedHourLater) : 0;
-    const storedUserLocation = localStorage.getItem("userLocation");
+    const abortController = new AbortController();
+    const { signal } = abortController;
 
-    //if there is no location stored within local storage with the key "userLocation", make an api call
-    let userLocation = !storedUserLocation
-      ? mockUserLocation
-      : JSON.parse(storedUserLocation);
+    const acquireUserLocation = async () => {
+      try {
+        // Check cache first
+        const storedUserLocation = localStorage.getItem("userLocation");
+        const storedExpiry = localStorage.getItem("hourLater");
+        const now = Date.now();
+        const isExpired = storedExpiry ? Number(storedExpiry) <= now : true;
 
-    if (!storedUserLocation || currentTime >= expiryTime) {
-      userLocation = mockUserLocation;
+        let userLocation = null;
 
-      const hourLater = Date.now() + 3600000;
-      localStorage.setItem("userLocation", JSON.stringify(userLocation));
-      localStorage.setItem("hourLater", hourLater.toString());
-    }
+        if (storedUserLocation && !isExpired) {
+          userLocation = JSON.parse(storedUserLocation);
+        } else {
+          userLocation = await getUserLocation(signal);
+          if (signal.aborted) return;
 
-    localStorage.setItem("location", userLocation);
-    setLocation(userLocation);
+          if (!userLocation) {
+            throw new Error("No location available");
+          }
+
+          const hourLater = Date.now() + 3600000;
+          localStorage.setItem("userLocation", JSON.stringify(userLocation));
+          localStorage.setItem("hourLater", hourLater.toString());
+        }
+
+        if (signal.aborted) return;
+
+        setLocation(userLocation);
+      } catch (err) {
+        if (signal.aborted) return;
+        console.error("Failed to acquire location", err);
+        setLocation(null);
+      }
+    };
+
+    acquireUserLocation(); // <-- actually call the function
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
+
   return (
     <>
       <LocationContext.Provider value={location}>
